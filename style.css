@@ -1,0 +1,18 @@
+.dashboardcard {
+  margin-top: 50px;
+}
+
+.dashboard {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#filter {
+  margin-right: 10px;
+}
+
+.dashboard-title {
+  font-size: 30px;
+  font-weight: bold;
+}
