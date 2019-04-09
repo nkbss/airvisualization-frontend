@@ -42,7 +42,7 @@ var airline = [{
 var defaultY = [{
   key: 1,
   text: 'No. of Route ',
-  value: 'NoRoute'
+  value: 'Route'
 }, {
   key: 2,
   text: 'Seat',
@@ -155,7 +155,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
       lineNumber: 62
     },
     __self: this
-  }, props.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 64
@@ -332,7 +332,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
-      _this.getDataYearByAirline(_this.state.airline);
+      _this.getDataYearPaxByAirline(_this.state.airline);
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleDropdown", function (e, data) {
@@ -353,39 +353,25 @@ function (_Component) {
       _this.state.showdefault = true;
 
       if (status === 'Pax') {
-        _this.getDataYearByAirline(airline);
+        _this.getDataYearPaxByAirline(airline);
       }
 
       if (status === 'Frequency') {
-        var count = 0;
-
-        for (var i = 0; i < _this.state.y2017.data.length; i++) {
-          if (_this.state.y2017.data[i].OWNER_CODE === airline) {
-            count = count + 1;
-          }
-
-          _this.state.frequency[4] = count;
-          _this.state.defaultGraphY[4] = count;
-          _this.state.defaultGraph[4].y = count;
-        }
+        _this.getDataYearFrequencyByAirline(airline);
       }
 
       if (status === 'Seat') {
-        var seat = 0;
+        _this.getDataYearSeatByAirline(airline);
+      }
 
-        for (var _i = 0; _i < _this.state.y2017.data.length; _i++) {
-          if (_this.state.y2017.data[_i].OWNER_CODE === airline) {
-            seat = seat + _this.state.y2017.data[_i].SEATS;
-          }
-
-          _this.state.defaultGraph[4].y = seat;
-        }
+      if (status === 'Route') {
+        _this.getDataYearRouteByAirline(airline);
       }
 
       _this.forceUpdate();
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearByAirline", function (airline) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearPaxByAirline", function (airline) {
       console.log('Get Airport!');
       fetch('http://localhost:4000/YearPaxByAirline', {
         method: 'POST',
@@ -407,10 +393,73 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearFrequencyByAirline", function (airline) {
+      fetch('http://localhost:4000/YearFrequencyByAirline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/plain'
+        },
+        body: JSON.stringify({
+          airline: airline
+        })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data);
+
+        _this.setDefaultGraphData(data.data);
+
+        _this.forceUpdate();
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearSeatByAirline", function (airline) {
+      fetch('http://localhost:4000/YearSeatByAirline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/plain'
+        },
+        body: JSON.stringify({
+          airline: airline
+        })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data);
+
+        _this.setDefaultGraphData(data.data);
+
+        _this.forceUpdate();
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearRouteByAirline", function (airline) {
+      fetch('http://localhost:4000/YearRouteByAirline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/plain'
+        },
+        body: JSON.stringify({
+          airline: airline
+        })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data);
+
+        _this.setDefaultGraphData(data.data);
+
+        _this.forceUpdate();
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setDefaultGraphData", function (data) {
       for (var i = 0; i < data.length; i++) {
-        _this.state.defaultGraph[data.length - 1 - i].y = data[i].TotalPax;
-        console.log(data[i].TotalPax);
+        _this.state.defaultGraph[data.length - 1 - i].y = data[i].Results;
+        console.log(data[i].Results);
       }
 
       _this.setState({
@@ -431,7 +480,7 @@ function (_Component) {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 124
+          lineNumber: 170
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineDashboardCard"], {
@@ -440,7 +489,7 @@ function (_Component) {
         updateGraph: this.updateGraph,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 125
+          lineNumber: 171
         },
         __self: this
       }));

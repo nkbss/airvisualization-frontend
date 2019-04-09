@@ -25,7 +25,7 @@ class AirlineDashboardLayout extends Component {
   }
 
   componentDidMount = () => {
-    this.getDataYearByAirline(this.state.airline)
+    this.getDataYearPaxByAirline(this.state.airline)
   }
 
   handleDropdown = (e, data) => {
@@ -42,28 +42,18 @@ class AirlineDashboardLayout extends Component {
   filterDefaultGraph = (airline, status) => {
     this.state.showdefault = true
     if (status === 'Pax') {
-      this.getDataYearByAirline(airline)
+      this.getDataYearPaxByAirline(airline)
     }
     if (status === 'Frequency') {
-      let count = 0
-      for (let i = 0; i < this.state.y2017.data.length; i++) {
-        if (this.state.y2017.data[i].OWNER_CODE === airline) {
-          count = count + 1
-        }
-        this.state.frequency[4] = count
-        this.state.defaultGraphY[4] = count
-        this.state.defaultGraph[4].y = count
-      }
+      this.getDataYearFrequencyByAirline(airline)
     }
 
     if (status === 'Seat') {
-      let seat = 0
-      for (let i = 0; i < this.state.y2017.data.length; i++) {
-        if (this.state.y2017.data[i].OWNER_CODE === airline) {
-          seat = seat + this.state.y2017.data[i].SEATS
-        }
-        this.state.defaultGraph[4].y = seat
-      }
+      this.getDataYearSeatByAirline(airline)
+    }
+
+    if (status === 'Route') {
+      this.getDataYearRouteByAirline(airline)
     }
     this.forceUpdate()
   }
@@ -86,7 +76,7 @@ class AirlineDashboardLayout extends Component {
   //       })
   //   }
 
-  getDataYearByAirline = airline => {
+  getDataYearPaxByAirline = airline => {
     console.log('Get Airport!')
     fetch('http://localhost:4000/YearPaxByAirline', {
       method: 'POST',
@@ -102,15 +92,71 @@ class AirlineDashboardLayout extends Component {
       .then(data => {
         console.log(data)
         this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
+  }
 
+  getDataYearFrequencyByAirline = airline => {
+    fetch('http://localhost:4000/YearFrequencyByAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
+  }
+
+  getDataYearSeatByAirline = airline => {
+    fetch('http://localhost:4000/YearSeatByAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
+  }
+
+  getDataYearRouteByAirline = airline => {
+    fetch('http://localhost:4000/YearRouteByAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
   }
 
   setDefaultGraphData = data => {
     for (let i = 0; i < data.length; i++) {
-      this.state.defaultGraph[data.length - 1 - i].y = data[i].TotalPax
-      console.log(data[i].TotalPax)
+      this.state.defaultGraph[data.length - 1 - i].y = data[i].Results
+      console.log(data[i].Results)
     }
     this.setState({ showdefault: true })
   }

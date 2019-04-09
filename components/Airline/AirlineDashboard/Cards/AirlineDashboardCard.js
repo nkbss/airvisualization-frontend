@@ -18,7 +18,7 @@ const airline = [
 ]
 
 const defaultY = [
-  { key: 1, text: 'No. of Route ', value: 'NoRoute' },
+  { key: 1, text: 'No. of Route ', value: 'Route' },
   { key: 2, text: 'Seat', value: 'Seat' },
   { key: 3, text: 'Pax', value: 'Pax' },
   { key: 4, text: 'Load Factor ', value: 'Load Factor' },
@@ -60,7 +60,7 @@ const AirlineDashboardCard = props => {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
-          {props.showdefault ? (
+          {props.state.showdefault ? (
             <Grid.Column>
               <label className="header-label">{props.state.defaultY}</label>
             </Grid.Column>
