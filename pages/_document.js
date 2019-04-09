@@ -20,6 +20,10 @@ export default class MyDocument extends Document {
             integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
             crossOrigin="anonymous"
           />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/react-vis/dist/style.css"
+          />
 
           {/* <meta
             name="viewport"
@@ -34,7 +38,13 @@ export default class MyDocument extends Document {
           <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" />
           <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js" />
           <script src="node_modules/datamaps/dist/datamaps.world.min.js" />
-          <script src="https://d3js.org/d3.v5.js"></script>
+          <script src="https://d3js.org/d3.v5.js" />
+          <script src="https://cdn.plot.ly/plotly-latest.min.js" />
+          <script src="https://unpkg.com/react-plotly.js@latest/dist/create-plotly-component.js" />
+          <script
+            type="text/javascript"
+            src="https://unpkg.com/react-vis/dist/dist.min.js"
+          />
         </Head>
         <body>
           {/* <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js" />

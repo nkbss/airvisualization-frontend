@@ -15,7 +15,7 @@
     "react-dom": "^16.5.2",
     "react-google-charts": "^3.0.10",
     "react-plotly.js": "^2.2.0",
-    "react-vis": "^1.11.4",
+    "react-vis": "^1.11.6",
     "semantic-ui-react": "^0.83.0"
   }
 }

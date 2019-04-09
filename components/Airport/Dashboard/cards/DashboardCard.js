@@ -9,6 +9,7 @@ const DashboardCard = props => {
         handleDropdown={props.handleDropdown}
         searchResult={props.searchResult}
         handleSelectOption={props.handleSelectOption}
+        handleInput={props.handleInput}
       />
     </React.Fragment>
   )

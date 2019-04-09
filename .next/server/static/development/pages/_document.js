@@ -185,56 +185,86 @@ function (_Document) {
           lineNumber: 17
         },
         __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("link", {
+        rel: "stylesheet",
+        href: "https://unpkg.com/react-vis/dist/style.css",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 23
+        },
+        __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("style", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 32
         },
         __self: this
       }, "\n              html { overflow: auto }\n              // body {padding-top: 100px}\n            "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
         src: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 38
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
         src: "//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 35
+          lineNumber: 39
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
         src: "node_modules/datamaps/dist/datamaps.world.min.js",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 36
+          lineNumber: 40
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
         src: "https://d3js.org/d3.v5.js",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 41
         },
         __self: this
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("body", {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
+        src: "https://cdn.plot.ly/plotly-latest.min.js",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 42
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_2__["Main"], {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
+        src: "https://unpkg.com/react-plotly.js@latest/dist/create-plotly-component.js",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 43
         },
         __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_2__["NextScript"], {
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("script", {
+        type: "text/javascript",
+        src: "https://unpkg.com/react-vis/dist/dist.min.js",
         __source: {
           fileName: _jsxFileName,
           lineNumber: 44
+        },
+        __self: this
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("body", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_2__["Main"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 53
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_2__["NextScript"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 54
         },
         __self: this
       })));
