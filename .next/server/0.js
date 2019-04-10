@@ -1,16 +1,16 @@
 exports.ids = [0];
 exports.modules = {
 
-/***/ "./components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js":
-/*!***************************************************************************!*\
-  !*** ./components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js ***!
-  \***************************************************************************/
-/*! exports provided: AirlineDashboardCard */
+/***/ "./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js":
+/*!***********************************************************************!*\
+  !*** ./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js ***!
+  \***********************************************************************/
+/*! exports provided: AirlineGraphCard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AirlineDashboardCard", function() { return AirlineDashboardCard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AirlineGraphCard", function() { return AirlineGraphCard; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
@@ -20,7 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layout_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Layout_style_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-vis */ "react-vis");
 /* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_vis__WEBPACK_IMPORTED_MODULE_4__);
-var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js";
+var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js";
 
 
 
@@ -51,21 +51,15 @@ var defaultY = [{
   key: 3,
   text: 'Pax',
   value: 'Pax'
-}, {
-  key: 4,
-  text: 'Load Factor ',
-  value: 'Load Factor'
-}, {
-  key: 5,
-  text: 'RPK',
-  value: 'RPK'
-}, {
+}, // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
+// { key: 5, text: 'RPK', value: 'RPK' },
+{
   key: 6,
   text: 'Frequency',
   value: 'Frequency'
 }];
 var DefaultBar = next_dynamic__WEBPACK_IMPORTED_MODULE_2___default()(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../../../Graph/defaultBar */ "./components/Graph/defaultBar.js"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ../../../Graph/defaultBar */ "./components/Graph/defaultBar.js"));
 }, {
   ssr: false,
   loadableGenerated: {
@@ -76,31 +70,31 @@ var DefaultBar = next_dynamic__WEBPACK_IMPORTED_MODULE_2___default()(function ()
   }
 });
 
-var AirlineDashboardCard = function AirlineDashboardCard(props) {
+var AirlineGraphCard = function AirlineGraphCard(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 39
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 40
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 37
+      lineNumber: 41
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     width: 6,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 42
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -108,7 +102,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 43
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -121,7 +115,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     onChange: props.handleDropdown,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 44
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -129,7 +123,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 54
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -142,7 +136,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     onChange: props.handleDropdown,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 55
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -152,20 +146,20 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 66
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 68
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 69
     },
     __self: this
   }, props.state.defaultY)) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -175,7 +169,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 73
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -185,7 +179,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 74
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DefaultBar, {
@@ -194,7 +188,7 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     yTitle: props.defaultY,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 81
     },
     __self: this
   }) : null)), props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -204,23 +198,58 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 95
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 96
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "text-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 97
     },
     __self: this
   }, "Year"))) : null));
+};
+
+
+
+/***/ }),
+
+/***/ "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js":
+/*!***************************************************************************!*\
+  !*** ./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js ***!
+  \***************************************************************************/
+/*! exports provided: AirlineStatisticCard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AirlineStatisticCard", function() { return AirlineStatisticCard; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js";
+
+
+var AirlineStatisticCard = function AirlineStatisticCard() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    },
+    __self: this
+  }, "Statistic "));
 };
 
 
@@ -231,13 +260,17 @@ var AirlineDashboardCard = function AirlineDashboardCard(props) {
 /*!************************************************************!*\
   !*** ./components/Airline/AirlineDashboard/Cards/index.js ***!
   \************************************************************/
-/*! exports provided: AirlineDashboardCard */
+/*! exports provided: AirlineGraphCard, AirlineStatisticCard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AirlineDashboardCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirlineDashboardCard */ "./components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AirlineDashboardCard", function() { return _AirlineDashboardCard__WEBPACK_IMPORTED_MODULE_0__["AirlineDashboardCard"]; });
+/* harmony import */ var _AirlineGraphCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirlineGraphCard */ "./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AirlineGraphCard", function() { return _AirlineGraphCard__WEBPACK_IMPORTED_MODULE_0__["AirlineGraphCard"]; });
+
+/* harmony import */ var _AirlineStatisticCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AirlineStatisticCard */ "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AirlineStatisticCard", function() { return _AirlineStatisticCard__WEBPACK_IMPORTED_MODULE_1__["AirlineStatisticCard"]; });
+
 
 
 
@@ -257,6 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Cards */ "./components/Airline/AirlineDashboard/Cards/index.js");
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dynamic */ "next/dynamic");
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dynamic__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Layout/AirlineDashboardLayout.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -278,6 +312,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -307,8 +342,6 @@ function (_Component) {
       defaultY: 'Pax',
       data: null,
       defaultY2017: null,
-      pax: [],
-      frequency: [],
       defaultGraphX: ['2013', '2014', '2015', '2016', '2017'],
       defaultGraphY: [],
       showdefault: false,
@@ -328,7 +361,8 @@ function (_Component) {
         x: '2017',
         y: 0
       }],
-      query: 'Test query'
+      query: 'Test query',
+      load: true
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
@@ -351,6 +385,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "filterDefaultGraph", function (airline, status) {
       _this.state.showdefault = true;
+      _this.state.load = true;
 
       if (status === 'Pax') {
         _this.getDataYearPaxByAirline(airline);
@@ -387,6 +422,10 @@ function (_Component) {
       }).then(function (data) {
         console.log(data);
 
+        if (data) {
+          _this.loadFinished(data);
+        }
+
         _this.setDefaultGraphData(data.data);
 
         _this.forceUpdate();
@@ -407,6 +446,10 @@ function (_Component) {
         return res.json();
       }).then(function (data) {
         console.log(data);
+
+        if (data) {
+          _this.loadFinished(data);
+        }
 
         _this.setDefaultGraphData(data.data);
 
@@ -429,6 +472,10 @@ function (_Component) {
       }).then(function (data) {
         console.log(data);
 
+        if (data) {
+          _this.loadFinished(data);
+        }
+
         _this.setDefaultGraphData(data.data);
 
         _this.forceUpdate();
@@ -450,10 +497,22 @@ function (_Component) {
       }).then(function (data) {
         console.log(data);
 
+        if (data) {
+          _this.loadFinished(data);
+        }
+
         _this.setDefaultGraphData(data.data);
 
         _this.forceUpdate();
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "loadFinished", function () {
+      _this.setState({
+        load: false
+      });
+
+      _this.forceUpdate;
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setDefaultGraphData", function (data) {
@@ -473,26 +532,43 @@ function (_Component) {
   _createClass(AirlineDashboardLayout, [{
     key: "render",
     value: function render() {
-      // console.log(this.state.pax[4])
-      // console.log(this.state.frequency[4])
       console.log(this.state.defaultGraph);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
+          lineNumber: 169
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineStatisticCard"], {
+        __source: {
+          fileName: _jsxFileName,
           lineNumber: 170
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineDashboardCard"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
         handleDropdown: this.handleDropdown,
         state: this.state,
-        updateGraph: this.updateGraph,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 171
         },
         __self: this
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.load,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 175
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
+        size: "big",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 176
+        },
+        __self: this
+      }, "Preparing Data")));
     }
   }]);
 

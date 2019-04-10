@@ -1,5 +1,9 @@
 import React from 'react'
-import { Grid, Dropdown } from '../../../../node_modules/semantic-ui-react'
+import {
+  Grid,
+  Dropdown,
+  Loader
+} from '../../../../node_modules/semantic-ui-react'
 import dynamic from 'next/dynamic'
 import '../Layout/style.css'
 import {
@@ -21,8 +25,8 @@ const defaultY = [
   { key: 1, text: 'No. of Route ', value: 'Route' },
   { key: 2, text: 'Seat', value: 'Seat' },
   { key: 3, text: 'Pax', value: 'Pax' },
-  { key: 4, text: 'Load Factor ', value: 'Load Factor' },
-  { key: 5, text: 'RPK', value: 'RPK' },
+  // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
+  // { key: 5, text: 'RPK', value: 'RPK' },
   { key: 6, text: 'Frequency', value: 'Frequency' }
 ]
 
@@ -30,7 +34,7 @@ const DefaultBar = dynamic(() => import('../../../Graph/defaultBar'), {
   ssr: false
 })
 
-const AirlineDashboardCard = props => {
+const AirlineGraphCard = props => {
   return (
     <React.Fragment>
       <Grid>
@@ -99,4 +103,4 @@ const AirlineDashboardCard = props => {
   )
 }
 
-export { AirlineDashboardCard }
+export { AirlineGraphCard }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { AirlineDashboardCard } from '../Cards'
+import { AirlineGraphCard, AirlineStatisticCard } from '../Cards'
 import dynamic from 'next/dynamic'
+import { Dimmer, Loader } from '../../../../node_modules/semantic-ui-react'
 
 class AirlineDashboardLayout extends Component {
   state = {
@@ -9,8 +10,6 @@ class AirlineDashboardLayout extends Component {
     defaultY: 'Pax',
     data: null,
     defaultY2017: null,
-    pax: [],
-    frequency: [],
     defaultGraphX: ['2013', '2014', '2015', '2016', '2017'],
     defaultGraphY: [],
     showdefault: false,
@@ -21,7 +20,8 @@ class AirlineDashboardLayout extends Component {
       { x: '2016', y: 0 },
       { x: '2017', y: 0 }
     ],
-    query: 'Test query'
+    query: 'Test query',
+    load: true
   }
 
   componentDidMount = () => {
@@ -41,6 +41,7 @@ class AirlineDashboardLayout extends Component {
 
   filterDefaultGraph = (airline, status) => {
     this.state.showdefault = true
+    this.state.load = true
     if (status === 'Pax') {
       this.getDataYearPaxByAirline(airline)
     }
@@ -58,24 +59,6 @@ class AirlineDashboardLayout extends Component {
     this.forceUpdate()
   }
 
-  //   test = () => {
-  //     fetch('http://localhost:4000/test', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Accept: 'text/plain'
-  //       },
-  //       body: JSON.stringify({
-  //         query: this.state.query
-  //       })
-  //     })
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         console.log(data)
-  //         this.forceUpdate()
-  //       })
-  //   }
-
   getDataYearPaxByAirline = airline => {
     console.log('Get Airport!')
     fetch('http://localhost:4000/YearPaxByAirline', {
@@ -91,6 +74,9 @@ class AirlineDashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        if (data) {
+          this.loadFinished(data)
+        }
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -110,6 +96,9 @@ class AirlineDashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        if (data) {
+          this.loadFinished(data)
+        }
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -129,6 +118,9 @@ class AirlineDashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        if (data) {
+          this.loadFinished(data)
+        }
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -148,9 +140,18 @@ class AirlineDashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        if (data) {
+          this.loadFinished(data)
+        }
+
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
+  }
+
+  loadFinished = () => {
+    this.setState({ load: false })
+    this.forceUpdate
   }
 
   setDefaultGraphData = data => {
@@ -162,17 +163,18 @@ class AirlineDashboardLayout extends Component {
   }
 
   render() {
-    // console.log(this.state.pax[4])
-    // console.log(this.state.frequency[4])
     console.log(this.state.defaultGraph)
 
     return (
       <div className="section-dashboard">
-        <AirlineDashboardCard
+        <AirlineStatisticCard />
+        <AirlineGraphCard
           handleDropdown={this.handleDropdown}
           state={this.state}
-          updateGraph={this.updateGraph}
         />
+        <Dimmer active={this.state.load}>
+          <Loader size="big">Preparing Data</Loader>
+        </Dimmer>
       </div>
     )
   }

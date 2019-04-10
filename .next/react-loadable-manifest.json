@@ -49,10 +49,18 @@
       "publicPath": "static/chunks/1.js"
     }
   ],
-  "./AirlineDashboardCard": [
+  "./AirlineGraphCard": [
     {
-      "id": "./components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js",
-      "name": "./components/Airline/AirlineDashboard/Cards/AirlineDashboardCard.js",
+      "id": "./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js",
+      "name": "./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
+  ],
+  "./AirlineStatisticCard": [
+    {
+      "id": "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js",
+      "name": "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
     }
@@ -3183,8 +3191,8 @@
     {
       "id": "./components/Graph/defaultBar.js",
       "name": "./components/Graph/defaultBar.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
+      "file": "static/chunks/3.js",
+      "publicPath": "static/chunks/3.js"
     }
   ]
 }
