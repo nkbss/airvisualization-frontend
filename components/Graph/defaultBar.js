@@ -20,6 +20,11 @@ const defaultBar = props => {
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis
+        // attr="x"
+        // attrAxis="y"
+        // orientation="bottom"
+        // position="end"
+        // title="x-axis"
         // title={props.xTitle}
         style={{
           text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 },
@@ -28,7 +33,13 @@ const defaultBar = props => {
         }}
         position="middle"
       />
-      <YAxis title={props.yTitle} />
+      <YAxis
+        // attr="y"
+        // attrAxis="x"
+        // orientation="left"
+        // position="end"
+        title={props.yTitle}
+      />
       <VerticalBarSeries data={props.data} barWidth={0.6} />
     </XYPlot>
   )
