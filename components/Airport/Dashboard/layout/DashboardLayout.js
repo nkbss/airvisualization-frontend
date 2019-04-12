@@ -1,200 +1,310 @@
 import React, { Component } from 'react'
 import { DashboardCard } from '../cards'
 import './style.css'
-
+import { Dimmer, Loader } from '../../../../node_modules/semantic-ui-react'
 class DashboardLayout extends Component {
   state = {
     y2017: null,
-    statistic: null,
+    airport: 'HKT',
+    defaultY: 'Pax',
+    data: null,
+    showdefault: false,
+    defaultGraph: [
+      { x: '2013', y: 0, opacity: 1 },
+      { x: '2014', y: 0, opacity: 1 },
+      { x: '2015', y: 0, opacity: 1 },
+      { x: '2016', y: 0, opacity: 1 },
+      { x: '2017', y: 0, opacity: 1 }
+    ],
+    load: true,
     year: null,
-    flightB: false,
-    routeB: false,
-    airlineB: false,
-    aircraftB: false,
-    seatB: false,
-    frequencyB: false,
-    paxB: false,
-    loadfactorB: false,
-    listB: false,
-    filterB: false,
-    rankB: false,
-    sumB: false,
-    growthB: false,
-    averageB: false,
-    sdB: false,
-    flight: null,
-    route: null,
-    airline: null,
-    aircraft: null,
-    seat: null,
-    frequency: null,
-    pax: null,
-    loadfactor: null,
-    sum: 0,
-    av: 0
+    routeAirlineData: [
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: 'Other', y: 0 }
+    ],
+    airlineData: [],
+    airlinestatus: false,
+    airlineload: false
   }
 
   componentDidMount = () => {
-    this.getAirport()
+    this.getPax(this.state.airport)
+  }
+
+  handleYear = year => {
+    this.setState({ year: year })
+    this.setOpacity(this.state.defaultGraph)
+    this.forceUpdate()
   }
 
   handleDropdown = (e, data) => {
-    console.log(data.value)
     this.setState({ [data.name]: data.value })
+    this.forceUpdate()
+    if (data.name === 'defaultY') {
+      this.filterDefaultGraph(this.state.airport, data.value)
+    }
+    if (data.name === 'airport' && this.state.defaultY !== null) {
+      this.filterDefaultGraph(data.value, this.state.defaultY)
+    }
+    if (data.type === 'airport') {
+      if (this.state.year != null) {
+        this.getAirlineAirport(this.state.year, data.value)
+      }
+    }
   }
 
-  getAirport = () => {
+  filterDefaultGraph = (airport, status) => {
+    this.state.showdefault = true
+    this.state.load = true
+    if (status === 'Pax') {
+      this.getPax(airport)
+    }
+    if (status === 'Frequency') {
+      this.getFrequency(airport)
+    }
+
+    if (status === 'Seat') {
+      this.getSeat(airport)
+    }
+
+    if (status === 'Route') {
+      this.getRoute(airport)
+    }
+    this.forceUpdate()
+  }
+
+  getPax = airport => {
     console.log('Get Airport!')
-    // if (year === '2017') {
-    //   fetch('http://localhost:4000/Y2017')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       console.log(data)
-    //       if (this.state.airlineB === true) {
-    //         this.calculatorSum(data, 'Airline')
-    //       }
-    //       this.setState({ Airline: data.data, totalflight: data.data.length })
-    //       this.forceUpdate()
-    //     })
-    // }
-    fetch('http://localhost:4000/Y2017')
+    fetch('http://localhost:4000/getPax', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airport: airport,
+        airline: '%',
+        flight: '%',
+        aircraft: '%'
+      })
+    })
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        this.setState({ y2017: data })
+        if (data) {
+          this.loadFinished(data)
+        }
+        this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
   }
 
-  calculatorSum = (year, filter, stat) => {
-    this.state.sum = 0
-    if (year === '2017') {
-      if (filter === 'Airline' && stat === 'Sum')
-        for (let i = 0; i < this.state.y2017.data.length; i++) {
-          if (this.state.y2017.data[i].OWNER_CODE === this.state.airline) {
-            this.state.sum = this.state.sum + 1
-          }
+  getFrequency = airport => {
+    fetch('http://localhost:4000/getFrequency', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airport: airport,
+        airline: '%',
+        flight: '%',
+        aircraft: '%'
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data) {
+          this.loadFinished(data)
         }
-      console.log(this.state.sum)
-    }
+        this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
   }
 
-  calculatorAv = (year, filter, stat) => {
-    if (year === '2017') {
-      if (filter === 'Airline' && stat === 'Av')
-        for (let i = 0; i < this.state.y2017.data.length; i++) {
-          if (this.state.y2017.data[i].OWNER_CODE === this.state.airline) {
-            this.state.sum = this.state.sum + 1
-          }
-          this.state.av = this.state.sum / this.state.y2017.data.length
+  getSeat = airport => {
+    fetch('http://localhost:4000/getSeat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airport: airport,
+        airline: '%',
+        flight: '%',
+        aircraft: '%'
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data) {
+          this.loadFinished(data)
         }
-      console.log(this.state.av)
+        this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
+  }
+
+  getRoute = airport => {
+    fetch('http://localhost:4000/getRoute', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        airport: airport,
+        airline: '%',
+        flight: '%',
+        aircraft: '%'
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data) {
+          this.loadFinished(data)
+        }
+
+        this.setDefaultGraphData(data.data)
+        this.forceUpdate()
+      })
+  }
+
+  getAirlineAirport = (year, airport) => {
+    this.setState({ airlinestatus: false, airlineload: true })
+    fetch('http://localhost:4000/getAirlineAirport', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airport: airport
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        // this.setRouteAirlineGraph(data.data)
+        if (data) {
+          // this.setRouteAirlineGraph(data.data)
+          this.setAirlineGraph(data.data)
+          this.setState({ airlinestatus: true, airlineload: false })
+          // this.loadFinished(data)
+        }
+
+        // this.setDefaultGraphData(data.data)
+        // this.forceUpdate()
+      })
+  }
+
+  loadFinished = () => {
+    this.setState({ load: false })
+    this.forceUpdate
+  }
+
+  setDefaultGraphData = data => {
+    for (let i = 0; i < data.length; i++) {
+      this.state.defaultGraph[i].y = data[i].Results
+
+      console.log(data[i].Results)
+    }
+    this.setState({ showdefault: true })
+  }
+
+  // setRouteAirlineGraph = data => {
+  //   let sum = 0
+  //   for (let i = 0; i < data.length; i++) {
+  //     if (i < 20) {
+  //       this.state.routeAirlineData[i].x = data[i].AIRPORT
+  //       this.state.routeAirlineData[i].y = data[i].Results
+  //     } else {
+  //       sum = sum + data[i].Results
+  //     }
+  //   }
+  //   this.state.routeAirlineData[20].y = sum
+  //   this.forceUpdate()
+  // }
+
+  setAirlineGraph = data => {
+    this.state.airlineData = []
+    console.log(data.length)
+    let sum = 0
+    if (data.length > 20) {
+      for (let i = 0; i < data.length; i++) {
+        if (i < 20) {
+          this.state.airlineData.push({
+            x: data[i].OWNER_CODE,
+            y: data[i].Results
+          })
+        } else if (i === 20) {
+          sum = sum + data[i].Results
+          this.state.airlineData.push({ x: 'Other', y: 0 })
+        } else if (i > 20) {
+          sum = sum + data[i].Results
+        }
+      }
+      this.state.airlineData[20].y = sum
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        this.state.airlineData.push({
+          x: data[i].OWNER_CODE,
+          y: data[i].Results
+        })
+      }
     }
   }
 
-  handleSelectOption = (e, data) => {
-    if (data.name === 'flightB') {
-      let status = !this.state.flightB
-      this.setState({ [data.name]: status, flight: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'routeB') {
-      let status = !this.state.routeB
-      this.setState({ [data.name]: status, route: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'airlineB') {
-      let status = !this.state.airlineB
-      this.setState({ [data.name]: status, airline: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'aircraftB') {
-      let status = !this.state.aircraftB
-      this.setState({ [data.name]: status, aircraft: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'seatB') {
-      let status = !this.state.seatB
-      this.setState({ [data.name]: status, seat: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'frequencyB') {
-      let status = !this.state.frequencyB
-      this.setState({ [data.name]: status, frequency: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'paxB') {
-      let status = !this.state.paxB
-      this.setState({ [data.name]: status, pax: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'loadfactorB') {
-      let status = !this.state.loadfactorB
-      this.setState({ [data.name]: status, loadfactor: null })
-      this.forceUpdate()
-    }
-    if (data.name === 'listB') {
-      let status = !this.state.listB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'filterB') {
-      let status = !this.state.filterB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'rankB') {
-      let status = !this.state.rankB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'sumB') {
-      let status = !this.state.sumB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'growthB') {
-      let status = !this.state.growthB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'averageB') {
-      let status = !this.state.averageB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-    if (data.name === 'sdB') {
-      let status = !this.state.sdB
-      this.setState({ [data.name]: status })
-      this.forceUpdate()
-    }
-  }
-
-  handleInput = (e, data) => {
-    this.setState({ [data.name]: data.value })
-  }
-
-  searchResult = () => {
-    if (this.state.airlineB && this.state.sumB) {
-      this.calculatorSum(this.state.year, 'Airline', 'Sum')
-    }
-    if (this.state.airlineB && this.state.averageB) {
-      this.calculatorAv(this.state.year, 'Airline', 'Av')
+  setOpacity = data => {
+    for (let i = 0; i < data.length; i++) {
+      data[i].opacity = 1
     }
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state.airlineData)
     return (
       <React.Fragment>
         <div id="airport-dashboard">
           <DashboardCard
-            state={this.state}
+            getAirlineAirport={this.getAirlineAirport}
             handleDropdown={this.handleDropdown}
-            searchResult={this.searchResult}
-            handleSelectOption={this.handleSelectOption}
-            handleInput={this.handleInput}
+            handleYear={this.handleYear}
+            state={this.state}
           />
+          <Dimmer active={this.state.load}>
+            <Loader size="big">Preparing Data</Loader>
+          </Dimmer>
+          {this.state.load ? null : (
+            <Dimmer active={this.state.airlineload}>
+              <Loader size="big">Get Airline!</Loader>
+            </Dimmer>
+          )}
         </div>
       </React.Fragment>
     )

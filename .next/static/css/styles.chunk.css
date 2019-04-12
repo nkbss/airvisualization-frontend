@@ -3,15 +3,8 @@
   justify-content: center;
 }
 
-.statistic-section {
-  padding-top: 40px;
-}
-
-.text-label {
-  /* padding-left: 75px; */
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
+#airport-dashboard {
+  margin-top: 20px;
 }
 
 .header-label {
@@ -19,10 +12,6 @@
   font-size: 20px;
   font-weight: bold;
   color: #6b6b76;
-}
-
-.section-dashboard {
-  padding-top: 20px;
 }
 
 

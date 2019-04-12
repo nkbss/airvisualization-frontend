@@ -47,8 +47,7 @@ class AirlineDashboardLayout extends Component {
       { x: 'Other', y: 0 }
     ],
     routestatus: false,
-    routeload: false,
-    crosshair: null
+    routeload: false
   }
 
   componentDidMount = () => {

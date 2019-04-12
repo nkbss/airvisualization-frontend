@@ -89,6 +89,7 @@ const AirlineGraphCard = props => {
           >
             {props.state.showdefault ? (
               <DefaultBar
+                type="airline"
                 airline={props.state.airline}
                 getRouteAirline={props.getRouteAirline}
                 handleYear={props.handleYear}

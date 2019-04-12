@@ -40,6 +40,7 @@ class defaultBar extends Component {
         <YAxis />
 
         <VerticalBarSeries
+          color={this.props.type === 'airport' ? '#1662cc' : '#12939a'}
           data={this.props.data}
           barWidth={0.6}
           onNearestX={(value, { index }) =>
@@ -50,9 +51,12 @@ class defaultBar extends Component {
           }
           onValueClick={(datapoint, { index }) => {
             this.props.handleYear(datapoint.x)
-            this.props.getRouteAirline(datapoint.x, this.props.airline)
-            console.log(datapoint.x)
-            console.log(index)
+            if (this.props.type === 'airline') {
+              this.props.getRouteAirline(datapoint.x, this.props.airline)
+            }
+            if (this.props.type === 'airport') {
+              this.props.getAirlineAirport(datapoint.x, this.props.airport)
+            }
             datapoint.opacity = 0.5378465593937095
           }}
         />
