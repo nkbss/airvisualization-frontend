@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   XYPlot,
   XAxis,
@@ -6,43 +6,70 @@ import {
   VerticalBarSeries,
   FlexibleXYPlot,
   HorizontalGridLines,
-  VerticalGridLines
+  VerticalGridLines,
+  Crosshair
 } from 'react-vis'
 
-const RouteAirlineBar = props => {
-  return (
-    <XYPlot
-      height={350}
-      width={900}
-      margin={{ left: 80, top: 10, bottom: 40 }}
-      xType="ordinal"
-    >
-      <VerticalGridLines />
-      <HorizontalGridLines />
-      <XAxis
-        style={{
-          text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 },
-          ticks: { stroke: '#ADDDE1' }
-          // title: { fontSize: '20px', tranform: 'translate(100px,100px)' }
-        }}
-        position="middle"
-      />
-      <YAxis
-      //  title={props.yTitle}
-      />
-      <VerticalBarSeries
-        color="#28c1b2"
-        data={props.data}
-        // barWidth={0.6}
-        // onValueClick={(datapoint, { index }) => {
-        //   props.handleYear(datapoint.x)
-        //   props.getRouteAirline(datapoint.x, props.airline)
-        //   console.log(datapoint.x)
-        //   console.log(index)
-        // }}
-      />
-    </XYPlot>
-  )
+class RouteAirlineBar extends Component {
+  state = {
+    crosshairValues: null
+  }
+
+  render() {
+    return (
+      <XYPlot
+        height={400}
+        width={900}
+        margin={{ left: 80, top: 10, bottom: 40 }}
+        xType="ordinal"
+        onMouseLeave={() =>
+          this.setState({ selectedPointId: null, crosshairValues: null })
+        }
+      >
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis
+          style={{
+            text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 },
+            ticks: { stroke: '#ADDDE1' }
+          }}
+          position="middle"
+        />
+        <YAxis />
+        <VerticalBarSeries
+          color="#28c1b2"
+          data={this.props.data}
+          onNearestX={(value, { index }) =>
+            this.setState({
+              selectedPointId: index,
+              crosshairValues: [value]
+            })
+          }
+        />
+        {this.state.crosshairValues && (
+          <Crosshair values={this.state.crosshairValues}>
+            <div
+              style={{
+                width: '80px',
+                color: 'grey',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              <p>X: {this.state.crosshairValues[0].x}</p>
+              <p>Y: {this.state.crosshairValues[0].y}</p>
+            </div>
+          </Crosshair>
+        )}
+      </XYPlot>
+    )
+  }
 }
+
+// const RouteAirlineBar = props => {
+//   return (
+
+//   )
+// }
 
 export { RouteAirlineBar }

@@ -346,19 +346,24 @@ function (_Component) {
       showdefault: false,
       defaultGraph: [{
         x: '2013',
-        y: 0
+        y: 0,
+        opacity: 1
       }, {
         x: '2014',
-        y: 0
+        y: 0,
+        opacity: 1
       }, {
         x: '2015',
-        y: 0
+        y: 0,
+        opacity: 1
       }, {
         x: '2016',
-        y: 0
+        y: 0,
+        opacity: 1
       }, {
         x: '2017',
-        y: 0
+        y: 0,
+        opacity: 1
       }],
       query: 'Test query',
       load: true,
@@ -428,7 +433,8 @@ function (_Component) {
         y: 0
       }],
       routestatus: false,
-      routeload: false
+      routeload: false,
+      crosshair: null
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
@@ -439,6 +445,8 @@ function (_Component) {
       _this.setState({
         year: year
       });
+
+      _this.setOpacity(_this.state.defaultGraph);
 
       _this.forceUpdate();
     });
@@ -670,6 +678,22 @@ function (_Component) {
       _this.forceUpdate();
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setOpacity", function (data) {
+      for (var i = 0; i < data.length; i++) {
+        data[i].opacity = 1;
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inCrosshair", function (data) {
+      _this.state.crosshair = data;
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "leaveCrosshair", function () {
+      _this.setState({
+        crosshair: null
+      });
+    });
+
     return _this;
   }
 
@@ -681,7 +705,7 @@ function (_Component) {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 260
+          lineNumber: 276
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
@@ -691,35 +715,35 @@ function (_Component) {
         state: this.state,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 261
+          lineNumber: 277
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.load,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 267
+          lineNumber: 283
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 268
+          lineNumber: 284
         },
         __self: this
       }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.routeload,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 271
+          lineNumber: 287
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 272
+          lineNumber: 288
         },
         __self: this
       }, "Get Route!")));
@@ -760,77 +784,170 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_vis__WEBPACK_IMPORTED_MODULE_1__);
 var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Graph/RouteAirlineBar.js";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var RouteAirlineBar = function RouteAirlineBar(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XYPlot"], {
-    height: 350,
-    width: 900,
-    margin: {
-      left: 80,
-      top: 10,
-      bottom: 40
-    },
-    xType: "ordinal",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalGridLines"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["HorizontalGridLines"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
-    style: {
-      text: {
-        stroke: 'none',
-        fill: '#6b6b76',
-        fontWeight: 600
-      },
-      ticks: {
-        stroke: '#ADDDE1' // title: { fontSize: '20px', tranform: 'translate(100px,100px)' }
 
-      }
-    },
-    position: "middle",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["YAxis"] //  title={props.yTitle}
-  , {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30
-    },
-    __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalBarSeries"], {
-    color: "#28c1b2",
-    data: props.data // barWidth={0.6}
-    // onValueClick={(datapoint, { index }) => {
-    //   props.handleYear(datapoint.x)
-    //   props.getRouteAirline(datapoint.x, props.airline)
-    //   console.log(datapoint.x)
-    //   console.log(index)
-    // }}
-    ,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 33
-    },
-    __self: this
-  }));
-};
+
+var RouteAirlineBar =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(RouteAirlineBar, _Component);
+
+  function RouteAirlineBar() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, RouteAirlineBar);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(RouteAirlineBar)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+      crosshairValues: null
+    });
+
+    return _this;
+  }
+
+  _createClass(RouteAirlineBar, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XYPlot"], {
+        height: 400,
+        width: 900,
+        margin: {
+          left: 80,
+          top: 10,
+          bottom: 40
+        },
+        xType: "ordinal",
+        onMouseLeave: function onMouseLeave() {
+          return _this2.setState({
+            selectedPointId: null,
+            crosshairValues: null
+          });
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalGridLines"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["HorizontalGridLines"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 30
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
+        style: {
+          text: {
+            stroke: 'none',
+            fill: '#6b6b76',
+            fontWeight: 600
+          },
+          ticks: {
+            stroke: '#ADDDE1'
+          }
+        },
+        position: "middle",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 38
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalBarSeries"], {
+        color: "#28c1b2",
+        data: this.props.data,
+        onNearestX: function onNearestX(value, _ref) {
+          var index = _ref.index;
+          return _this2.setState({
+            selectedPointId: index,
+            crosshairValues: [value]
+          });
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 39
+        },
+        __self: this
+      }), this.state.crosshairValues && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["Crosshair"], {
+        values: this.state.crosshairValues,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 50
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          width: '80px',
+          color: 'grey',
+          fontSize: '14px',
+          fontWeight: 'bold'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 59
+        },
+        __self: this
+      }, "X: ", this.state.crosshairValues[0].x), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60
+        },
+        __self: this
+      }, "Y: ", this.state.crosshairValues[0].y))));
+    }
+  }]);
+
+  return RouteAirlineBar;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const RouteAirlineBar = props => {
+//   return (
+//   )
+// }
+
 
 
 

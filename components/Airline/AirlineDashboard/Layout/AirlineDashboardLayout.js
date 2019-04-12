@@ -14,11 +14,11 @@ class AirlineDashboardLayout extends Component {
     defaultGraphY: [],
     showdefault: false,
     defaultGraph: [
-      { x: '2013', y: 0 },
-      { x: '2014', y: 0 },
-      { x: '2015', y: 0 },
-      { x: '2016', y: 0 },
-      { x: '2017', y: 0 }
+      { x: '2013', y: 0, opacity: 1 },
+      { x: '2014', y: 0, opacity: 1 },
+      { x: '2015', y: 0, opacity: 1 },
+      { x: '2016', y: 0, opacity: 1 },
+      { x: '2017', y: 0, opacity: 1 }
     ],
     query: 'Test query',
     load: true,
@@ -47,7 +47,8 @@ class AirlineDashboardLayout extends Component {
       { x: 'Other', y: 0 }
     ],
     routestatus: false,
-    routeload: false
+    routeload: false,
+    crosshair: null
   }
 
   componentDidMount = () => {
@@ -56,6 +57,7 @@ class AirlineDashboardLayout extends Component {
 
   handleYear = year => {
     this.setState({ year: year })
+    this.setOpacity(this.state.defaultGraph)
     this.forceUpdate()
   }
 
@@ -251,6 +253,20 @@ class AirlineDashboardLayout extends Component {
     }
     this.state.routeAirlineData[20].y = sum
     this.forceUpdate()
+  }
+
+  setOpacity = data => {
+    for (let i = 0; i < data.length; i++) {
+      data[i].opacity = 1
+    }
+  }
+
+  inCrosshair = data => {
+    this.state.crosshair = data
+  }
+
+  leaveCrosshair = () => {
+    this.setState({ crosshair: null })
   }
 
   render() {
