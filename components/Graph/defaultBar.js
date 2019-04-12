@@ -13,7 +13,7 @@ const defaultBar = props => {
   return (
     <XYPlot
       height={600}
-      width={630}
+      width={600}
       margin={{ left: 80, top: 10, bottom: 40 }}
       xType="ordinal"
     >
@@ -40,7 +40,16 @@ const defaultBar = props => {
         // position="end"
         title={props.yTitle}
       />
-      <VerticalBarSeries data={props.data} barWidth={0.6} />
+      <VerticalBarSeries
+        data={props.data}
+        barWidth={0.6}
+        onValueClick={(datapoint, { index }) => {
+          props.handleYear(datapoint.x)
+          props.getRouteAirline(datapoint.x, props.airline)
+          console.log(datapoint.x)
+          console.log(index)
+        }}
+      />
     </XYPlot>
   )
 }

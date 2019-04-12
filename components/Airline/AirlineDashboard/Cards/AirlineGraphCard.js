@@ -42,6 +42,7 @@ const AirlineGraphCard = props => {
           <Grid.Column width={6} />
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
+              type="airline"
               defaultValue="THA"
               options={airline}
               name="airline"
@@ -79,6 +80,9 @@ const AirlineGraphCard = props => {
           >
             {props.state.showdefault ? (
               <DefaultBar
+                airline={props.state.airline}
+                getRouteAirline={props.getRouteAirline}
+                handleYear={props.handleYear}
                 data={props.state.defaultGraph}
                 xTitle="Year"
                 yTitle={props.defaultY}

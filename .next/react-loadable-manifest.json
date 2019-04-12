@@ -69,14 +69,6 @@
       "publicPath": "static/chunks/1.js"
     }
   ],
-  "./AirlineStatisticCard": [
-    {
-      "id": "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js",
-      "name": "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
-    }
-  ],
   "../Cards": [
     {
       "id": "./components/Airline/AirlineDashboard/Cards/index.js",

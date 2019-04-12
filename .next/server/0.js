@@ -106,6 +106,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
+    type: "airline",
     defaultValue: "THA",
     options: airline,
     name: "airline",
@@ -123,7 +124,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -136,7 +137,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     onChange: props.handleDropdown,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 56
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -146,20 +147,20 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 67
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 68
+      lineNumber: 69
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 70
     },
     __self: this
   }, props.state.defaultY)) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -169,7 +170,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 74
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -179,16 +180,19 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 75
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DefaultBar, {
+    airline: props.state.airline,
+    getRouteAirline: props.getRouteAirline,
+    handleYear: props.handleYear,
     data: props.state.defaultGraph,
     xTitle: "Year",
     yTitle: props.defaultY,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 81
+      lineNumber: 82
     },
     __self: this
   }) : null)), props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -198,58 +202,23 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 99
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96
+      lineNumber: 100
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "text-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 101
     },
     __self: this
   }, "Year"))) : null));
-};
-
-
-
-/***/ }),
-
-/***/ "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js":
-/*!***************************************************************************!*\
-  !*** ./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js ***!
-  \***************************************************************************/
-/*! exports provided: AirlineStatisticCard */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AirlineStatisticCard", function() { return AirlineStatisticCard; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js";
-
-
-var AirlineStatisticCard = function AirlineStatisticCard() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 5
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
-    },
-    __self: this
-  }, "Statistic "));
 };
 
 
@@ -260,17 +229,13 @@ var AirlineStatisticCard = function AirlineStatisticCard() {
 /*!************************************************************!*\
   !*** ./components/Airline/AirlineDashboard/Cards/index.js ***!
   \************************************************************/
-/*! exports provided: AirlineGraphCard, AirlineStatisticCard */
+/*! exports provided: AirlineGraphCard */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AirlineGraphCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirlineGraphCard */ "./components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AirlineGraphCard", function() { return _AirlineGraphCard__WEBPACK_IMPORTED_MODULE_0__["AirlineGraphCard"]; });
-
-/* harmony import */ var _AirlineStatisticCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AirlineStatisticCard */ "./components/Airline/AirlineDashboard/Cards/AirlineStatisticCard.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AirlineStatisticCard", function() { return _AirlineStatisticCard__WEBPACK_IMPORTED_MODULE_1__["AirlineStatisticCard"]; });
-
 
 
 
@@ -362,11 +327,84 @@ function (_Component) {
         y: 0
       }],
       query: 'Test query',
-      load: true
+      load: true,
+      year: null,
+      routeAirlineData: [{
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: '',
+        y: 0
+      }, {
+        x: 'Other',
+        y: 0
+      }]
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
-      _this.getDataYearPaxByAirline(_this.state.airline);
+      _this.getPax(_this.state.airline);
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleYear", function (year) {
+      _this.setState({
+        year: year
+      });
+
+      _this.forceUpdate();
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleDropdown", function (e, data) {
@@ -381,6 +419,12 @@ function (_Component) {
       if (data.name === 'airline' && _this.state.defaultY !== null) {
         _this.filterDefaultGraph(data.value, _this.state.defaultY);
       }
+
+      if (data.type === 'airline') {
+        if (_this.state.year != null) {
+          _this.getRouteAirline(_this.state.year, _this.state.airline);
+        }
+      }
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "filterDefaultGraph", function (airline, status) {
@@ -388,34 +432,37 @@ function (_Component) {
       _this.state.load = true;
 
       if (status === 'Pax') {
-        _this.getDataYearPaxByAirline(airline);
+        _this.getPax(airline);
       }
 
       if (status === 'Frequency') {
-        _this.getDataYearFrequencyByAirline(airline);
+        _this.getFrequency(airline);
       }
 
       if (status === 'Seat') {
-        _this.getDataYearSeatByAirline(airline);
+        _this.getSeat(airline);
       }
 
       if (status === 'Route') {
-        _this.getDataYearRouteByAirline(airline);
+        _this.getRoute(airline);
       }
 
       _this.forceUpdate();
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearPaxByAirline", function (airline) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getPax", function (airline) {
       console.log('Get Airport!');
-      fetch('http://localhost:4000/YearPaxByAirline', {
+      fetch('http://localhost:4000/getPax', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'text/plain'
         },
         body: JSON.stringify({
-          airline: airline
+          airport: '%',
+          airline: airline,
+          flight: '%',
+          aircraft: '%'
         })
       }).then(function (res) {
         return res.json();
@@ -432,15 +479,18 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearFrequencyByAirline", function (airline) {
-      fetch('http://localhost:4000/YearFrequencyByAirline', {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getFrequency", function (airline) {
+      fetch('http://localhost:4000/getFrequency', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'text/plain'
         },
         body: JSON.stringify({
-          airline: airline
+          airport: '%',
+          airline: airline,
+          flight: '%',
+          aircraft: '%'
         })
       }).then(function (res) {
         return res.json();
@@ -457,15 +507,18 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearSeatByAirline", function (airline) {
-      fetch('http://localhost:4000/YearSeatByAirline', {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getSeat", function (airline) {
+      fetch('http://localhost:4000/getSeat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'text/plain'
         },
         body: JSON.stringify({
-          airline: airline
+          airport: '%',
+          airline: airline,
+          flight: '%',
+          aircraft: '%'
         })
       }).then(function (res) {
         return res.json();
@@ -482,15 +535,18 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getDataYearRouteByAirline", function (airline) {
-      fetch('http://localhost:4000/YearRouteByAirline', {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getRoute", function (airline) {
+      fetch('http://localhost:4000/getRoute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'text/plain'
         },
         body: JSON.stringify({
-          airline: airline
+          airport: '%',
+          airline: airline,
+          flight: '%',
+          aircraft: '%'
         })
       }).then(function (res) {
         return res.json();
@@ -504,6 +560,31 @@ function (_Component) {
         _this.setDefaultGraphData(data.data);
 
         _this.forceUpdate();
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getRouteAirline", function (year, airline) {
+      fetch('http://localhost:4000/getRouteAirline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/plain'
+        },
+        body: JSON.stringify({
+          year: year,
+          airline: airline
+        })
+      }).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data); // this.setRouteAirlineGraph(data.data)
+
+        if (data) {
+          _this.setRouteAirlineGraph(data.data); // this.loadFinished(data)
+
+        } // this.setDefaultGraphData(data.data)
+        // this.forceUpdate()
+
       });
     });
 
@@ -517,7 +598,7 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setDefaultGraphData", function (data) {
       for (var i = 0; i < data.length; i++) {
-        _this.state.defaultGraph[data.length - 1 - i].y = data[i].Results;
+        _this.state.defaultGraph[i].y = data[i].Results;
         console.log(data[i].Results);
       }
 
@@ -526,46 +607,59 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setRouteAirlineGraph", function (data) {
+      var sum = 0;
+
+      for (var i = 0; i < data.length; i++) {
+        if (i < 20) {
+          _this.state.routeAirlineData[i].x = data[i].AIRPORT;
+          _this.state.routeAirlineData[i].y = data[i].Results;
+        } else {
+          sum = sum + data[i].Results;
+        }
+      }
+
+      _this.state.routeAirlineData[20].y = sum;
+
+      _this.forceUpdate();
+    });
+
     return _this;
   }
 
   _createClass(AirlineDashboardLayout, [{
     key: "render",
     value: function render() {
-      console.log(this.state.defaultGraph);
+      console.log(this.state.routeAirlineData);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 169
+          lineNumber: 256
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineStatisticCard"], {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 170
-        },
-        __self: this
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
         handleDropdown: this.handleDropdown,
+        handleYear: this.handleYear,
+        getRouteAirline: this.getRouteAirline,
         state: this.state,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 171
+          lineNumber: 257
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.load,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 175
+          lineNumber: 263
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 176
+          lineNumber: 264
         },
         __self: this
       }, "Preparing Data")));

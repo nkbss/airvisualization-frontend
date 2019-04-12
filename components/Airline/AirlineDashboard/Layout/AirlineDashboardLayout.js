@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AirlineGraphCard, AirlineStatisticCard } from '../Cards'
+import { AirlineGraphCard } from '../Cards'
 import dynamic from 'next/dynamic'
 import { Dimmer, Loader } from '../../../../node_modules/semantic-ui-react'
 
@@ -21,11 +21,40 @@ class AirlineDashboardLayout extends Component {
       { x: '2017', y: 0 }
     ],
     query: 'Test query',
-    load: true
+    load: true,
+    year: null,
+    routeAirlineData: [
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: '', y: 0 },
+      { x: 'Other', y: 0 }
+    ]
   }
 
   componentDidMount = () => {
-    this.getDataYearPaxByAirline(this.state.airline)
+    this.getPax(this.state.airline)
+  }
+
+  handleYear = year => {
+    this.setState({ year: year })
+    this.forceUpdate()
   }
 
   handleDropdown = (e, data) => {
@@ -37,38 +66,46 @@ class AirlineDashboardLayout extends Component {
     if (data.name === 'airline' && this.state.defaultY !== null) {
       this.filterDefaultGraph(data.value, this.state.defaultY)
     }
+    if (data.type === 'airline') {
+      if (this.state.year != null) {
+        this.getRouteAirline(this.state.year, this.state.airline)
+      }
+    }
   }
 
   filterDefaultGraph = (airline, status) => {
     this.state.showdefault = true
     this.state.load = true
     if (status === 'Pax') {
-      this.getDataYearPaxByAirline(airline)
+      this.getPax(airline)
     }
     if (status === 'Frequency') {
-      this.getDataYearFrequencyByAirline(airline)
+      this.getFrequency(airline)
     }
 
     if (status === 'Seat') {
-      this.getDataYearSeatByAirline(airline)
+      this.getSeat(airline)
     }
 
     if (status === 'Route') {
-      this.getDataYearRouteByAirline(airline)
+      this.getRoute(airline)
     }
     this.forceUpdate()
   }
 
-  getDataYearPaxByAirline = airline => {
+  getPax = airline => {
     console.log('Get Airport!')
-    fetch('http://localhost:4000/YearPaxByAirline', {
+    fetch('http://localhost:4000/getPax', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain'
       },
       body: JSON.stringify({
-        airline: airline
+        airport: '%',
+        airline: airline,
+        flight: '%',
+        aircraft: '%'
       })
     })
       .then(res => res.json())
@@ -82,15 +119,18 @@ class AirlineDashboardLayout extends Component {
       })
   }
 
-  getDataYearFrequencyByAirline = airline => {
-    fetch('http://localhost:4000/YearFrequencyByAirline', {
+  getFrequency = airline => {
+    fetch('http://localhost:4000/getFrequency', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain'
       },
       body: JSON.stringify({
-        airline: airline
+        airport: '%',
+        airline: airline,
+        flight: '%',
+        aircraft: '%'
       })
     })
       .then(res => res.json())
@@ -104,15 +144,18 @@ class AirlineDashboardLayout extends Component {
       })
   }
 
-  getDataYearSeatByAirline = airline => {
-    fetch('http://localhost:4000/YearSeatByAirline', {
+  getSeat = airline => {
+    fetch('http://localhost:4000/getSeat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain'
       },
       body: JSON.stringify({
-        airline: airline
+        airport: '%',
+        airline: airline,
+        flight: '%',
+        aircraft: '%'
       })
     })
       .then(res => res.json())
@@ -126,15 +169,18 @@ class AirlineDashboardLayout extends Component {
       })
   }
 
-  getDataYearRouteByAirline = airline => {
-    fetch('http://localhost:4000/YearRouteByAirline', {
+  getRoute = airline => {
+    fetch('http://localhost:4000/getRoute', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'text/plain'
       },
       body: JSON.stringify({
-        airline: airline
+        airport: '%',
+        airline: airline,
+        flight: '%',
+        aircraft: '%'
       })
     })
       .then(res => res.json())
@@ -146,6 +192,32 @@ class AirlineDashboardLayout extends Component {
 
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
+      })
+  }
+
+  getRouteAirline = (year, airline) => {
+    fetch('http://localhost:4000/getRouteAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        // this.setRouteAirlineGraph(data.data)
+        if (data) {
+          this.setRouteAirlineGraph(data.data)
+          // this.loadFinished(data)
+        }
+
+        // this.setDefaultGraphData(data.data)
+        // this.forceUpdate()
       })
   }
 
@@ -156,20 +228,36 @@ class AirlineDashboardLayout extends Component {
 
   setDefaultGraphData = data => {
     for (let i = 0; i < data.length; i++) {
-      this.state.defaultGraph[data.length - 1 - i].y = data[i].Results
+      this.state.defaultGraph[i].y = data[i].Results
+
       console.log(data[i].Results)
     }
     this.setState({ showdefault: true })
   }
 
+  setRouteAirlineGraph = data => {
+    let sum = 0
+    for (let i = 0; i < data.length; i++) {
+      if (i < 20) {
+        this.state.routeAirlineData[i].x = data[i].AIRPORT
+        this.state.routeAirlineData[i].y = data[i].Results
+      } else {
+        sum = sum + data[i].Results
+      }
+    }
+    this.state.routeAirlineData[20].y = sum
+    this.forceUpdate()
+  }
+
   render() {
-    console.log(this.state.defaultGraph)
+    console.log(this.state.routeAirlineData)
 
     return (
       <div className="section-dashboard">
-        <AirlineStatisticCard />
         <AirlineGraphCard
           handleDropdown={this.handleDropdown}
+          handleYear={this.handleYear}
+          getRouteAirline={this.getRouteAirline}
           state={this.state}
         />
         <Dimmer active={this.state.load}>
