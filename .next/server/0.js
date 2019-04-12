@@ -20,7 +20,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layout_style_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Layout_style_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-vis */ "react-vis");
 /* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_vis__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Graph_RouteAirlineBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Graph/RouteAirlineBar */ "./components/Graph/RouteAirlineBar.js");
 var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Airline/AirlineDashboard/Cards/AirlineGraphCard.js";
+
 
 
 
@@ -68,33 +70,38 @@ var DefaultBar = next_dynamic__WEBPACK_IMPORTED_MODULE_2___default()(function ()
     },
     modules: ['../../../Graph/defaultBar']
   }
-});
+}); // const RouteAirlineBar = dynamic(
+//   () => import('../../../Graph/RouteAirlineBar'),
+//   {
+//     ssr: false
+//   }
+// )
 
 var AirlineGraphCard = function AirlineGraphCard(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 48
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 40
+      lineNumber: 49
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 41
+      lineNumber: 50
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     width: 6,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 51
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -102,7 +109,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 52
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -116,7 +123,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     onChange: props.handleDropdown,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 53
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -124,7 +131,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 64
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -137,7 +144,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     onChange: props.handleDropdown,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 65
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -147,20 +154,20 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 76
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 78
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 70
+      lineNumber: 79
     },
     __self: this
   }, props.state.defaultY)) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -170,7 +177,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 83
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -180,7 +187,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 84
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DefaultBar, {
@@ -192,33 +199,60 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     yTitle: props.defaultY,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 91
     },
     __self: this
-  }) : null)), props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
-    textAlign: "center",
-    style: {
-      paddingTop: '0px'
-    },
+  }) : null)), props.state.routestatus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 99
+      lineNumber: 115
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+    textAlign: "center",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 100
+      lineNumber: 117
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "text-label",
+    className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 118
     },
     __self: this
-  }, "Year"))) : null));
+  }, "Total of route ", props.state.year, " by ", props.state.airline, ' ', "Airline"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+    textAlign: "center",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 124
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    style: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 125
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_RouteAirlineBar__WEBPACK_IMPORTED_MODULE_5__["RouteAirlineBar"], {
+    data: props.state.routeAirlineData,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131
+    },
+    __self: this
+  })))) : null));
 };
 
 
@@ -392,7 +426,9 @@ function (_Component) {
       }, {
         x: 'Other',
         y: 0
-      }]
+      }],
+      routestatus: false,
+      routeload: false
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
@@ -422,7 +458,7 @@ function (_Component) {
 
       if (data.type === 'airline') {
         if (_this.state.year != null) {
-          _this.getRouteAirline(_this.state.year, _this.state.airline);
+          _this.getRouteAirline(_this.state.year, data.value);
         }
       }
     });
@@ -564,6 +600,11 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "getRouteAirline", function (year, airline) {
+      _this.setState({
+        routestatus: false,
+        routeload: true
+      });
+
       fetch('http://localhost:4000/getRouteAirline', {
         method: 'POST',
         headers: {
@@ -580,7 +621,12 @@ function (_Component) {
         console.log(data); // this.setRouteAirlineGraph(data.data)
 
         if (data) {
-          _this.setRouteAirlineGraph(data.data); // this.loadFinished(data)
+          _this.setRouteAirlineGraph(data.data);
+
+          _this.setState({
+            routestatus: true,
+            routeload: false
+          }); // this.loadFinished(data)
 
         } // this.setDefaultGraphData(data.data)
         // this.forceUpdate()
@@ -635,7 +681,7 @@ function (_Component) {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 256
+          lineNumber: 260
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
@@ -645,24 +691,38 @@ function (_Component) {
         state: this.state,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 257
+          lineNumber: 261
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.load,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 263
+          lineNumber: 267
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 264
+          lineNumber: 268
         },
         __self: this
-      }, "Preparing Data")));
+      }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.routeload,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 271
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
+        size: "big",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 272
+        },
+        __self: this
+      }, "Get Route!")));
     }
   }]);
 
@@ -679,6 +739,98 @@ function (_Component) {
   \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/Graph/RouteAirlineBar.js":
+/*!*********************************************!*\
+  !*** ./components/Graph/RouteAirlineBar.js ***!
+  \*********************************************/
+/*! exports provided: RouteAirlineBar */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouteAirlineBar", function() { return RouteAirlineBar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-vis */ "react-vis");
+/* harmony import */ var react_vis__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_vis__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/components/Graph/RouteAirlineBar.js";
+
+
+
+var RouteAirlineBar = function RouteAirlineBar(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XYPlot"], {
+    height: 350,
+    width: 900,
+    margin: {
+      left: 80,
+      top: 10,
+      bottom: 40
+    },
+    xType: "ordinal",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalGridLines"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["HorizontalGridLines"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
+    style: {
+      text: {
+        stroke: 'none',
+        fill: '#6b6b76',
+        fontWeight: 600
+      },
+      ticks: {
+        stroke: '#ADDDE1' // title: { fontSize: '20px', tranform: 'translate(100px,100px)' }
+
+      }
+    },
+    position: "middle",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 22
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["YAxis"] //  title={props.yTitle}
+  , {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalBarSeries"], {
+    color: "#28c1b2",
+    data: props.data // barWidth={0.6}
+    // onValueClick={(datapoint, { index }) => {
+    //   props.handleYear(datapoint.x)
+    //   props.getRouteAirline(datapoint.x, props.airline)
+    //   console.log(datapoint.x)
+    //   console.log(index)
+    // }}
+    ,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }));
+};
 
 
 

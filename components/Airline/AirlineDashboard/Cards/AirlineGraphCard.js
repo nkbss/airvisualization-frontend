@@ -15,6 +15,8 @@ import {
   HorizontalGridLines,
   VerticalGridLines
 } from 'react-vis'
+import { RouteAirlineBar } from '../../../Graph/RouteAirlineBar'
+
 const airline = [
   { key: 1, text: 'THA', value: 'THA' },
   { key: 2, text: 'BKP', value: 'BKP' },
@@ -33,6 +35,13 @@ const defaultY = [
 const DefaultBar = dynamic(() => import('../../../Graph/defaultBar'), {
   ssr: false
 })
+
+// const RouteAirlineBar = dynamic(
+//   () => import('../../../Graph/RouteAirlineBar'),
+//   {
+//     ssr: false
+//   }
+// )
 
 const AirlineGraphCard = props => {
   return (
@@ -95,12 +104,34 @@ const AirlineGraphCard = props => {
             /> */}
           </Grid.Column>
         </Grid.Row>
-        {props.state.showdefault ? (
+        {/* {props.state.showdefault ? (
           <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
             <Grid.Column>
               <label className="text-label">Year</label>
             </Grid.Column>
           </Grid.Row>
+        ) : null} */}
+        {props.state.routestatus ? (
+          <React.Fragment>
+            <Grid.Row textAlign="center">
+              <Grid.Column>
+                <label className="header-label">
+                  Total of route {props.state.year} by {props.state.airline}{' '}
+                  Airline
+                </label>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row textAlign="center">
+              <Grid.Column
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <RouteAirlineBar data={props.state.routeAirlineData} />
+              </Grid.Column>
+            </Grid.Row>
+          </React.Fragment>
         ) : null}
       </Grid>
     </React.Fragment>

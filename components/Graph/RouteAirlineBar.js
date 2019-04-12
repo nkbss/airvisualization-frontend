@@ -9,23 +9,17 @@ import {
   VerticalGridLines
 } from 'react-vis'
 
-const defaultBar = props => {
+const RouteAirlineBar = props => {
   return (
     <XYPlot
-      height={550}
-      width={700}
+      height={350}
+      width={900}
       margin={{ left: 80, top: 10, bottom: 40 }}
       xType="ordinal"
     >
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis
-        // attr="x"
-        // attrAxis="y"
-        // orientation="bottom"
-        // position="end"
-        // title="x-axis"
-        // title={props.xTitle}
         style={{
           text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 },
           ticks: { stroke: '#ADDDE1' }
@@ -34,24 +28,21 @@ const defaultBar = props => {
         position="middle"
       />
       <YAxis
-        // attr="y"
-        // attrAxis="x"
-        // orientation="left"
-        // position="end"
-        title={props.yTitle}
+      //  title={props.yTitle}
       />
       <VerticalBarSeries
+        color="#28c1b2"
         data={props.data}
-        barWidth={0.6}
-        onValueClick={(datapoint, { index }) => {
-          props.handleYear(datapoint.x)
-          props.getRouteAirline(datapoint.x, props.airline)
-          console.log(datapoint.x)
-          console.log(index)
-        }}
+        // barWidth={0.6}
+        // onValueClick={(datapoint, { index }) => {
+        //   props.handleYear(datapoint.x)
+        //   props.getRouteAirline(datapoint.x, props.airline)
+        //   console.log(datapoint.x)
+        //   console.log(index)
+        // }}
       />
     </XYPlot>
   )
 }
 
-export default defaultBar
+export { RouteAirlineBar }

@@ -85,6 +85,14 @@
       "publicPath": "static/chunks/1.js"
     }
   ],
+  "../../../Graph/RouteAirlineBar": [
+    {
+      "id": "./components/Graph/RouteAirlineBar.js",
+      "name": "./components/Graph/RouteAirlineBar.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
+  ],
   "./array": [
     {
       "id": "./node_modules/d3-array/src/array.js",

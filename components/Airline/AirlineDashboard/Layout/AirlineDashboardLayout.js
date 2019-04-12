@@ -45,7 +45,9 @@ class AirlineDashboardLayout extends Component {
       { x: '', y: 0 },
       { x: '', y: 0 },
       { x: 'Other', y: 0 }
-    ]
+    ],
+    routestatus: false,
+    routeload: false
   }
 
   componentDidMount = () => {
@@ -68,7 +70,7 @@ class AirlineDashboardLayout extends Component {
     }
     if (data.type === 'airline') {
       if (this.state.year != null) {
-        this.getRouteAirline(this.state.year, this.state.airline)
+        this.getRouteAirline(this.state.year, data.value)
       }
     }
   }
@@ -196,6 +198,7 @@ class AirlineDashboardLayout extends Component {
   }
 
   getRouteAirline = (year, airline) => {
+    this.setState({ routestatus: false, routeload: true })
     fetch('http://localhost:4000/getRouteAirline', {
       method: 'POST',
       headers: {
@@ -213,6 +216,7 @@ class AirlineDashboardLayout extends Component {
         // this.setRouteAirlineGraph(data.data)
         if (data) {
           this.setRouteAirlineGraph(data.data)
+          this.setState({ routestatus: true, routeload: false })
           // this.loadFinished(data)
         }
 
@@ -263,6 +267,11 @@ class AirlineDashboardLayout extends Component {
         <Dimmer active={this.state.load}>
           <Loader size="big">Preparing Data</Loader>
         </Dimmer>
+        {this.state.load ? null : (
+          <Dimmer active={this.state.routeload}>
+            <Loader size="big">Get Route!</Loader>
+          </Dimmer>
+        )}
       </div>
     )
   }
