@@ -47,7 +47,7 @@ const AirlineGraphCard = props => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid.Row textAlign="center">
+        {/* <Grid.Row textAlign="center">
           <Grid.Column width={6} />
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
@@ -79,7 +79,7 @@ const AirlineGraphCard = props => {
               <label className="header-label">{props.state.defaultY}</label>
             </Grid.Column>
           ) : null}
-        </Grid.Row>
+        </Grid.Row> */}
         <Grid.Row textAlign="center" style={{ paddingBottom: '0px' }}>
           <Grid.Column
             style={{

@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import { AirlineGraphCard } from '../Cards'
+import { AirlineGraphCard, AirlineMapCard } from '../Cards'
 import dynamic from 'next/dynamic'
-import { Dimmer, Loader } from '../../../../node_modules/semantic-ui-react'
+import {
+  Dimmer,
+  Loader,
+  Grid,
+  Dropdown,
+  Menu
+} from '../../../../node_modules/semantic-ui-react'
 
 class AirlineDashboardLayout extends Component {
   state = {
     y2017: null,
     airline: 'THA',
+    mapyear: '2017',
     defaultY: 'Pax',
     data: null,
     defaultY2017: null,
@@ -47,16 +54,42 @@ class AirlineDashboardLayout extends Component {
       { x: 'Other', y: 0 }
     ],
     routestatus: false,
-    routeload: false
+    routeload: false,
+    bubblemap: [],
+    map: false,
+    mode: true,
+    graph: true,
+    mapload: false,
+    mapstatus: false
   }
 
   componentDidMount = () => {
     this.getPax(this.state.airline)
+    this.getPaxBubbleMap(this.state.mapyear, this.state.airline)
   }
 
   handleYear = year => {
-    this.setState({ year: year })
+    this.setState({ year: year, mapyear: year })
     this.setOpacity(this.state.defaultGraph)
+    if (this.state.defaultY === 'Pax') {
+      this.getPaxBubbleMap(year, this.state.airline)
+    } else if (this.state.defaultY === 'Frequency') {
+      this.getFrequencyBubbleMap(year, this.state.airline)
+    } else if (this.state.defaultY === 'Seat') {
+      this.getSeatBubbleMap(year, this.state.airline)
+    }
+
+    this.forceUpdate()
+  }
+
+  activeMode = type => {
+    if (type === 'graph') {
+      this.state.graph = true
+      this.state.map = false
+    } else if (type === 'map') {
+      this.state.map = true
+      this.state.graph = false
+    }
     this.forceUpdate()
   }
 
@@ -64,11 +97,29 @@ class AirlineDashboardLayout extends Component {
     this.setState({ [data.name]: data.value })
     this.forceUpdate()
     if (data.name === 'defaultY') {
-      this.filterDefaultGraph(this.state.airline, data.value)
+      if (this.state.year === null) {
+        this.filterDefaultGraph(this.state.airline, data.value, this.state.year)
+      } else {
+        this.filterDefaultGraph(
+          this.state.airline,
+          data.value,
+          this.state.mapyear
+        )
+      }
     }
     if (data.name === 'airline' && this.state.defaultY !== null) {
-      this.filterDefaultGraph(data.value, this.state.defaultY)
+      this.filterDefaultGraph(data.value, this.state.defaultY, this.state.year)
     }
+    if (data.name === 'year') {
+      this.filterDefaultGraph(
+        this.state.airline,
+        this.state.defaultY,
+        data.value
+      )
+      this.getRouteAirline(data.value, this.state.airline)
+      this.handleYear(data.value)
+    }
+
     if (data.type === 'airline') {
       if (this.state.year != null) {
         this.getRouteAirline(this.state.year, data.value)
@@ -76,18 +127,22 @@ class AirlineDashboardLayout extends Component {
     }
   }
 
-  filterDefaultGraph = (airline, status) => {
+  filterDefaultGraph = (airline, status, year) => {
+    console.log(status)
     this.state.showdefault = true
     this.state.load = true
     if (status === 'Pax') {
       this.getPax(airline)
+      this.getPaxBubbleMap(year, airline)
     }
     if (status === 'Frequency') {
       this.getFrequency(airline)
+      this.getFrequencyBubbleMap(year, airline)
     }
 
     if (status === 'Seat') {
       this.getSeat(airline)
+      this.getSeatBubbleMap(year, airline)
     }
 
     if (status === 'Route') {
@@ -214,16 +269,122 @@ class AirlineDashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        // this.setRouteAirlineGraph(data.data)
+
         if (data) {
           this.setRouteAirlineGraph(data.data)
           this.setState({ routestatus: true, routeload: false })
+        }
+      })
+  }
+
+  getFrequencyBubbleMap = (year, airline) => {
+    this.setState({ mapstatus: false, mapload: true })
+    console.log('get freq bb')
+    fetch('http://localhost:4000/getFrequencyBubbleMap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data) {
+          this.setBubbleMap(data.data)
+          // this.setRouteAirlineGraph(data.data)
+          // this.setState({ routestatus: true, routeload: false })
           // this.loadFinished(data)
         }
 
         // this.setDefaultGraphData(data.data)
         // this.forceUpdate()
       })
+  }
+
+  getPaxBubbleMap = (year, airline) => {
+    console.log('get pax bb')
+    this.setState({ mapstatus: false, mapload: true })
+    fetch('http://localhost:4000/getPaxBubbleMap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        // this.setRouteAirlineGraph(data.data)
+        if (data) {
+          this.setBubbleMap(data.data)
+          // this.setRouteAirlineGraph(data.data)
+          // this.setState({ routestatus: true, routeload: false })
+          // this.loadFinished(data)
+        }
+
+        // this.setDefaultGraphData(data.data)
+        // this.forceUpdate()
+      })
+  }
+
+  getSeatBubbleMap = (year, airline) => {
+    console.log('get seat bb')
+    this.setState({ mapstatus: false, mapload: true })
+    fetch('http://localhost:4000/getSeatBubbleMap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        // this.setRouteAirlineGraph(data.data)
+        if (data) {
+          this.setBubbleMap(data.data)
+          // this.setRouteAirlineGraph(data.data)
+          // this.setState({ routestatus: true, routeload: false })
+          // this.loadFinished(data)
+        }
+
+        // this.setDefaultGraphData(data.data)
+        // this.forceUpdate()
+      })
+  }
+
+  setBubbleMap = data => {
+    let fill = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']
+
+    for (let i = 0; i < data.length; i++) {
+      let randomfill = Math.floor(Math.random() * fill.length)
+      let radius = (data[i].Results / data[0].Results) * 50
+      this.state.bubblemap.push({
+        name: data[i].AIRPORT,
+        result: data[i].Results,
+        radius: radius,
+        country: data[i].Name,
+        latitude: data[i].Latitude,
+        longitude: data[i].Longitude,
+        fillKey: fill[randomfill]
+      })
+    }
+    this.setState({ mapstatus: true, mapload: false })
+    this.forceUpdate()
   }
 
   loadFinished = () => {
@@ -269,22 +430,134 @@ class AirlineDashboardLayout extends Component {
   }
 
   render() {
-    console.log(this.state.routeAirlineData)
+    console.log(this.state.mapstatus)
+    const airline = [
+      { key: 1, text: 'THA', value: 'THA' },
+      { key: 2, text: 'BKP', value: 'BKP' },
+      { key: 3, text: 'THD', value: 'THD' }
+    ]
+
+    const defaultY = [
+      { key: 1, text: 'No. of Route ', value: 'Route' },
+      { key: 2, text: 'Seat', value: 'Seat' },
+      { key: 3, text: 'Pax', value: 'Pax' },
+      // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
+      // { key: 5, text: 'RPK', value: 'RPK' },
+      { key: 6, text: 'Frequency', value: 'Frequency' }
+    ]
+
+    const defaultYM = [
+      { key: 1, text: 'Seat', value: 'Seat' },
+      { key: 2, text: 'Pax', value: 'Pax' },
+      { key: 3, text: 'Frequency', value: 'Frequency' }
+    ]
+
+    const year = [
+      { key: 1, text: '2013', value: '2013' },
+      { key: 2, text: '2014', value: '2014' },
+      { key: 3, text: '2015', value: '2015' },
+      { key: 4, text: '2016', value: '2016' },
+      { key: 5, text: '2017', value: '2017' }
+    ]
 
     return (
       <div className="section-dashboard">
-        <AirlineGraphCard
-          handleDropdown={this.handleDropdown}
-          handleYear={this.handleYear}
-          getRouteAirline={this.getRouteAirline}
-          state={this.state}
-        />
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column width={8} textAlign="right">
+              <label>
+                <a
+                  className={
+                    this.state.graph ? 'mode-header-active' : 'mode-header'
+                  }
+                  onClick={() => this.activeMode('graph')}
+                >
+                  Graph
+                </a>
+              </label>
+            </Grid.Column>
+            <Grid.Column width={8} textAlign="left">
+              <label>
+                <a
+                  className={
+                    this.state.map ? 'mode-header-active' : 'mode-header'
+                  }
+                  onClick={() => this.activeMode('map')}
+                >
+                  Map
+                </a>
+              </label>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row textAlign="center">
+            {this.state.graph ? (
+              <Grid.Column width={6} />
+            ) : (
+              <Grid.Column width={5} />
+            )}
+            {this.state.map ? (
+              <Grid.Column width={2} verticalAlign="middle">
+                <Dropdown
+                  // defaultValue="2017"
+                  value={this.state.mapyear}
+                  options={year}
+                  name="year"
+                  placeholder="Year"
+                  selection
+                  fluid
+                  onChange={this.handleDropdown}
+                />
+              </Grid.Column>
+            ) : null}
+            <Grid.Column width={2} verticalAlign="middle">
+              <Dropdown
+                type="airline"
+                defaultValue="THA"
+                options={airline}
+                name="airline"
+                placeholder="Airline"
+                selection
+                fluid
+                onChange={this.handleDropdown}
+              />
+            </Grid.Column>
+            <Grid.Column width={2} verticalAlign="middle">
+              <Dropdown
+                defaultValue="Pax"
+                options={defaultY}
+                name="defaultY"
+                placeholder="Yaxis"
+                selection
+                fluid
+                onChange={this.handleDropdown}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        {this.state.graph ? (
+          <AirlineGraphCard
+            handleDropdown={this.handleDropdown}
+            handleYear={this.handleYear}
+            getRouteAirline={this.getRouteAirline}
+            state={this.state}
+          />
+        ) : null}
+
+        {this.state.map ? (
+          <AirlineMapCard state={this.state} data={this.state.bubblemap} />
+        ) : null}
+
         <Dimmer active={this.state.load}>
           <Loader size="big">Preparing Data</Loader>
         </Dimmer>
         {this.state.load ? null : (
           <Dimmer active={this.state.routeload}>
             <Loader size="big">Get Route!</Loader>
+          </Dimmer>
+        )}
+        {this.state.load === true || this.state.routeload === true ? null : (
+          <Dimmer active={this.state.mapload}>
+            <Loader size="big">Get Map!</Loader>
           </Dimmer>
         )}
       </div>

@@ -15,3 +15,23 @@
 .section-dashboard {
   padding-top: 20px;
 }
+
+.mode-header {
+  font-size: 40px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.mode-header-active {
+  font-size: 40px;
+  font-weight: bold;
+  color: teal;
+}
+
+.mode-header-active:hover {
+  color: teal;
+}
+
+.mode-header:hover {
+  color: teal;
+}

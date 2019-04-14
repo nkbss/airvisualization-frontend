@@ -3,8 +3,30 @@
   justify-content: center;
 }
 
-#airport-dashboard {
-  margin-top: 20px;
+.dashboardcard {
+  margin-top: 50px;
+}
+
+.dashboard {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#filter {
+  margin-right: 10px;
+}
+
+.dashboard-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.text-label {
+  /* padding-left: 75px; */
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
 }
 
 .header-label {
@@ -12,6 +34,30 @@
   font-size: 20px;
   font-weight: bold;
   color: #6b6b76;
+}
+
+.section-dashboard {
+  padding-top: 20px;
+}
+
+.mode-header {
+  font-size: 40px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.mode-header-active {
+  font-size: 40px;
+  font-weight: bold;
+  color: teal;
+}
+
+.mode-header-active:hover {
+  color: teal;
+}
+
+.mode-header:hover {
+  color: teal;
 }
 
 
