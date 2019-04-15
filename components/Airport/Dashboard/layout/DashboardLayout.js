@@ -18,35 +18,14 @@ class DashboardLayout extends Component {
     ],
     load: true,
     year: null,
-    routeAirlineData: [
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: 'Other', y: 0 }
-    ],
     airlineData: [],
     airlinestatus: false,
     airlineload: false
   }
 
   componentDidMount = () => {
+    this.state.type = localStorage.getItem('STATE')
+    this.forceUpdate()
     this.getPax(this.state.airport)
   }
 
@@ -104,7 +83,8 @@ class DashboardLayout extends Component {
         airport: airport,
         airline: '%',
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -129,7 +109,8 @@ class DashboardLayout extends Component {
         airport: airport,
         airline: '%',
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -154,7 +135,8 @@ class DashboardLayout extends Component {
         airport: airport,
         airline: '%',
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -179,7 +161,8 @@ class DashboardLayout extends Component {
         airport: airport,
         airline: '%',
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -204,7 +187,8 @@ class DashboardLayout extends Component {
       },
       body: JSON.stringify({
         year: year,
-        airport: airport
+        airport: airport,
+        type: this.state.type
       })
     })
       .then(res => res.json())

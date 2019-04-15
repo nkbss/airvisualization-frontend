@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { StatisticLayout } from '../../components/Statistic/layout/StatisticLayout'
 import { TopMenu } from '../../components/Menu'
+import { ODDahsBoardLayout } from '../../components/OD/Layout'
 
-class statistic extends Component {
+class od extends Component {
   render() {
     return (
       <React.Fragment>
         <TopMenu />
-        <StatisticLayout />
+        <ODDahsBoardLayout />
       </React.Fragment>
     )
   }
 }
 
-export default statistic
+export default od

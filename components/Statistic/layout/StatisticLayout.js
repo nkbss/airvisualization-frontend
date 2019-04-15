@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StatisticCard } from '../cards'
 import './style.css'
+import { Dimmer, Loader } from '../../../node_modules/semantic-ui-react'
 class StatisticLayout extends Component {
   state = {
     Airline: null,
@@ -26,7 +27,17 @@ class StatisticLayout extends Component {
     routeData: null,
     frequencyData: null,
     av: [],
-    sd: []
+    sd: [],
+    type: null,
+    pax: false,
+    seat: false,
+    route: false,
+    frequency: false
+  }
+
+  componentDidMount = () => {
+    this.state.type = localStorage.getItem('STATE')
+    this.forceUpdate()
   }
 
   handleDropdown = (e, data) => {
@@ -97,22 +108,30 @@ class StatisticLayout extends Component {
       this.state.paxB
       // && this.state.paxData == null
     ) {
+      this.setState({ pax: true })
+      this.forceUpdate()
       this.getPax()
     }
     if (
       this.state.seatB
       // && this.state.seatData == null
     ) {
+      this.setState({ seat: true })
+      this.forceUpdate()
       this.getSeat()
     }
     if (
       this.state.routeB
       //  && this.state.routeData == null
     ) {
+      this.setState({ route: true })
+      this.forceUpdate()
       this.getRoute()
     }
 
     if (this.state.frequencyB) {
+      this.setState({ frequency: true })
+      this.forceUpdate()
       this.getFrequency()
     }
   }
@@ -129,7 +148,8 @@ class StatisticLayout extends Component {
         airport: this.state.airport,
         airline: this.state.airline,
         flight: this.state.flight,
-        aircraft: this.state.aircraft
+        aircraft: this.state.aircraft,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -137,7 +157,7 @@ class StatisticLayout extends Component {
         console.log(data)
         this.calculateAv('pax', data.data)
         this.calculateSd('pax', data.data)
-        this.setState({ paxData: data.data })
+        this.setState({ paxData: data.data, pax: false })
         this.forceUpdate()
       })
   }
@@ -154,7 +174,8 @@ class StatisticLayout extends Component {
         airport: this.state.airport,
         airline: this.state.airline,
         flight: this.state.flight,
-        aircraft: this.state.aircraft
+        aircraft: this.state.aircraft,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -162,7 +183,7 @@ class StatisticLayout extends Component {
         console.log(data)
         this.calculateAv('seat', data.data)
         this.calculateSd('seat', data.data)
-        this.setState({ seatData: data.data })
+        this.setState({ seatData: data.data, seat: false })
         this.forceUpdate()
       })
   }
@@ -179,7 +200,8 @@ class StatisticLayout extends Component {
         airport: this.state.airport,
         airline: this.state.airline,
         flight: this.state.flight,
-        aircraft: this.state.aircraft
+        aircraft: this.state.aircraft,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -187,7 +209,7 @@ class StatisticLayout extends Component {
         console.log(data)
         this.calculateAv('route', data.data)
         this.calculateSd('route', data.data)
-        this.setState({ routeData: data.data })
+        this.setState({ routeData: data.data, route: false })
         this.forceUpdate()
       })
   }
@@ -204,7 +226,8 @@ class StatisticLayout extends Component {
         airport: this.state.airport,
         airline: this.state.airline,
         flight: this.state.flight,
-        aircraft: this.state.aircraft
+        aircraft: this.state.aircraft,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -212,7 +235,7 @@ class StatisticLayout extends Component {
         console.log(data)
         this.calculateAv('frequency', data.data)
         this.calculateSd('frequency', data.data)
-        this.setState({ frequencyData: data.data })
+        this.setState({ frequencyData: data.data, frequency: false })
         this.forceUpdate()
       })
   }
@@ -271,6 +294,26 @@ class StatisticLayout extends Component {
           getData={this.getData}
           state={this.state}
         />
+        {this.state.seat && this.state.route && this.state.frequency ? null : (
+          <Dimmer active={this.state.pax}>
+            <Loader size="big">Get Pax!</Loader>
+          </Dimmer>
+        )}
+        {this.state.pax && this.state.route && this.state.frequency ? null : (
+          <Dimmer active={this.state.seat}>
+            <Loader size="big">Get Seat!</Loader>
+          </Dimmer>
+        )}
+        {this.state.pax && this.state.seat && this.state.frequency ? null : (
+          <Dimmer active={this.state.route}>
+            <Loader size="big">Get Route!</Loader>
+          </Dimmer>
+        )}
+        {this.state.pax && this.state.seat && this.state.route ? null : (
+          <Dimmer active={this.state.frequency}>
+            <Loader size="big">Get Frequency!</Loader>
+          </Dimmer>
+        )}
       </div>
     )
   }

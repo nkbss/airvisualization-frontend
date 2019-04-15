@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { StatisticLayout } from '../../components/Statistic/layout/StatisticLayout'
+import { RouteDashBoardLayout } from '../../Route/Layout'
 import { TopMenu } from '../../components/Menu'
 
-class statistic extends Component {
+class route extends Component {
   render() {
     return (
       <React.Fragment>
         <TopMenu />
-        <StatisticLayout />
+        <RouteDashBoardLayout />
       </React.Fragment>
     )
   }
 }
 
-export default statistic
+export default route

@@ -284,7 +284,7 @@ const StatisticCard = props => {
         <Grid.Row columns={7}>
           <Grid.Column>
             <Button
-              color="green"
+              color="teal"
               fluid
               size="large"
               onClick={() => props.getData()}

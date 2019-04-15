@@ -1,51 +1,52 @@
 import React, { Component } from 'react'
 import { Menu } from '../../node_modules/semantic-ui-react'
 import './style.css'
-
+import Link from '../Global/ActiveLink'
 class TopMenu extends Component {
-  state = {
-    activeItem: 'home'
+  componentDidMount = () => {
+    this.state.type = localStorage.getItem('STATE')
+    this.forceUpdate()
   }
 
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
+  state = {
+    type: null
   }
 
   render() {
-    const { activeItem } = this.state
+    console.log(this.state.type)
     return (
       <div>
         <Menu pointing secondary fluid size="huge" id="topmenu">
           <Menu.Menu>
-            <Menu.Item
-              name="Airline"
-              active={activeItem === 'Airline'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="Airport"
-              active={activeItem === 'Airport'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="Route"
-              active={activeItem === 'Route'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="OD"
-              active={activeItem === 'OD'}
-              onClick={this.handleItemClick}
-            />
+            <Menu.Item>
+              <label
+                style={{
+                  fontSize: '20px',
+                  color: 'teal',
+                  fontWeight: 'bold'
+                }}
+              >
+                {this.state.type === '5'
+                  ? '- Domestic Flight -'
+                  : '- International Flight -'}
+              </label>
+            </Menu.Item>
+            <Link activeClassName="active" href="/trafficDemand/statistic">
+              <Menu.Item name="Statistic" />
+            </Link>
+            <Link activeClassName="active" href="/trafficDemand/airline">
+              <Menu.Item name="Airline" />
+            </Link>
+            <Link activeClassName="active" href="/trafficDemand/airport">
+              <Menu.Item name="Airport" />
+            </Link>
+            <Link activeClassName="active" href="/trafficDemand/route">
+              <Menu.Item name="Route" />
+            </Link>
+            <Link activeClassName="active" href="/trafficDemand/od">
+              <Menu.Item name="OD" />
+            </Link>
           </Menu.Menu>
-
-          {/* <Menu.Menu position="right">
-            <Menu.Item
-              name="logout"
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu> */}
         </Menu>
       </div>
     )

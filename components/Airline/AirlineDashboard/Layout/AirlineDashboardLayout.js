@@ -60,10 +60,13 @@ class AirlineDashboardLayout extends Component {
     mode: true,
     graph: true,
     mapload: false,
-    mapstatus: false
+    mapstatus: false,
+    type: null
   }
 
   componentDidMount = () => {
+    this.state.type = localStorage.getItem('STATE')
+    this.forceUpdate()
     this.getPax(this.state.airline)
     this.getPaxBubbleMap(this.state.mapyear, this.state.airline)
   }
@@ -152,6 +155,7 @@ class AirlineDashboardLayout extends Component {
   }
 
   getPax = airline => {
+    console.log(this.state.type)
     console.log('Get Airport!')
     fetch('http://localhost:4000/getPax', {
       method: 'POST',
@@ -163,7 +167,8 @@ class AirlineDashboardLayout extends Component {
         airport: '%',
         airline: airline,
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -188,7 +193,8 @@ class AirlineDashboardLayout extends Component {
         airport: '%',
         airline: airline,
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -213,7 +219,8 @@ class AirlineDashboardLayout extends Component {
         airport: '%',
         airline: airline,
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -238,7 +245,8 @@ class AirlineDashboardLayout extends Component {
         airport: '%',
         airline: airline,
         flight: '%',
-        aircraft: '%'
+        aircraft: '%',
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -263,7 +271,8 @@ class AirlineDashboardLayout extends Component {
       },
       body: JSON.stringify({
         year: year,
-        airline: airline
+        airline: airline,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -288,7 +297,8 @@ class AirlineDashboardLayout extends Component {
       },
       body: JSON.stringify({
         year: year,
-        airline: airline
+        airline: airline,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -307,6 +317,7 @@ class AirlineDashboardLayout extends Component {
   }
 
   getPaxBubbleMap = (year, airline) => {
+    console.log(this.state.type)
     console.log('get pax bb')
     this.setState({ mapstatus: false, mapload: true })
     fetch('http://localhost:4000/getPaxBubbleMap', {
@@ -317,7 +328,8 @@ class AirlineDashboardLayout extends Component {
       },
       body: JSON.stringify({
         year: year,
-        airline: airline
+        airline: airline,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -348,7 +360,8 @@ class AirlineDashboardLayout extends Component {
       },
       body: JSON.stringify({
         year: year,
-        airline: airline
+        airline: airline,
+        type: this.state.type
       })
     })
       .then(res => res.json())
@@ -372,7 +385,12 @@ class AirlineDashboardLayout extends Component {
 
     for (let i = 0; i < data.length; i++) {
       let randomfill = Math.floor(Math.random() * fill.length)
-      let radius = (data[i].Results / data[0].Results) * 50
+      let radius
+      if (this.state.type === '5') {
+        radius = (data[i].Results / data[0].Results) * 20
+      } else {
+        radius = (data[i].Results / data[0].Results) * 50
+      }
       this.state.bubblemap.push({
         name: data[i].AIRPORT,
         result: data[i].Results,
@@ -402,16 +420,42 @@ class AirlineDashboardLayout extends Component {
   }
 
   setRouteAirlineGraph = data => {
+    // let sum = 0
+    // for (let i = 0; i < data.length; i++) {
+    //   if (i < 20) {
+    //     this.state.routeAirlineData[i].x = data[i].AIRPORT
+    //     this.state.routeAirlineData[i].y = data[i].Results
+    //   } else {
+    //     sum = sum + data[i].Results
+    //   }
+    // }
+    // this.state.routeAirlineData[20].y = sum
+    this.state.routeAirlineData = []
+    console.log(data.length)
     let sum = 0
-    for (let i = 0; i < data.length; i++) {
-      if (i < 20) {
-        this.state.routeAirlineData[i].x = data[i].AIRPORT
-        this.state.routeAirlineData[i].y = data[i].Results
-      } else {
-        sum = sum + data[i].Results
+    if (data.length > 20) {
+      for (let i = 0; i < data.length; i++) {
+        if (i < 20) {
+          this.state.routeAirlineData.push({
+            x: data[i].AIRPORT,
+            y: data[i].Results
+          })
+        } else if (i === 20) {
+          sum = sum + data[i].Results
+          this.state.routeAirlineData.push({ x: 'Other', y: 0 })
+        } else if (i > 20) {
+          sum = sum + data[i].Results
+        }
+      }
+      this.state.routeAirlineData[20].y = sum
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        this.state.routeAirlineData.push({
+          x: data[i].AIRPORT,
+          y: data[i].Results
+        })
       }
     }
-    this.state.routeAirlineData[20].y = sum
     this.forceUpdate()
   }
 
@@ -430,7 +474,7 @@ class AirlineDashboardLayout extends Component {
   }
 
   render() {
-    console.log(this.state.mapstatus)
+    console.log(this.state.type)
     const airline = [
       { key: 1, text: 'THA', value: 'THA' },
       { key: 2, text: 'BKP', value: 'BKP' },
@@ -463,8 +507,19 @@ class AirlineDashboardLayout extends Component {
     return (
       <div className="section-dashboard">
         <Grid>
-          <Grid.Row columns={2}>
-            <Grid.Column width={8} textAlign="right">
+          <Grid.Row
+            columns={2}
+            style={{
+              height: '40px',
+              paddingTop: '35px',
+              paddingBottom: '40px'
+            }}
+          >
+            <Grid.Column
+              width={8}
+              textAlign="right"
+              style={{ borderRight: '2px solid grey' }}
+            >
               <label>
                 <a
                   className={
@@ -524,7 +579,7 @@ class AirlineDashboardLayout extends Component {
             <Grid.Column width={2} verticalAlign="middle">
               <Dropdown
                 defaultValue="Pax"
-                options={defaultY}
+                options={this.state.mapstatus ? defaultYM : defaultY}
                 name="defaultY"
                 placeholder="Yaxis"
                 selection

@@ -32,47 +32,7 @@ class AirlineMapCard extends Component {
                 f7: '#954cef',
                 f8: '#ec4cef'
               }}
-              bubbles={
-                this.props.data
-                // [
-                //   {
-                //     name: 'Not a bomb, but centered on Brazil',
-                //     radius: 23,
-                //     centered: 'BRA',
-                //     country: 'USA',
-                //     yeild: 0,
-                //     fillKey: 'OTH',
-                //     date: '1954-03-01',
-                //     fills: 'red'
-                //   },
-                //   {
-                //     name: 'Castle Bravo',
-                //     radius: 25,
-                //     yeild: 15000,
-                //     country: 'USA',
-                //     significance:
-                //       'First dry fusion fuel "staged" thermonuclear weapon; a serious nuclear fallout accident occurred',
-                //     fillKey: 'OTH',
-                //     date: '1954-03-01',
-                //     latitude: 11.415,
-                //     longitude: 165.1619,
-                //     fills: 'red'
-                //   },
-                //   {
-                //     name: 'Tsar Bomba',
-                //     radius: 70,
-                //     yeild: 50000,
-                //     country: 'USSR',
-                //     fillKey: 'USA',
-                //     significance:
-                //       'Largest thermonuclear weapon ever tested-scaled down from its initial 100Mt design by 50%',
-                //     date: '1961-10-31',
-                //     latitude: 73.482,
-                //     longitude: 54.5854,
-                //     fills: 'red'
-                //   }
-                // ]
-              }
+              bubbles={this.props.data}
               bubbleOptions={{
                 popupTemplate: (geo, data) =>
                   `<div class="hoverinfo">
