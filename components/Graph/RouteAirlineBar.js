@@ -18,7 +18,7 @@ class RouteAirlineBar extends Component {
   render() {
     return (
       <XYPlot
-        height={400}
+        height={500}
         width={900}
         margin={{ left: 80, top: 10, bottom: 40 }}
         xType="ordinal"
@@ -50,10 +50,13 @@ class RouteAirlineBar extends Component {
           <Crosshair values={this.state.crosshairValues}>
             <div
               style={{
-                width: '80px',
-                color: 'grey',
+                width: '90px',
+                color: 'white',
                 fontSize: '14px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                backgroundColor: 'black',
+                borderRadius: '10px',
+                textAlign: 'center'
               }}
             >
               <p>X: {this.state.crosshairValues[0].x}</p>

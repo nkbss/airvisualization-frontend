@@ -18,6 +18,17 @@ body {
   font-size: 70px;
   color: grey;
   font-weight: bold;
+  background: linear-gradient(
+    to right,
+    rgb(0, 0, 0),
+    rgb(53, 53, 54),
+    rgb(124, 124, 124),
+    rgb(10, 3, 107),
+    blue,
+    rgb(56, 86, 184)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .a-label {
@@ -26,4 +37,8 @@ body {
 
 .a-label:hover {
   color: teal;
+}
+
+body {
+  background-image: url(https://images.unsplash.com/photo-1532744746419-cc629ec46004?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80);
 }

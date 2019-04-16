@@ -194,7 +194,7 @@ const DashboardCard = props => {
                   centered: 'BRA',
                   country: 'USA',
                   yeild: 0,
-                  // fillKey: 'OTH',
+                  fillKey: 'OTH',
                   date: '1954-03-01',
                   fills: 'red'
                 },
@@ -205,7 +205,7 @@ const DashboardCard = props => {
                   country: 'USA',
                   significance:
                     'First dry fusion fuel "staged" thermonuclear weapon; a serious nuclear fallout accident occurred',
-                  // fillKey: 'OTH',
+                  fillKey: 'OTH',
                   date: '1954-03-01',
                   latitude: 11.415,
                   longitude: 165.1619,
@@ -216,7 +216,7 @@ const DashboardCard = props => {
                   radius: 70,
                   yeild: 50000,
                   country: 'USSR',
-                  // fillKey: 'OTH',
+                  fillKey: 'USA',
                   significance:
                     'Largest thermonuclear weapon ever tested-scaled down from its initial 100Mt design by 50%',
                   date: '1961-10-31',

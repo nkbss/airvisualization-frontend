@@ -1368,7 +1368,7 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XYPlot"], {
-        height: 400,
+        height: 500,
         width: 900,
         margin: {
           left: 80,
@@ -1446,10 +1446,13 @@ function (_Component) {
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          width: '80px',
-          color: 'grey',
+          width: '90px',
+          color: 'white',
           fontSize: '14px',
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          backgroundColor: 'black',
+          borderRadius: '10px',
+          textAlign: 'center'
         },
         __source: {
           fileName: _jsxFileName,
@@ -1459,13 +1462,13 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 62
         },
         __self: this
       }, "X: ", this.state.crosshairValues[0].x), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 60
+          lineNumber: 63
         },
         __self: this
       }, "Y: ", this.state.crosshairValues[0].y))));
