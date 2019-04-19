@@ -16,7 +16,7 @@ import {
   VerticalGridLines
 } from 'react-vis'
 import { RouteAirlineBar } from '../../../Graph/RouteAirlineBar'
-
+var commaNumber = require('comma-number')
 const airline = [
   { key: 1, text: 'THA', value: 'THA' },
   { key: 2, text: 'BKP', value: 'BKP' },
@@ -72,14 +72,20 @@ const AirlineGraphCard = props => {
               onChange={props.handleDropdown}
             />
           </Grid.Column>
-        </Grid.Row>
-        <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
+        </Grid.Row> */}
+        <Grid.Row
+          style={{
+            paddingTop: '0px',
+            paddingLeft: '410px',
+            paddingBottom: '0px'
+          }}
+        >
           {props.state.showdefault ? (
             <Grid.Column>
               <label className="header-label">{props.state.defaultY}</label>
             </Grid.Column>
           ) : null}
-        </Grid.Row> */}
+        </Grid.Row>
         <Grid.Row textAlign="center" style={{ paddingBottom: '0px' }}>
           <Grid.Column
             style={{
@@ -117,20 +123,40 @@ const AirlineGraphCard = props => {
             <Grid.Row textAlign="center">
               <Grid.Column>
                 <label className="header-label">
-                  Total of route {props.state.year} by {props.state.airline}{' '}
+                  {props.state.year} Total routes of {props.state.airline}{' '}
                   Airline
                 </label>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row textAlign="center">
+            <Grid.Row style={{ paddingBottom: '0px' }}>
+              <Grid.Column width={3} />
+              <Grid.Column style={{ paddingLeft: '50px' }}>
+                <label className="header-label">Routes</label>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={3}>
+              <Grid.Column width={3} />
               <Grid.Column
                 style={{
                   display: 'flex',
                   justifyContent: 'center'
                 }}
+                width={9}
+                textAlign="right"
               >
                 <RouteAirlineBar data={props.state.routeAirlineData} />
               </Grid.Column>
+              {props.state.otherstatus ? (
+                <Grid.Column
+                  width={2}
+                  textAlign="left"
+                  style={{ paddingLeft: '0px' }}
+                >
+                  <label>Others</label>
+                  <br />
+                  <label>{commaNumber(props.state.other)}</label>
+                </Grid.Column>
+              ) : null}
             </Grid.Row>
           </React.Fragment>
         ) : null}

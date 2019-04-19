@@ -20,7 +20,9 @@ class DashboardLayout extends Component {
     year: null,
     airlineData: [],
     airlinestatus: false,
-    airlineload: false
+    airlineload: false,
+    otherstatus: false,
+    other: 0
   }
 
   componentDidMount = () => {
@@ -248,12 +250,14 @@ class DashboardLayout extends Component {
           })
         } else if (i === 20) {
           sum = sum + data[i].Results
-          this.state.airlineData.push({ x: 'Other', y: 0 })
+          this.state.otherstatus = true
+          // this.state.airlineData.push({ x: 'Other', y: 0 })
         } else if (i > 20) {
           sum = sum + data[i].Results
         }
       }
-      this.state.airlineData[20].y = sum
+      this.state.other = sum
+      // this.state.airlineData[20].y = sum
     } else {
       for (let i = 0; i < data.length; i++) {
         this.state.airlineData.push({

@@ -9,6 +9,7 @@ import {
   VerticalGridLines,
   Crosshair
 } from 'react-vis'
+var commaNumber = require('comma-number')
 
 class RouteAirlineBar extends Component {
   state = {
@@ -60,7 +61,7 @@ class RouteAirlineBar extends Component {
               }}
             >
               <p>X: {this.state.crosshairValues[0].x}</p>
-              <p>Y: {this.state.crosshairValues[0].y}</p>
+              <p>Y: {commaNumber(this.state.crosshairValues[0].y)}</p>
             </div>
           </Crosshair>
         )}

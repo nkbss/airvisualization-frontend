@@ -21,11 +21,11 @@ class AirlineDashboardLayout extends Component {
     defaultGraphY: [],
     showdefault: false,
     defaultGraph: [
-      { x: '2013', y: 0, opacity: 1 },
-      { x: '2014', y: 0, opacity: 1 },
-      { x: '2015', y: 0, opacity: 1 },
-      { x: '2016', y: 0, opacity: 1 },
-      { x: '2017', y: 0, opacity: 1 }
+      { x: '2013', y: 0, opacity: 1, color: '#1662cc' },
+      { x: '2014', y: 0, opacity: 1, color: '#1662cc' },
+      { x: '2015', y: 0, opacity: 1, color: '#1662cc' },
+      { x: '2016', y: 0, opacity: 1, color: '#1662cc' },
+      { x: '2017', y: 0, opacity: 1, color: '#1662cc' }
     ],
     query: 'Test query',
     load: true,
@@ -50,8 +50,8 @@ class AirlineDashboardLayout extends Component {
       { x: '', y: 0 },
       { x: '', y: 0 },
       { x: '', y: 0 },
-      { x: '', y: 0 },
-      { x: 'Other', y: 0 }
+      { x: '', y: 0 }
+      // { x: 'Other', y: 0 }
     ],
     routestatus: false,
     routeload: false,
@@ -61,7 +61,9 @@ class AirlineDashboardLayout extends Component {
     graph: true,
     mapload: false,
     mapstatus: false,
-    type: null
+    type: null,
+    otherstatus: false,
+    other: 0
   }
 
   componentDidMount = () => {
@@ -442,12 +444,14 @@ class AirlineDashboardLayout extends Component {
           })
         } else if (i === 20) {
           sum = sum + data[i].Results
-          this.state.routeAirlineData.push({ x: 'Other', y: 0 })
+          this.state.otherstatus = true
+          // this.state.routeAirlineData.push({ x: 'Other', y: 0 })
         } else if (i > 20) {
           sum = sum + data[i].Results
         }
       }
-      this.state.routeAirlineData[20].y = sum
+      this.state.other = sum
+      // this.state.routeAirlineData[20].y = sum
     } else {
       for (let i = 0; i < data.length; i++) {
         this.state.routeAirlineData.push({

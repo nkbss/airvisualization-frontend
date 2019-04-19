@@ -5,33 +5,9 @@
       "name": "./components/Menu/style.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": "./components/Airport/Dashboard/layout/style.css",
-      "name": "./components/Airport/Dashboard/layout/style.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": "./Route/Layout/style.css",
-      "name": "./Route/Layout/style.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
     }
   ],
   "undefined": [
-    {
-      "id": 7,
-      "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": 10,
-      "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
     {
       "id": 4,
       "name": null,
@@ -39,7 +15,7 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 8,
+      "id": 5,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
@@ -51,14 +27,6 @@
       "name": "./components/Airline/AirlineDashboard/Layout/style.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "../../../Graph/defaultBar": [
-    {
-      "id": "./components/Graph/defaultBar.js",
-      "name": "./components/Graph/defaultBar.js",
-      "file": "static/chunks/2.js",
-      "publicPath": "static/chunks/2.js"
     }
   ],
   "./noop": [
@@ -117,6 +85,14 @@
     {
       "id": "./components/Graph/RouteAirlineBar.js",
       "name": "./components/Graph/RouteAirlineBar.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
+  ],
+  "comma-number": [
+    {
+      "id": "./node_modules/comma-number/lib/index.js",
+      "name": "./node_modules/comma-number/lib/index.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
     }
@@ -3233,6 +3209,14 @@
       "name": "./node_modules/react-vis/es/utils/series-utils.js",
       "file": "static/chunks/1.js",
       "publicPath": "static/chunks/1.js"
+    }
+  ],
+  "../../../Graph/defaultBar": [
+    {
+      "id": "./components/Graph/defaultBar.js",
+      "name": "./components/Graph/defaultBar.js",
+      "file": "static/chunks/2.js",
+      "publicPath": "static/chunks/2.js"
     }
   ],
   "../../../Datamaps/DataMaps": [

@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "comma-number": "^2.0.0",
     "d3": "^5.9.1",
     "datamaps": "^0.5.9",
     "isomorphic-unfetch": "^3.0.0",

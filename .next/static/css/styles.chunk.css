@@ -1,21 +1,6 @@
-.route-card-section {
-  padding-top: 20px;
-}
-
 #topmenu {
   display: flex;
   justify-content: center;
-}
-
-#airport-dashboard {
-  margin-top: 20px;
-}
-
-.header-label {
-  /* padding-left: 50px; */
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
 }
 
 .text-label {

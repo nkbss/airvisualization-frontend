@@ -26,6 +26,9 @@ var _jsxFileName = "/Users/kanoktat/Documents/project/airport-visualization/comp
 
 
 
+
+var commaNumber = __webpack_require__(/*! comma-number */ "./node_modules/comma-number/lib/index.js");
+
 var airline = [{
   key: 1,
   text: 'THA',
@@ -89,13 +92,37 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+    style: {
+      paddingTop: '0px',
+      paddingLeft: '410px',
+      paddingBottom: '0px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: this
+  }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "header-label",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 85
+    },
+    __self: this
+  }, props.state.defaultY)) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     textAlign: "center",
     style: {
       paddingBottom: '0px'
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 89
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -105,7 +132,7 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 90
     },
     __self: this
   }, props.state.showdefault ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DefaultBar, {
@@ -118,60 +145,130 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     yTitle: props.defaultY,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 97
     },
     __self: this
   }) : null)), props.state.routestatus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 116
+      lineNumber: 122
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 117
+      lineNumber: 123
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 118
+      lineNumber: 124
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
-    },
-    __self: this
-  }, "Total of route ", props.state.year, " by ", props.state.airline, ' ', "Airline"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
-    textAlign: "center",
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 125
     },
     __self: this
+  }, props.state.year, " Total routes of ", props.state.airline, ' ', "Airline"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+    style: {
+      paddingBottom: '0px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 131
+    },
+    __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    width: 3,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 132
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    style: {
+      paddingLeft: '50px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 133
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "header-label",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 134
+    },
+    __self: this
+  }, "Routes"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+    columns: 3,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 137
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    width: 3,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 138
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     style: {
       display: 'flex',
       justifyContent: 'center'
     },
+    width: 9,
+    textAlign: "right",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 139
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_RouteAirlineBar__WEBPACK_IMPORTED_MODULE_5__["RouteAirlineBar"], {
     data: props.state.routeAirlineData,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132
+      lineNumber: 147
     },
     __self: this
-  })))) : null));
+  })), props.state.otherstatus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+    width: 2,
+    textAlign: "left",
+    style: {
+      paddingLeft: '0px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 150
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 155
+    },
+    __self: this
+  }, "Others"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 156
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 157
+    },
+    __self: this
+  }, commaNumber(props.state.other))) : null)) : null));
 };
 
 
@@ -408,23 +505,28 @@ function (_Component) {
       defaultGraph: [{
         x: '2013',
         y: 0,
-        opacity: 1
+        opacity: 1,
+        color: '#1662cc'
       }, {
         x: '2014',
         y: 0,
-        opacity: 1
+        opacity: 1,
+        color: '#1662cc'
       }, {
         x: '2015',
         y: 0,
-        opacity: 1
+        opacity: 1,
+        color: '#1662cc'
       }, {
         x: '2016',
         y: 0,
-        opacity: 1
+        opacity: 1,
+        color: '#1662cc'
       }, {
         x: '2017',
         y: 0,
-        opacity: 1
+        opacity: 1,
+        color: '#1662cc'
       }],
       query: 'Test query',
       load: true,
@@ -488,10 +590,8 @@ function (_Component) {
         y: 0
       }, {
         x: '',
-        y: 0
-      }, {
-        x: 'Other',
-        y: 0
+        y: 0 // { x: 'Other', y: 0 }
+
       }],
       routestatus: false,
       routeload: false,
@@ -501,7 +601,9 @@ function (_Component) {
       graph: true,
       mapload: false,
       mapstatus: false,
-      type: null
+      type: null,
+      otherstatus: false,
+      other: 0
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "componentDidMount", function () {
@@ -938,17 +1040,13 @@ function (_Component) {
             });
           } else if (i === 20) {
             sum = sum + data[i].Results;
-
-            _this.state.routeAirlineData.push({
-              x: 'Other',
-              y: 0
-            });
+            _this.state.otherstatus = true; // this.state.routeAirlineData.push({ x: 'Other', y: 0 })
           } else if (i > 20) {
             sum = sum + data[i].Results;
           }
         }
 
-        _this.state.routeAirlineData[20].y = sum;
+        _this.state.other = sum; // this.state.routeAirlineData[20].y = sum
       } else {
         for (var _i = 0; _i < data.length; _i++) {
           _this.state.routeAirlineData.push({
@@ -1056,13 +1154,13 @@ function (_Component) {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 508
+          lineNumber: 512
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 509
+          lineNumber: 513
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
@@ -1074,7 +1172,7 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 510
+          lineNumber: 514
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1085,13 +1183,13 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 518
+          lineNumber: 522
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 523
+          lineNumber: 527
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1101,7 +1199,7 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 524
+          lineNumber: 528
         },
         __self: this
       }, "Graph"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1109,13 +1207,13 @@ function (_Component) {
         textAlign: "left",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 534
+          lineNumber: 538
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 535
+          lineNumber: 539
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1125,28 +1223,28 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 536
+          lineNumber: 540
         },
         __self: this
       }, "Map")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
         textAlign: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 547
+          lineNumber: 551
         },
         __self: this
       }, this.state.graph ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
         width: 6,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 549
+          lineNumber: 553
         },
         __self: this
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
         width: 5,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 551
+          lineNumber: 555
         },
         __self: this
       }), this.state.map ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1154,7 +1252,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 554
+          lineNumber: 558
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"] // defaultValue="2017"
@@ -1168,7 +1266,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 555
+          lineNumber: 559
         },
         __self: this
       })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1176,7 +1274,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 567
+          lineNumber: 571
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], {
@@ -1190,7 +1288,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 568
+          lineNumber: 572
         },
         __self: this
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1198,7 +1296,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 579
+          lineNumber: 583
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], {
@@ -1211,7 +1309,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 580
+          lineNumber: 584
         },
         __self: this
       })))), this.state.graph ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
@@ -1221,7 +1319,7 @@ function (_Component) {
         state: this.state,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 593
+          lineNumber: 597
         },
         __self: this
       }) : null, this.state.map ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineMapCard"], {
@@ -1229,25 +1327,11 @@ function (_Component) {
         data: this.state.bubblemap,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 602
+          lineNumber: 606
         },
         __self: this
       }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.load,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 605
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
-        size: "big",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 606
-        },
-        __self: this
-      }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
-        active: this.state.routeload,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 609
@@ -1260,18 +1344,32 @@ function (_Component) {
           lineNumber: 610
         },
         __self: this
-      }, "Get Route!")), this.state.load === true || this.state.routeload === true ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
-        active: this.state.mapload,
+      }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.routeload,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 614
+          lineNumber: 613
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 615
+          lineNumber: 614
+        },
+        __self: this
+      }, "Get Route!")), this.state.load === true || this.state.routeload === true ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.mapload,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 618
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
+        size: "big",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 619
         },
         __self: this
       }, "Get Map!")));
@@ -1323,6 +1421,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var commaNumber = __webpack_require__(/*! comma-number */ "./node_modules/comma-number/lib/index.js");
+
 var RouteAirlineBar =
 /*#__PURE__*/
 function (_Component) {
@@ -1370,19 +1470,19 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 21
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalGridLines"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 30
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["HorizontalGridLines"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 31
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
@@ -1399,13 +1499,13 @@ function (_Component) {
         position: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 32
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 39
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["VerticalBarSeries"], {
@@ -1420,14 +1520,14 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 40
         },
         __self: this
       }), this.state.crosshairValues && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_vis__WEBPACK_IMPORTED_MODULE_1__["Crosshair"], {
         values: this.state.crosshairValues,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 50
+          lineNumber: 51
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1442,22 +1542,22 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51
+          lineNumber: 52
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62
+          lineNumber: 63
         },
         __self: this
       }, "X: ", this.state.crosshairValues[0].x), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 63
+          lineNumber: 64
         },
         __self: this
-      }, "Y: ", this.state.crosshairValues[0].y))));
+      }, "Y: ", commaNumber(this.state.crosshairValues[0].y)))));
     }
   }]);
 
@@ -1468,6 +1568,120 @@ function (_Component) {
 // }
 
 
+
+
+/***/ }),
+
+/***/ "./node_modules/comma-number/lib/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/comma-number/lib/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// return a string with the provided number formatted with commas.
+// can specify either a Number or a String.
+function commaNumber(number, separator, decimalChar) {
+
+  // we'll strip off and hold the decimal value to reattach later.
+  // we'll hold both the `number` value and `stringNumber` value.
+  var decimal, stringNumber
+
+  // default `separator` is a comma
+  separator   = separator   || ','
+  // default `decimalChar` is a period
+  decimalChar = decimalChar || '.'
+
+  switch (typeof number) {
+
+    case 'string':
+
+      // if there aren't enough digits to need separators then return it
+      // NOTE: some numbers which are too small will get passed this
+      //       when they have decimal values which make them too long here.
+      //       but, the number value check after this switch will catch it.
+      if (number.length < (number[0] === '-' ? 5 : 4)) {
+        return number
+      }
+
+      // remember it as a string in `stringNumber` and convert to a Number
+      stringNumber = number
+
+      // if they're not using the Node standard decimal char then replace it
+      // before converting.
+      number = decimalChar !== '.' ? Number(number.replace(decimalChar, '.'))
+                                   : Number(number)
+      break
+
+    // convert to a string.
+    // NOTE: don't check if the number is too small before converting
+    //       because we'll need to return `stringNumber` anyway.
+    case 'number': stringNumber = String(number) ; break
+
+    // return invalid type as-is
+    default: return number
+  }
+
+  // when it doesn't need a separator or isn't a number then return it
+  if ((-1000 < number && number < 1000) || isNaN(number) || !isFinite(number)) {
+    return stringNumber
+  }
+
+  // strip off decimal value to append to the final result at the bottom
+  decimal = stringNumber.lastIndexOf(decimalChar)
+
+  if (decimal > -1) {
+    decimal = stringNumber.slice(decimal)
+    stringNumber = stringNumber.slice(0, -decimal.length)
+  } else {
+    decimal = null
+  }
+
+  // finally, parse the string and add in separators
+  stringNumber = parse(stringNumber, separator)
+
+  // if there's a decimal value add it back on the end.
+  // NOTE: we sliced() it off including the decimalChar, so it's good.
+  return (decimal != null) ? stringNumber + decimal : stringNumber
+
+}
+
+
+function parse(stringNumber, separator) {
+
+  // below here we split the number at spots to add a separator.
+  // then, combine it with the separator and add decimal value (if exists)
+  var count, i, start, strings
+
+  start = stringNumber[0] === '-' ? 1 : 0  // start after minus sign
+  count = stringNumber.length - start - 1  // count digits after first
+  strings = []                             // hold string parts
+  i = (count % 3) + 1 + start              // index for first separator
+
+  // grab string content before where the first separator belongs
+  strings.push(stringNumber.slice(0, i))
+
+  // split remaining string in groups of 3 where a separator belongs
+  while (i < stringNumber.length) {
+    strings.push(stringNumber.substr(i, 3))
+    i += 3
+  }
+
+  // finally, combine groups with the separator
+  return strings.join(separator)
+}
+
+
+// convenience function for currying style:
+//   var format = commaNumber.bindWith(',', '.')
+function bindWith(separator, decimalChar) {
+  return function(number) {
+    return commaNumber(number, separator, decimalChar)
+  }
+}
+
+module.exports = commaNumber
+module.exports.bindWith = bindWith
 
 
 /***/ }),

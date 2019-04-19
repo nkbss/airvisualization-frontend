@@ -54,7 +54,13 @@ const DashboardCard = props => {
             />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
+        <Grid.Row
+          style={{
+            paddingTop: '0px',
+            paddingLeft: '410px',
+            paddingBottom: '0px'
+          }}
+        >
           {props.state.showdefault ? (
             <Grid.Column>
               <label className="header-label">{props.state.defaultY}</label>
@@ -86,23 +92,44 @@ const DashboardCard = props => {
             <Grid.Row textAlign="center">
               <Grid.Column>
                 <label className="header-label">
-                  Total of airlines {props.state.year} by {props.state.airport}{' '}
-                  Airport
+                  {props.state.year} operating airlines between BKK-
+                  {props.state.airport}
                 </label>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row textAlign="center">
+            <Grid.Row>
+              <Grid.Column width={3} />
+              <Grid.Column
+                style={{ paddingLeft: '50px', paddingBottom: '0px' }}
+              >
+                <label className="header-label">Airlines</label>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
+              <Grid.Column width={3} />
               <Grid.Column
                 style={{
                   display: 'flex',
                   justifyContent: 'center'
                 }}
+                width={9}
               >
                 <RouteAirlineBar
                   data={props.state.airlineData}
                   type="airport"
                 />
               </Grid.Column>
+              {props.state.otherstatus ? (
+                <Grid.Column
+                  width={2}
+                  textAlign="left"
+                  style={{ paddingLeft: '0px' }}
+                >
+                  <label>Others</label>
+                  <br />
+                  <label>{commaNumber(props.state.other)}</label>
+                </Grid.Column>
+              ) : null}
             </Grid.Row>
           </React.Fragment>
         ) : null}
