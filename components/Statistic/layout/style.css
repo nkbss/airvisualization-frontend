@@ -1,3 +1,21 @@
 .statistic-section {
   padding-top: 40px;
 }
+
+#tableresponseform-card {
+  box-shadow: none;
+  background: #f7f7f8;
+  margin-bottom: 0px;
+}
+
+#tableresponseform-divider {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-radius: 1rem;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6b6b76;
+}

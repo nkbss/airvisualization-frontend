@@ -3,7 +3,10 @@ import {
   Grid,
   Input,
   Button,
-  Dropdown
+  Dropdown,
+  Card,
+  Divider,
+  Table
 } from '../../../node_modules/semantic-ui-react'
 import { DataCard } from './DataCard'
 
@@ -27,10 +30,17 @@ const StatisticCard = props => {
   return (
     <div>
       <Grid textAlign="center">
-        <Grid.Row columns={7}>
-          <Grid.Column verticalAlign="middle">
-            <label>1. Choose condition</label>
+        <Grid.Row>
+          <Grid.Column
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <label className="header">Statistics</label>
           </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={6}>
           {/* <Grid.Column>
             <Button
               fluid
@@ -116,8 +126,7 @@ const StatisticCard = props => {
             </Button>
           </Grid.Column> */}
         </Grid.Row>
-        <Grid.Row columns={7}>
-          <Grid.Column />
+        <Grid.Row columns={6}>
           {/* <Grid.Column>
             {props.state.yearB ? (
               <Input
@@ -132,14 +141,15 @@ const StatisticCard = props => {
           </Grid.Column> */}
           <Grid.Column>
             {props.state.airportB ? (
-              <Dropdown
-                options={airport}
+              <Input
+                // options={airport}
                 name="airport"
                 placeholder="Airport"
                 size="large"
                 selection
                 fluid
-                onChange={props.handleDropdown}
+                onChange={props.handleInput}
+                onKeyPress={props.pressEnterToGetData}
               />
             ) : (
               <Input disabled fluid size="large" />
@@ -147,14 +157,15 @@ const StatisticCard = props => {
           </Grid.Column>
           <Grid.Column>
             {props.state.airlineB ? (
-              <Dropdown
-                options={airline}
+              <Input
+                // options={airline}
                 name="airline"
                 placeholder="Airline"
                 size="large"
                 selection
                 fluid
-                onChange={props.handleDropdown}
+                onChange={props.handleInput}
+                onKeyPress={props.pressEnterToGetData}
               />
             ) : (
               <Input disabled fluid size="large" />
@@ -167,6 +178,7 @@ const StatisticCard = props => {
                 size="large"
                 name="flight"
                 onChange={props.handleInput}
+                onKeyPress={props.pressEnterToGetData}
               />
             ) : (
               <Input disabled fluid size="large" />
@@ -179,6 +191,7 @@ const StatisticCard = props => {
                 size="large"
                 name="aircraft"
                 onChange={props.handleInput}
+                onKeyPress={props.pressEnterToGetData}
               />
             ) : (
               <Input disabled fluid size="large" />
@@ -228,9 +241,9 @@ const StatisticCard = props => {
           <Grid.Column />
           <Grid.Column />
         </Grid.Row> */}
-        <Grid.Row columns={7}>
+        {/* <Grid.Row columns={7}>
           <Grid.Column verticalAlign="middle">
-            <label>2. Choose result</label>
+            <label>Step 2</label>
           </Grid.Column>
           <Grid.Column>
             <Button
@@ -280,8 +293,8 @@ const StatisticCard = props => {
               Frequency
             </Button>
           </Grid.Column>
-        </Grid.Row>
-        <Grid.Row columns={7}>
+        </Grid.Row> */}
+        <Grid.Row columns={6}>
           <Grid.Column>
             <Button
               color="teal"
@@ -293,7 +306,8 @@ const StatisticCard = props => {
             </Button>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={7}>
+
+        {/* <Grid.Row columns={7}>
           {props.state.paxData ? (
             <Grid.Column width={3}>
               <DataCard
@@ -335,7 +349,7 @@ const StatisticCard = props => {
               />
             </Grid.Column>
           ) : null}
-        </Grid.Row>
+        </Grid.Row> */}
       </Grid>
     </div>
   )

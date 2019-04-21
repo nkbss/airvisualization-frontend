@@ -1,5 +1,17 @@
-.section-map {
-  padding-top: 20px;
+.statistic-section {
+  padding-top: 40px;
+}
+
+#tableresponseform-card {
+  box-shadow: none;
+  background: #f7f7f8;
+  margin-bottom: 0px;
+}
+
+#tableresponseform-divider {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-radius: 1rem;
 }
 
 .header {
@@ -8,36 +20,9 @@
   color: #6b6b76;
 }
 
-.M-label-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
-}
-
 #topmenu {
   display: flex;
   justify-content: center;
-}
-
-.OD-section {
-  padding-top: 20px;
-}
-
-.OD-label-text {
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.OD-label-header {
-  font-size: 25px;
-  font-weight: bold;
-  color: #6b6b76;
-}
-
-.header-label {
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
 }
 
 

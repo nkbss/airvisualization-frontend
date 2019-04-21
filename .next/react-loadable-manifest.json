@@ -1,20 +1,22 @@
 {
+  "./noop": [
+    {
+      "id": "./node_modules/next/dist/client/noop.js",
+      "name": "./node_modules/next/dist/client/noop.js",
+      "file": "static/chunks/0.js",
+      "publicPath": "static/chunks/0.js"
+    }
+  ],
   "./style.css": [
+    {
+      "id": "./components/Statistic/layout/style.css",
+      "name": "./components/Statistic/layout/style.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
     {
       "id": "./components/Menu/style.css",
       "name": "./components/Menu/style.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": "./components/OD/Layout/style.css",
-      "name": "./components/OD/Layout/style.css",
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": "./components/Map/Layout/style.css",
-      "name": "./components/Map/Layout/style.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
@@ -27,56 +29,10 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 7,
+      "id": 5,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
-    },
-    {
-      "id": 3,
-      "name": null,
-      "file": "static/chunks/styles.js",
-      "publicPath": "static/chunks/styles.js"
-    }
-  ],
-  "./noop": [
-    {
-      "id": "./node_modules/next/dist/client/noop.js",
-      "name": "./node_modules/next/dist/client/noop.js",
-      "file": "static/chunks/0.js",
-      "publicPath": "static/chunks/0.js"
-    }
-  ],
-  "../../Datamaps/DataMaps": [
-    {
-      "id": "./components/Datamaps/DataMaps.js",
-      "name": "./components/Datamaps/DataMaps.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
-    }
-  ],
-  "datamaps": [
-    {
-      "id": "./node_modules/datamaps/dist/datamaps.all.js",
-      "name": "./node_modules/datamaps/dist/datamaps.all.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
-    }
-  ],
-  "d3": [
-    {
-      "id": "./node_modules/datamaps/node_modules/d3/d3.js",
-      "name": "./node_modules/datamaps/node_modules/d3/d3.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
-    }
-  ],
-  "topojson": [
-    {
-      "id": "./node_modules/topojson/build/topojson.js",
-      "name": "./node_modules/topojson/build/topojson.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
     }
   ]
 }

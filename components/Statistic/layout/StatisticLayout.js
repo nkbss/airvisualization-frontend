@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { StatisticCard } from '../cards'
+import { StatisticCard, TableStatisticCard } from '../cards'
 import './style.css'
-import { Dimmer, Loader } from '../../../node_modules/semantic-ui-react'
+import {
+  Dimmer,
+  Loader,
+  Modal,
+  Button
+} from '../../../node_modules/semantic-ui-react'
 class StatisticLayout extends Component {
   state = {
     Airline: null,
@@ -32,7 +37,10 @@ class StatisticLayout extends Component {
     pax: false,
     seat: false,
     route: false,
-    frequency: false
+    frequency: false,
+    tableData: [],
+    load: false,
+    notfound: false
   }
 
   componentDidMount = () => {
@@ -40,9 +48,16 @@ class StatisticLayout extends Component {
     this.forceUpdate()
   }
 
-  handleDropdown = (e, data) => {
+  handleInput = (e, data) => {
     console.log(data.value)
     this.setState({ [data.name]: data.value })
+  }
+
+  pressEnterToGetData = event => {
+    if (event.key === 'Enter') {
+      this.getData()
+      console.log('Enter')
+    }
   }
 
   handleFilterButton = (e, data) => {
@@ -104,39 +119,46 @@ class StatisticLayout extends Component {
   }
 
   getData = () => {
-    if (
-      this.state.paxB
-      // && this.state.paxData == null
-    ) {
-      this.setState({ pax: true })
-      this.forceUpdate()
-      this.getPax()
-    }
-    if (
-      this.state.seatB
-      // && this.state.seatData == null
-    ) {
-      this.setState({ seat: true })
-      this.forceUpdate()
-      this.getSeat()
-    }
-    if (
-      this.state.routeB
-      //  && this.state.routeData == null
-    ) {
-      this.setState({ route: true })
-      this.forceUpdate()
-      this.getRoute()
-    }
+    // if (
+    //   this.state.paxB
+    //   // && this.state.paxData == null
+    // ) {
+    //   this.setState({ pax: true })
+    //   this.forceUpdate()
+    //   this.getPax()
+    // }
+    // if (
+    //   this.state.seatB
+    //   // && this.state.seatData == null
+    // ) {
+    //   this.setState({ seat: true })
+    //   this.forceUpdate()
+    //   this.getSeat()
+    // }
+    // if (
+    //   this.state.routeB
+    //   //  && this.state.routeData == null
+    // ) {
+    //   this.setState({ route: true })
+    //   this.forceUpdate()
+    //   this.getRoute()
+    // }
 
-    if (this.state.frequencyB) {
-      this.setState({ frequency: true })
-      this.forceUpdate()
-      this.getFrequency()
-    }
+    // if (this.state.frequencyB) {
+    //   this.setState({ frequency: true })
+    //   this.forceUpdate()
+    //   this.getFrequency()
+    // }
+    this.setState({ load: true, av: [], sd: [] })
+
+    this.getPax()
+    this.getSeat()
+    this.getRoute()
+    this.getFrequency()
   }
 
   getPax = () => {
+    this.setState({ paxData: null })
     console.log('get pax')
     fetch('http://localhost:4000/getPax', {
       method: 'POST',
@@ -155,15 +177,18 @@ class StatisticLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        this.checkData(data.data)
         this.calculateAv('pax', data.data)
         this.calculateSd('pax', data.data)
         this.setState({ paxData: data.data, pax: false })
+        // this.setTableData(data.data)
         this.forceUpdate()
       })
   }
 
   getSeat = () => {
     console.log('get seat')
+    this.setState({ seatData: null })
     fetch('http://localhost:4000/getSeat', {
       method: 'POST',
       headers: {
@@ -190,6 +215,7 @@ class StatisticLayout extends Component {
 
   getRoute = () => {
     console.log('get route')
+    this.setState({ routeData: null })
     fetch('http://localhost:4000/getRoute', {
       method: 'POST',
       headers: {
@@ -216,6 +242,7 @@ class StatisticLayout extends Component {
 
   getFrequency = () => {
     console.log('get frequency')
+    this.setState({ frequencyData: null })
     fetch('http://localhost:4000/getFrequency', {
       method: 'POST',
       headers: {
@@ -235,7 +262,11 @@ class StatisticLayout extends Component {
         console.log(data)
         this.calculateAv('frequency', data.data)
         this.calculateSd('frequency', data.data)
-        this.setState({ frequencyData: data.data, frequency: false })
+        this.setState({
+          frequencyData: data.data,
+          frequency: false,
+          load: false
+        })
         this.forceUpdate()
       })
   }
@@ -247,13 +278,13 @@ class StatisticLayout extends Component {
     }
     let av = sum / data.length
     if (type == 'pax') {
-      this.state.av[0] = av
+      this.state.av[0] = av.toFixed(2)
     } else if (type == 'seat') {
-      this.state.av[1] = av
+      this.state.av[1] = av.toFixed(2)
     } else if (type == 'route') {
-      this.state.av[2] = av
+      this.state.av[2] = av.toFixed(2)
     } else if (type == 'frequency') {
-      this.state.av[3] = av
+      this.state.av[3] = av.toFixed(2)
     }
     this.forceUpdate()
   }
@@ -269,32 +300,69 @@ class StatisticLayout extends Component {
     let bot = data.length * (data.length - 1)
     let sd = Math.sqrt(top / bot)
     if (type == 'pax') {
-      this.state.sd[0] = sd
+      this.state.sd[0] = sd.toFixed(2)
     } else if (type == 'seat') {
-      this.state.sd[1] = sd
+      this.state.sd[1] = sd.toFixed(2)
     } else if (type == 'route') {
-      this.state.sd[2] = sd
+      this.state.sd[2] = sd.toFixed(2)
     } else if (type == 'frequency') {
-      this.state.sd[3] = sd
+      this.state.sd[3] = sd.toFixed(2)
     }
     this.forceUpdate()
   }
 
-  render() {
-    // console.log(this.state.airline)
-    // console.log(this.state.airport)
-    // console.log(this.state.routeData)
-    console.log(this.state.sd)
+  checkData = data => {
+    console.log(data)
+    if (data.length === 0) {
+      this.setState({ notfound: true })
+      this.forceUpdate()
+    }
+  }
 
+  closeModal = () => {
+    location.reload()
+  }
+
+  render() {
+    console.log(this.state.notfound)
     return (
       <div className="statistic-section">
         <StatisticCard
           handleFilterButton={this.handleFilterButton}
-          handleDropdown={this.handleDropdown}
+          handleInput={this.handleInput}
+          pressEnterToGetData={this.pressEnterToGetData}
           getData={this.getData}
           state={this.state}
         />
-        {this.state.seat && this.state.route && this.state.frequency ? null : (
+        <div style={{ paddingTop: '40px' }}>
+          {this.state.paxData != null &&
+          this.state.seatData != null &&
+          this.state.frequencyData != null &&
+          this.state.routeData &&
+          !this.state.notfound ? (
+            <TableStatisticCard
+              paxData={this.state.paxData}
+              seatData={this.state.seatData}
+              routeData={this.state.routeData}
+              frequencyData={this.state.frequencyData}
+              av={this.state.av}
+              sd={this.state.sd}
+            />
+          ) : null}
+        </div>
+        <Dimmer active={this.state.load}>
+          <Loader size="big">Get Data!</Loader>
+        </Dimmer>
+
+        <Modal size="mini" open={this.state.notfound} onClose={this.closeModal}>
+          <Modal.Header>Not found !</Modal.Header>
+          <Modal.Actions>
+            <Button onClick={this.closeModal} negative>
+              Close
+            </Button>
+          </Modal.Actions>
+        </Modal>
+        {/* {this.state.seat && this.state.route && this.state.frequency ? null : (
           <Dimmer active={this.state.pax}>
             <Loader size="big">Get Pax!</Loader>
           </Dimmer>
@@ -313,7 +381,7 @@ class StatisticLayout extends Component {
           <Dimmer active={this.state.frequency}>
             <Loader size="big">Get Frequency!</Loader>
           </Dimmer>
-        )}
+        )} */}
       </div>
     )
   }
