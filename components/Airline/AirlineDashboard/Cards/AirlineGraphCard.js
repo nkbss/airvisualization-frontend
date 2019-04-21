@@ -104,11 +104,6 @@ const AirlineGraphCard = props => {
                 yTitle={props.defaultY}
               />
             ) : null}
-            {/* <DefaultBar
-              data={props.state.defaultGraph}
-              xTitle="Year"
-              yTitle={props.defaultY}
-            /> */}
           </Grid.Column>
         </Grid.Row>
         {/* {props.state.showdefault ? (

@@ -151,27 +151,27 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
   }) : null)), props.state.routestatus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 117
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 118
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 119
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 125
+      lineNumber: 120
     },
     __self: this
   }, props.state.year, " Total routes of ", props.state.airline, ' ', "Airline"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
@@ -180,14 +180,14 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 131
+      lineNumber: 126
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     width: 3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132
+      lineNumber: 127
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -196,28 +196,28 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 133
+      lineNumber: 128
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "header-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134
+      lineNumber: 129
     },
     __self: this
   }, "Routes"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
     columns: 3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 137
+      lineNumber: 132
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
     width: 3,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 138
+      lineNumber: 133
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -229,14 +229,14 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     textAlign: "right",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 139
+      lineNumber: 134
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Graph_RouteAirlineBar__WEBPACK_IMPORTED_MODULE_5__["RouteAirlineBar"], {
     data: props.state.routeAirlineData,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 142
     },
     __self: this
   })), props.state.otherstatus ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
@@ -247,25 +247,25 @@ var AirlineGraphCard = function AirlineGraphCard(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 150
+      lineNumber: 145
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 155
+      lineNumber: 150
     },
     __self: this
   }, "Others"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 156
+      lineNumber: 151
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 152
     },
     __self: this
   }, commaNumber(props.state.other))) : null)) : null));
@@ -506,27 +506,32 @@ function (_Component) {
         x: '2013',
         y: 0,
         opacity: 1,
-        color: '#1662cc'
+        color: '#1662cc',
+        index: 0
       }, {
         x: '2014',
         y: 0,
         opacity: 1,
-        color: '#1662cc'
+        color: '#1662cc',
+        index: 1
       }, {
         x: '2015',
         y: 0,
         opacity: 1,
-        color: '#1662cc'
+        color: '#1662cc',
+        index: 2
       }, {
         x: '2016',
         y: 0,
         opacity: 1,
-        color: '#1662cc'
+        color: '#1662cc',
+        index: 3
       }, {
         x: '2017',
         y: 0,
         opacity: 1,
-        color: '#1662cc'
+        color: '#1662cc',
+        index: 4
       }],
       query: 'Test query',
       load: true,
@@ -616,13 +621,13 @@ function (_Component) {
       _this.getPaxBubbleMap(_this.state.mapyear, _this.state.airline);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleYear", function (year) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleYear", function (year, index) {
       _this.setState({
         year: year,
         mapyear: year
       });
 
-      _this.setOpacity(_this.state.defaultGraph);
+      _this.setOpacity(_this.state.defaultGraph, index);
 
       if (_this.state.defaultY === 'Pax') {
         _this.getPaxBubbleMap(year, _this.state.airline);
@@ -1059,9 +1064,13 @@ function (_Component) {
       _this.forceUpdate();
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setOpacity", function (data) {
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "setOpacity", function (data, index) {
       for (var i = 0; i < data.length; i++) {
-        data[i].opacity = 1;
+        if (i != index) {
+          data[i].opacity = 0.5;
+        } else {
+          data[i].opacity = 1;
+        }
       }
     });
 
@@ -1154,13 +1163,13 @@ function (_Component) {
         className: "section-dashboard",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 512
+          lineNumber: 516
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 513
+          lineNumber: 517
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
@@ -1172,7 +1181,7 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 514
+          lineNumber: 518
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1183,13 +1192,13 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 522
+          lineNumber: 526
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 527
+          lineNumber: 531
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1199,7 +1208,7 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 528
+          lineNumber: 532
         },
         __self: this
       }, "Graph"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1207,13 +1216,13 @@ function (_Component) {
         textAlign: "left",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 538
+          lineNumber: 542
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 539
+          lineNumber: 543
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1223,28 +1232,28 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 540
+          lineNumber: 544
         },
         __self: this
       }, "Map")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Row, {
         textAlign: "center",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 551
+          lineNumber: 555
         },
         __self: this
       }, this.state.graph ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
         width: 6,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 553
+          lineNumber: 557
         },
         __self: this
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
         width: 5,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 555
+          lineNumber: 559
         },
         __self: this
       }), this.state.map ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1252,7 +1261,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 558
+          lineNumber: 562
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"] // defaultValue="2017"
@@ -1266,7 +1275,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 559
+          lineNumber: 563
         },
         __self: this
       })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1274,7 +1283,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 571
+          lineNumber: 575
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], {
@@ -1288,7 +1297,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 572
+          lineNumber: 576
         },
         __self: this
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -1296,7 +1305,7 @@ function (_Component) {
         verticalAlign: "middle",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 583
+          lineNumber: 587
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dropdown"], {
@@ -1309,7 +1318,7 @@ function (_Component) {
         onChange: this.handleDropdown,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 584
+          lineNumber: 588
         },
         __self: this
       })))), this.state.graph ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineGraphCard"], {
@@ -1319,7 +1328,7 @@ function (_Component) {
         state: this.state,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 597
+          lineNumber: 601
         },
         __self: this
       }) : null, this.state.map ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cards__WEBPACK_IMPORTED_MODULE_1__["AirlineMapCard"], {
@@ -1327,25 +1336,11 @@ function (_Component) {
         data: this.state.bubblemap,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 606
+          lineNumber: 610
         },
         __self: this
       }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
         active: this.state.load,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 609
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
-        size: "big",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 610
-        },
-        __self: this
-      }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
-        active: this.state.routeload,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 613
@@ -1358,18 +1353,32 @@ function (_Component) {
           lineNumber: 614
         },
         __self: this
-      }, "Get Route!")), this.state.load === true || this.state.routeload === true ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
-        active: this.state.mapload,
+      }, "Preparing Data")), this.state.load ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.routeload,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 618
+          lineNumber: 617
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
         size: "big",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 619
+          lineNumber: 618
+        },
+        __self: this
+      }, "Get Route!")), this.state.load === true || this.state.routeload === true ? null : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
+        active: this.state.mapload,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 622
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_node_modules_semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
+        size: "big",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 623
         },
         __self: this
       }, "Get Map!")));

@@ -21,11 +21,11 @@ class AirlineDashboardLayout extends Component {
     defaultGraphY: [],
     showdefault: false,
     defaultGraph: [
-      { x: '2013', y: 0, opacity: 1, color: '#1662cc' },
-      { x: '2014', y: 0, opacity: 1, color: '#1662cc' },
-      { x: '2015', y: 0, opacity: 1, color: '#1662cc' },
-      { x: '2016', y: 0, opacity: 1, color: '#1662cc' },
-      { x: '2017', y: 0, opacity: 1, color: '#1662cc' }
+      { x: '2013', y: 0, opacity: 1, color: '#1662cc', index: 0 },
+      { x: '2014', y: 0, opacity: 1, color: '#1662cc', index: 1 },
+      { x: '2015', y: 0, opacity: 1, color: '#1662cc', index: 2 },
+      { x: '2016', y: 0, opacity: 1, color: '#1662cc', index: 3 },
+      { x: '2017', y: 0, opacity: 1, color: '#1662cc', index: 4 }
     ],
     query: 'Test query',
     load: true,
@@ -73,9 +73,9 @@ class AirlineDashboardLayout extends Component {
     this.getPaxBubbleMap(this.state.mapyear, this.state.airline)
   }
 
-  handleYear = year => {
+  handleYear = (year, index) => {
     this.setState({ year: year, mapyear: year })
-    this.setOpacity(this.state.defaultGraph)
+    this.setOpacity(this.state.defaultGraph, index)
     if (this.state.defaultY === 'Pax') {
       this.getPaxBubbleMap(year, this.state.airline)
     } else if (this.state.defaultY === 'Frequency') {
@@ -463,9 +463,13 @@ class AirlineDashboardLayout extends Component {
     this.forceUpdate()
   }
 
-  setOpacity = data => {
+  setOpacity = (data, index) => {
     for (let i = 0; i < data.length; i++) {
-      data[i].opacity = 1
+      if (i != index) {
+        data[i].opacity = 0.5
+      } else {
+        data[i].opacity = 1
+      }
     }
   }
 

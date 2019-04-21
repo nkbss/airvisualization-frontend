@@ -13,7 +13,7 @@ import {
 } from 'react-vis'
 var commaNumber = require('comma-number')
 
-class defaultBar extends Component {
+class ODdefaultBar extends Component {
   state = {
     crosshairValues: null
   }
@@ -43,7 +43,7 @@ class defaultBar extends Component {
           <YAxis />
 
           <VerticalBarSeries
-            color={this.props.type === 'airport' ? '#1662cc' : '#12939a'}
+            color="#ff9833"
             data={this.props.data}
             barWidth={0.6}
             onNearestX={(value, { index }) =>
@@ -53,14 +53,23 @@ class defaultBar extends Component {
               })
             }
             onValueClick={(datapoint, { index }) => {
-              console.log('index', datapoint.index)
-              this.props.handleYear(datapoint.x, datapoint.index)
-              if (this.props.type === 'airline') {
-                this.props.getRouteAirline(datapoint.x, this.props.airline)
-              }
-              if (this.props.type === 'airport') {
-                this.props.getAirlineAirport(datapoint.x, this.props.airport)
-              }
+              console.log(datapoint)
+              //   this.props.handleYear(datapoint.x, datapoint.index)
+              this.props.setStopText(datapoint.x, datapoint.index)
+              this.props.getStopOD(
+                this.props.state.orig,
+                this.props.state.dest,
+                datapoint.index,
+                this.props.state.year
+              )
+
+              //   this.props.handleYear(datapoint.x)
+              //   if (this.props.type === 'airline') {
+              //     this.props.getRouteAirline(datapoint.x, this.props.airline)
+              //   }
+              //   if (this.props.type === 'airport') {
+              //     this.props.getAirlineAirport(datapoint.x, this.props.airport)
+              //   }
             }}
           />
           {this.state.crosshairValues && (
@@ -87,4 +96,4 @@ class defaultBar extends Component {
   }
 }
 
-export default defaultBar
+export { ODdefaultBar }
