@@ -1,6 +1,10 @@
 import React from 'react'
 import { OptionsCard } from '../../../Options'
-import { Grid, Dropdown } from '../../../../node_modules/semantic-ui-react'
+import {
+  Grid,
+  Dropdown,
+  Input
+} from '../../../../node_modules/semantic-ui-react'
 import dynamic from 'next/dynamic'
 import { RouteAirlineBar } from '../../../Graph/RouteAirlineBar'
 const airport = [
@@ -12,9 +16,9 @@ const airport = [
 ]
 
 const defaultY = [
-  { key: 1, text: 'No. of Route ', value: 'Route' },
+  // { key: 1, text: 'No. of Route ', value: 'Route' },
   { key: 2, text: 'Seat', value: 'Seat' },
-  { key: 3, text: 'Pax', value: 'Pax' },
+  { key: 3, text: 'Passenger', value: 'Passenger' },
   // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
   // { key: 5, text: 'RPK', value: 'RPK' },
   { key: 6, text: 'Frequency', value: 'Frequency' }
@@ -28,23 +32,43 @@ const DashboardCard = props => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid.Row textAlign="center">
-          <Grid.Column width={6} />
+        <Grid.Row>
+          <Grid.Column
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <label className="header">Airport</label>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row
+          centered
+          textAlign="center"
+          columns={4}
+          verticalAlign="middle"
+        >
+          <Grid.Column width={1}>
+            <label className="A-label-text">Airport</label>
+          </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
-            <Dropdown
-              defaultValue="HKT"
+            <Input
               type="airport"
-              options={airport}
+              defaultValue="HKT"
               name="airport"
               placeholder="Airport"
-              selection
               fluid
               onChange={props.handleDropdown}
+              onKeyPress={props.pressEnterToGetData}
             />
+          </Grid.Column>
+          <Grid.Column width={1}>
+            <label className="A-label-text">Results</label>
           </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
-              defaultValue="Pax"
+              defaultValue="Passenger"
               options={defaultY}
               name="defaultY"
               placeholder="Yaxis"
@@ -57,7 +81,7 @@ const DashboardCard = props => {
         <Grid.Row
           style={{
             paddingTop: '0px',
-            paddingLeft: '410px',
+            paddingLeft: '385px',
             paddingBottom: '0px'
           }}
         >
@@ -81,6 +105,8 @@ const DashboardCard = props => {
                 airport={props.state.airport}
                 handleYear={props.handleYear}
                 data={props.state.defaultGraph}
+                state={props.state}
+                selectTypeAirlineAirport={props.selectTypeAirlineAirport}
                 xTitle="Year"
                 yTitle={props.defaultY}
               />
@@ -97,40 +123,74 @@ const DashboardCard = props => {
                 </label>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-              <Grid.Column width={3} />
-              <Grid.Column
-                style={{ paddingLeft: '50px', paddingBottom: '0px' }}
-              >
-                <label className="header-label">Airlines</label>
+            <Grid.Row
+              style={{
+                paddingTop: '0px',
+                paddingLeft: '385px',
+                paddingBottom: '0px'
+              }}
+            >
+              <Grid.Column>
+                <label className="header-label">{props.state.defaultY}</label>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row textAlign="center" style={{ paddingTop: '0px' }}>
-              <Grid.Column width={3} />
-              <Grid.Column
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center'
-                }}
-                width={9}
-              >
-                <RouteAirlineBar
-                  data={props.state.airlineData}
-                  type="airport"
-                />
-              </Grid.Column>
-              {props.state.otherstatus ? (
-                <Grid.Column
-                  width={2}
-                  textAlign="left"
-                  style={{ paddingLeft: '0px' }}
-                >
-                  <label>Others</label>
-                  <br />
-                  <label>{commaNumber(props.state.other)}</label>
-                </Grid.Column>
-              ) : null}
-            </Grid.Row>
+            {props.state.airlineData.length < 20 ? (
+              <React.Fragment>
+                <Grid.Row textAlign="center" style={{ paddingBottom: '0px' }}>
+                  <Grid.Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <RouteAirlineBar
+                      data={props.state.airlineData}
+                      type="airport"
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row centered columns={1} style={{ paddingTop: '0px' }}>
+                  <Grid.Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      paddingLeft: '85px'
+                    }}
+                  >
+                    <label className="header-label">Airline</label>
+                  </Grid.Column>
+                </Grid.Row>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Grid.Row textAlign="center">
+                  <Grid.Column width={3} />
+                  <Grid.Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}
+                    width={9}
+                  >
+                    <RouteAirlineBar
+                      data={props.state.airlineData}
+                      type="airport"
+                    />
+                  </Grid.Column>
+                  {props.state.otherstatus ? (
+                    <Grid.Column
+                      width={2}
+                      textAlign="left"
+                      style={{ paddingLeft: '0px' }}
+                    >
+                      <label>Others</label>
+                      <br />
+                      <label>{commaNumber(props.state.other)}</label>
+                    </Grid.Column>
+                  ) : null}
+                </Grid.Row>
+              </React.Fragment>
+            )}
           </React.Fragment>
         ) : null}
       </Grid>

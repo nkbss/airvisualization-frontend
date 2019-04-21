@@ -1,3 +1,19 @@
+.section-map {
+  padding-top: 20px;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.M-label-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
 #topmenu {
   display: flex;
   justify-content: center;
@@ -22,44 +38,6 @@
   font-size: 20px;
   font-weight: bold;
   color: #6b6b76;
-}
-
-.text-label {
-  /* padding-left: 75px; */
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
-}
-
-.header-label {
-  /* padding-left: 50px; */
-  font-size: 20px;
-  font-weight: bold;
-  color: #6b6b76;
-}
-
-.section-dashboard {
-  padding-top: 20px;
-}
-
-.mode-header {
-  font-size: 40px;
-  font-weight: bold;
-  color: #6b6b76;
-}
-
-.mode-header-active {
-  font-size: 40px;
-  font-weight: bold;
-  color: teal;
-}
-
-.mode-header-active:hover {
-  color: teal;
-}
-
-.mode-header:hover {
-  color: teal;
 }
 
 

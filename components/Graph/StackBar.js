@@ -10,6 +10,7 @@ import {
   Crosshair
 } from 'react-vis'
 
+var commaNumber = require('comma-number')
 class StackBar extends Component {
   state = {
     crosshairValues: null
@@ -20,6 +21,7 @@ class StackBar extends Component {
     return (
       <XYPlot
         height={550}
+        stackBy="y"
         width={900}
         margin={{ left: 80, top: 10, bottom: 40 }}
         xType="ordinal"
@@ -108,8 +110,18 @@ class StackBar extends Component {
               }}
             >
               <p>X: {this.state.crosshairValues[0].x}</p>
-              <p>Y: {this.state.crosshairValues[0].y}</p>
-              <p>Airline: {this.state.crosshairValues[0].airline}</p>
+              <p>
+                Y:{' '}
+                {this.state.crosshairValues[0].y0
+                  ? commaNumber(
+                      this.state.crosshairValues[0].y -
+                        this.state.crosshairValues[0].y0
+                    )
+                  : commaNumber(this.state.crosshairValues[0].y)}
+              </p>
+              <p>
+                Airline: {commaNumber(this.state.crosshairValues[0].airline)}
+              </p>
             </div>
           </Crosshair>
         )}

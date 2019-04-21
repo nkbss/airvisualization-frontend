@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Dropdown } from '../../node_modules/semantic-ui-react'
+import { Grid, Dropdown, Input } from '../../node_modules/semantic-ui-react'
 import StackBar from '../../components/Graph/StackBar'
 
 const airport = [
@@ -12,7 +12,7 @@ const airport = [
 
 const defaultY = [
   { key: 1, text: 'Seat', value: 'Seat' },
-  { key: 2, text: 'Pax', value: 'Pax' },
+  { key: 2, text: 'Passenger', value: 'Passenger' },
   { key: 3, text: 'Frequency', value: 'Frequency' }
 ]
 
@@ -20,23 +20,42 @@ const RouteDashBoardCard = props => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid.Row textAlign="center">
-          <Grid.Column width={6} />
+        <Grid.Row>
+          <Grid.Column
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <label className="header">Segment</label>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row
+          centered
+          textAlign="center"
+          columns={4}
+          verticalAlign="middle"
+        >
+          <Grid.Column width={1}>
+            <label className="S-label-text">Airport</label>
+          </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
-            <Dropdown
-              defaultValue="HKG"
+            <Input
               type="airport"
-              options={airport}
+              defaultValue="HKG"
               name="airport"
               placeholder="Airport"
-              selection
               fluid
               onChange={props.handleDropdown}
+              onKeyPress={props.pressEnterToGetData}
             />
+          </Grid.Column>
+          <Grid.Column width={1}>
+            <label className="S-label-text">Results</label>
           </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
-              defaultValue="Seat"
+              defaultValue="Passenger"
               options={defaultY}
               name="defaultY"
               placeholder="Yaxis"
@@ -47,16 +66,29 @@ const RouteDashBoardCard = props => {
           </Grid.Column>
         </Grid.Row>
         {props.state.status ? (
-          <Grid.Row centered style={{ paddingTop: '50px' }}>
-            <Grid.Column
-              style={{
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <StackBar data={props.state.data} />
-            </Grid.Column>
-          </Grid.Row>
+          <React.Fragment>
+            <Grid.Row>
+              <Grid.Column
+                style={{
+                  paddingTop: '0px',
+                  paddingLeft: '385px',
+                  paddingBottom: '0px'
+                }}
+              >
+                <label className="header-label">{props.state.defaultY}</label>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row centered style={{ paddingTop: '0px' }}>
+              <Grid.Column
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <StackBar data={props.state.data} />
+              </Grid.Column>
+            </Grid.Row>
+          </React.Fragment>
         ) : null}
       </Grid>
     </React.Fragment>

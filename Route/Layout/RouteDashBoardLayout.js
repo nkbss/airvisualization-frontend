@@ -5,7 +5,7 @@ import { Dimmer, Loader } from '../../node_modules/semantic-ui-react'
 class RouteDashBoardLayout extends Component {
   state = {
     airport: 'HKG',
-    defaultY: 'Seat',
+    defaultY: 'Passenger',
     type: null,
     status: false,
     data: [
@@ -106,9 +106,9 @@ class RouteDashBoardLayout extends Component {
     if (data.name === 'defaultY') {
       this.filterDefaultGraph(this.state.airport, data.value)
     }
-    if (data.name === 'airport' && this.state.defaultY !== null) {
-      this.filterDefaultGraph(data.value, this.state.defaultY)
-    }
+    // if (data.name === 'airport' && this.state.defaultY !== null) {
+    //   this.filterDefaultGraph(data.value, this.state.defaultY)
+    // }
     // if (data.type === 'airport') {
     //   if (this.state.year != null) {
     //     this.getAirlineAirport(this.state.year, data.value)
@@ -119,7 +119,7 @@ class RouteDashBoardLayout extends Component {
   filterDefaultGraph = (airport, status) => {
     this.state.showdefault = true
     this.state.load = true
-    if (status === 'Pax') {
+    if (status === 'Passenger') {
       this.getPax(airport)
     }
     if (status === 'Frequency') {
@@ -130,6 +130,15 @@ class RouteDashBoardLayout extends Component {
       this.getSeat(airport)
     }
     this.forceUpdate()
+  }
+
+  pressEnterToGetData = event => {
+    if (this.state.airport != '' || this.state.airport != null) {
+      if (event.key === 'Enter') {
+        this.filterDefaultGraph(this.state.airport, this.state.defaultY)
+        console.log('Enter')
+      }
+    }
   }
 
   getPax = airport => {
@@ -296,6 +305,7 @@ class RouteDashBoardLayout extends Component {
     return (
       <div className="route-card-section">
         <RouteDashBoardCard
+          pressEnterToGetData={this.pressEnterToGetData}
           handleDropdown={this.handleDropdown}
           state={this.state}
         />

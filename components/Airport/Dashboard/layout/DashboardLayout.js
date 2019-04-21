@@ -6,15 +6,15 @@ class DashboardLayout extends Component {
   state = {
     y2017: null,
     airport: 'HKT',
-    defaultY: 'Pax',
+    defaultY: 'Passenger',
     data: null,
     showdefault: false,
     defaultGraph: [
-      { x: '2013', y: 0, opacity: 1 },
-      { x: '2014', y: 0, opacity: 1 },
-      { x: '2015', y: 0, opacity: 1 },
-      { x: '2016', y: 0, opacity: 1 },
-      { x: '2017', y: 0, opacity: 1 }
+      { x: '2013', y: 0, opacity: 1, index: 0 },
+      { x: '2014', y: 0, opacity: 1, index: 1 },
+      { x: '2015', y: 0, opacity: 1, index: 2 },
+      { x: '2016', y: 0, opacity: 1, index: 3 },
+      { x: '2017', y: 0, opacity: 1, index: 4 }
     ],
     load: true,
     year: null,
@@ -22,7 +22,8 @@ class DashboardLayout extends Component {
     airlinestatus: false,
     airlineload: false,
     otherstatus: false,
-    other: 0
+    other: 0,
+    graphindex: null
   }
 
   componentDidMount = () => {
@@ -31,9 +32,9 @@ class DashboardLayout extends Component {
     this.getPax(this.state.airport)
   }
 
-  handleYear = year => {
-    this.setState({ year: year })
-    this.setOpacity(this.state.defaultGraph)
+  handleYear = (year, index) => {
+    this.setState({ year: year, graphindex: index })
+    this.setOpacity(this.state.defaultGraph, index)
     this.forceUpdate()
   }
 
@@ -41,35 +42,44 @@ class DashboardLayout extends Component {
     this.setState({ [data.name]: data.value })
     this.forceUpdate()
     if (data.name === 'defaultY') {
-      this.filterDefaultGraph(this.state.airport, data.value)
+      this.filterDefaultGraph(this.state.airport, data.value, this.state.year)
     }
-    if (data.name === 'airport' && this.state.defaultY !== null) {
-      this.filterDefaultGraph(data.value, this.state.defaultY)
-    }
-    if (data.type === 'airport') {
-      if (this.state.year != null) {
-        this.getAirlineAirport(this.state.year, data.value)
-      }
-    }
+    // if (data.name === 'airport' && this.state.defaultY !== null) {
+    //   this.filterDefaultGraph(data.value, this.state.defaultY)
+    // }
+    // if (data.type === 'airport') {
+    //   if (this.state.year != null) {
+    //     this.getAirlineAirport(this.state.year, data.value)
+    //   }
+    // }
   }
 
-  filterDefaultGraph = (airport, status) => {
+  filterDefaultGraph = (airport, status, year) => {
     this.state.showdefault = true
     this.state.load = true
-    if (status === 'Pax') {
+    if (status === 'Passenger') {
       this.getPax(airport)
+      if (this.state.graphindex != null) {
+        this.getPaxAirlineAirport(year, airport)
+      }
     }
     if (status === 'Frequency') {
       this.getFrequency(airport)
+      if (this.state.graphindex != null) {
+        this.getAirlineAirport(year, airport)
+      }
     }
 
     if (status === 'Seat') {
       this.getSeat(airport)
+      if (this.state.graphindex != null) {
+        this.getSeatAirlineAirport(year, airport)
+      }
     }
 
-    if (status === 'Route') {
-      this.getRoute(airport)
-    }
+    // if (status === 'Route') {
+    //   this.getRoute(airport)
+    // }
     this.forceUpdate()
   }
 
@@ -179,6 +189,16 @@ class DashboardLayout extends Component {
       })
   }
 
+  selectTypeAirlineAirport = (type, year, airport) => {
+    if (type === 'Passenger') {
+      this.getPaxAirlineAirport(year, airport)
+    } else if (type === 'Seat') {
+      this.getSeatAirlineAirport(year, airport)
+    } else {
+      this.getAirlineAirport(year, airport)
+    }
+  }
+
   getAirlineAirport = (year, airport) => {
     this.setState({ airlinestatus: false, airlineload: true })
     fetch('http://localhost:4000/getAirlineAirport', {
@@ -196,17 +216,82 @@ class DashboardLayout extends Component {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        // this.setRouteAirlineGraph(data.data)
+
         if (data) {
-          // this.setRouteAirlineGraph(data.data)
           this.setAirlineGraph(data.data)
           this.setState({ airlinestatus: true, airlineload: false })
-          // this.loadFinished(data)
         }
-
-        // this.setDefaultGraphData(data.data)
-        // this.forceUpdate()
       })
+  }
+
+  getPaxAirlineAirport = (year, airport) => {
+    this.setState({ airlinestatus: false, airlineload: true })
+    fetch('http://localhost:4000/getPaxAirlineAirport', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airport: airport,
+        type: this.state.type
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        if (data) {
+          this.setAirlineGraph(data.data)
+          this.setState({ airlinestatus: true, airlineload: false })
+        }
+      })
+  }
+
+  getSeatAirlineAirport = (year, airport) => {
+    this.setState({ airlinestatus: false, airlineload: true })
+    fetch('http://localhost:4000/getSeatAirlineAirport', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airport: airport,
+        type: this.state.type
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        if (data) {
+          this.setAirlineGraph(data.data)
+          this.setState({ airlinestatus: true, airlineload: false })
+        }
+      })
+  }
+
+  pressEnterToGetData = event => {
+    if (this.state.airport != '' || this.state.airport != null) {
+      if (event.key === 'Enter') {
+        this.filterDefaultGraph(
+          this.state.airport,
+          this.state.defaultY,
+          this.state.year
+        )
+        if (this.state.graphindex != null) {
+          this.selectTypeAirlineAirport(
+            this.state.defaultY,
+            this.state.year,
+            this.state.airport
+          )
+        }
+        console.log('Enter')
+      }
+    }
   }
 
   loadFinished = () => {
@@ -268,12 +353,15 @@ class DashboardLayout extends Component {
     }
   }
 
-  setOpacity = data => {
+  setOpacity = (data, index) => {
     for (let i = 0; i < data.length; i++) {
-      data[i].opacity = 1
+      if (i != index) {
+        data[i].opacity = 0.5
+      } else {
+        data[i].opacity = 1
+      }
     }
   }
-
   render() {
     console.log(this.state.airlineData)
     return (
@@ -284,6 +372,8 @@ class DashboardLayout extends Component {
             handleDropdown={this.handleDropdown}
             handleYear={this.handleYear}
             state={this.state}
+            selectTypeAirlineAirport={this.selectTypeAirlineAirport}
+            pressEnterToGetData={this.pressEnterToGetData}
           />
           <Dimmer active={this.state.load}>
             <Loader size="big">Preparing Data</Loader>

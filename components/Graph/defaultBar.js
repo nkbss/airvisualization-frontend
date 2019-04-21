@@ -56,10 +56,21 @@ class defaultBar extends Component {
               console.log('index', datapoint.index)
               this.props.handleYear(datapoint.x, datapoint.index)
               if (this.props.type === 'airline') {
-                this.props.getRouteAirline(datapoint.x, this.props.airline)
+                this.props.selectTypeRouteAirline(
+                  this.props.state.defaultY,
+                  datapoint.x,
+                  this.props.airline
+                )
+                // this.props.getRouteAirline(datapoint.x, this.props.airline)
               }
               if (this.props.type === 'airport') {
+                this.props.handleYear(datapoint.x, datapoint.index)
                 this.props.getAirlineAirport(datapoint.x, this.props.airport)
+                this.props.selectTypeAirlineAirport(
+                  this.props.state.defaultY,
+                  datapoint.x,
+                  this.props.airport
+                )
               }
             }}
           />

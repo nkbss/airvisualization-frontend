@@ -14,7 +14,7 @@ class AirlineDashboardLayout extends Component {
     y2017: null,
     airline: 'THA',
     mapyear: '2017',
-    defaultY: 'Pax',
+    defaultY: 'Passenger',
     data: null,
     defaultY2017: null,
     defaultGraphX: ['2013', '2014', '2015', '2016', '2017'],
@@ -63,7 +63,8 @@ class AirlineDashboardLayout extends Component {
     mapstatus: false,
     type: null,
     otherstatus: false,
-    other: 0
+    other: 0,
+    graphindex: null
   }
 
   componentDidMount = () => {
@@ -74,16 +75,15 @@ class AirlineDashboardLayout extends Component {
   }
 
   handleYear = (year, index) => {
-    this.setState({ year: year, mapyear: year })
+    this.setState({ year: year, mapyear: year, graphindex: index })
     this.setOpacity(this.state.defaultGraph, index)
-    if (this.state.defaultY === 'Pax') {
-      this.getPaxBubbleMap(year, this.state.airline)
-    } else if (this.state.defaultY === 'Frequency') {
-      this.getFrequencyBubbleMap(year, this.state.airline)
-    } else if (this.state.defaultY === 'Seat') {
-      this.getSeatBubbleMap(year, this.state.airline)
-    }
-
+    // if (this.state.defaultY === 'Pax') {
+    //   this.getPaxBubbleMap(year, this.state.airline)
+    // } else if (this.state.defaultY === 'Frequency') {
+    //   this.getFrequencyBubbleMap(year, this.state.airline)
+    // } else if (this.state.defaultY === 'Seat') {
+    //   this.getSeatBubbleMap(year, this.state.airline)
+    // }
     this.forceUpdate()
   }
 
@@ -112,22 +112,42 @@ class AirlineDashboardLayout extends Component {
         )
       }
     }
-    if (data.name === 'airline' && this.state.defaultY !== null) {
-      this.filterDefaultGraph(data.value, this.state.defaultY, this.state.year)
-    }
-    if (data.name === 'year') {
-      this.filterDefaultGraph(
-        this.state.airline,
-        this.state.defaultY,
-        data.value
-      )
-      this.getRouteAirline(data.value, this.state.airline)
-      this.handleYear(data.value)
-    }
+    // if (data.name === 'airline' && this.state.defaultY !== null) {
+    //   this.filterDefaultGraph(data.value, this.state.defaultY, this.state.year)
+    // }
+    // if (data.name === 'year') {
+    //   this.filterDefaultGraph(
+    //     this.state.airline,
+    //     this.state.defaultY,
+    //     data.value
+    //   )
+    //   // this.getRouteAirline(data.value, this.state.airline)
+    //   this.handleYear(data.value)
+    // }
 
-    if (data.type === 'airline') {
-      if (this.state.year != null) {
-        this.getRouteAirline(this.state.year, data.value)
+    // if (data.type === 'airline') {
+    //   if (this.state.year != null) {
+    //     this.getRouteAirline(this.state.year, data.value)
+    //   }
+    // }
+  }
+
+  pressEnterToGetData = event => {
+    if (this.state.airline != '' || this.state.airline != null) {
+      if (event.key === 'Enter') {
+        this.filterDefaultGraph(
+          this.state.airline,
+          this.state.defaultY,
+          this.state.year
+        )
+        if (this.state.graphindex != null) {
+          this.selectTypeRouteAirline(
+            this.state.defaultY,
+            this.state.year,
+            this.state.airline
+          )
+        }
+        console.log('Enter')
       }
     }
   }
@@ -136,22 +156,34 @@ class AirlineDashboardLayout extends Component {
     console.log(status)
     this.state.showdefault = true
     this.state.load = true
-    if (status === 'Pax') {
+    if (status === 'Passenger') {
       this.getPax(airline)
-      this.getPaxBubbleMap(year, airline)
+      if (this.state.graphindex != null) {
+        this.getPaxRouteAirline(year, airline)
+      }
+      // this.getPaxBubbleMap(year, airline)
     }
     if (status === 'Frequency') {
       this.getFrequency(airline)
-      this.getFrequencyBubbleMap(year, airline)
+      if (this.state.graphindex != null) {
+        this.getRouteAirline(year, airline)
+      }
+      // this.getFrequencyBubbleMap(year, airline)
     }
 
     if (status === 'Seat') {
       this.getSeat(airline)
-      this.getSeatBubbleMap(year, airline)
+      if (this.state.graphindex != null) {
+        this.getSeatRouteAirline(year, airline)
+      }
+      // this.getSeatBubbleMap(year, airline)
     }
 
     if (status === 'Route') {
       this.getRoute(airline)
+      if (this.state.graphindex != null) {
+        this.getRouteAirline(year, airline)
+      }
     }
     this.forceUpdate()
   }
@@ -288,6 +320,66 @@ class AirlineDashboardLayout extends Component {
       })
   }
 
+  getPaxRouteAirline = (year, airline) => {
+    this.setState({ routestatus: false, routeload: true })
+    fetch('http://localhost:4000/getPaxRouteAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline,
+        type: this.state.type
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        if (data) {
+          this.setRouteAirlineGraph(data.data)
+          this.setState({ routestatus: true, routeload: false })
+        }
+      })
+  }
+
+  getSeatRouteAirline = (year, airline) => {
+    this.setState({ routestatus: false, routeload: true })
+    fetch('http://localhost:4000/getSeatRouteAirline', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain'
+      },
+      body: JSON.stringify({
+        year: year,
+        airline: airline,
+        type: this.state.type
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        if (data) {
+          this.setRouteAirlineGraph(data.data)
+          this.setState({ routestatus: true, routeload: false })
+        }
+      })
+  }
+
+  selectTypeRouteAirline = (type, year, airline) => {
+    if (type === 'Passenger') {
+      this.getPaxRouteAirline(year, airline)
+    } else if (type === 'Seat') {
+      this.getSeatRouteAirline(year, airline)
+    } else {
+      this.getRouteAirline(year, airline)
+    }
+  }
+
   getFrequencyBubbleMap = (year, airline) => {
     this.setState({ mapstatus: false, mapload: true })
     console.log('get freq bb')
@@ -308,6 +400,7 @@ class AirlineDashboardLayout extends Component {
         console.log(data)
         if (data) {
           this.setBubbleMap(data.data)
+          this.setState({ mapload: false })
           // this.setRouteAirlineGraph(data.data)
           // this.setState({ routestatus: true, routeload: false })
           // this.loadFinished(data)
@@ -341,6 +434,7 @@ class AirlineDashboardLayout extends Component {
         // this.setRouteAirlineGraph(data.data)
         if (data) {
           this.setBubbleMap(data.data)
+          this.setState({ mapload: false })
           // this.setRouteAirlineGraph(data.data)
           // this.setState({ routestatus: true, routeload: false })
           // this.loadFinished(data)
@@ -373,7 +467,7 @@ class AirlineDashboardLayout extends Component {
         if (data) {
           this.setBubbleMap(data.data)
           // this.setRouteAirlineGraph(data.data)
-          // this.setState({ routestatus: true, routeload: false })
+          this.setState({ mapload: false })
           // this.loadFinished(data)
         }
 
@@ -422,16 +516,6 @@ class AirlineDashboardLayout extends Component {
   }
 
   setRouteAirlineGraph = data => {
-    // let sum = 0
-    // for (let i = 0; i < data.length; i++) {
-    //   if (i < 20) {
-    //     this.state.routeAirlineData[i].x = data[i].AIRPORT
-    //     this.state.routeAirlineData[i].y = data[i].Results
-    //   } else {
-    //     sum = sum + data[i].Results
-    //   }
-    // }
-    // this.state.routeAirlineData[20].y = sum
     this.state.routeAirlineData = []
     console.log(data.length)
     let sum = 0
@@ -483,39 +567,11 @@ class AirlineDashboardLayout extends Component {
 
   render() {
     console.log(this.state.type)
-    const airline = [
-      { key: 1, text: 'THA', value: 'THA' },
-      { key: 2, text: 'BKP', value: 'BKP' },
-      { key: 3, text: 'THD', value: 'THD' }
-    ]
-
-    const defaultY = [
-      { key: 1, text: 'No. of Route ', value: 'Route' },
-      { key: 2, text: 'Seat', value: 'Seat' },
-      { key: 3, text: 'Pax', value: 'Pax' },
-      // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
-      // { key: 5, text: 'RPK', value: 'RPK' },
-      { key: 6, text: 'Frequency', value: 'Frequency' }
-    ]
-
-    const defaultYM = [
-      { key: 1, text: 'Seat', value: 'Seat' },
-      { key: 2, text: 'Pax', value: 'Pax' },
-      { key: 3, text: 'Frequency', value: 'Frequency' }
-    ]
-
-    const year = [
-      { key: 1, text: '2013', value: '2013' },
-      { key: 2, text: '2014', value: '2014' },
-      { key: 3, text: '2015', value: '2015' },
-      { key: 4, text: '2016', value: '2016' },
-      { key: 5, text: '2017', value: '2017' }
-    ]
 
     return (
       <div className="section-dashboard">
-        <Grid>
-          <Grid.Row
+        {/* <Grid> */}
+        {/* <Grid.Row
             columns={2}
             style={{
               height: '40px',
@@ -551,8 +607,9 @@ class AirlineDashboardLayout extends Component {
                 </a>
               </label>
             </Grid.Column>
-          </Grid.Row>
-          <Grid.Row textAlign="center">
+          </Grid.Row> */}
+
+        {/* <Grid.Row textAlign="center">
             {this.state.graph ? (
               <Grid.Column width={6} />
             ) : (
@@ -587,7 +644,7 @@ class AirlineDashboardLayout extends Component {
             <Grid.Column width={2} verticalAlign="middle">
               <Dropdown
                 defaultValue="Pax"
-                options={this.state.mapstatus ? defaultYM : defaultY}
+                options={defaultY}
                 name="defaultY"
                 placeholder="Yaxis"
                 selection
@@ -596,19 +653,20 @@ class AirlineDashboardLayout extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-        </Grid>
-        {this.state.graph ? (
-          <AirlineGraphCard
-            handleDropdown={this.handleDropdown}
-            handleYear={this.handleYear}
-            getRouteAirline={this.getRouteAirline}
-            state={this.state}
-          />
-        ) : null}
+        </Grid> */}
 
-        {this.state.map ? (
+        <AirlineGraphCard
+          handleDropdown={this.handleDropdown}
+          handleYear={this.handleYear}
+          getRouteAirline={this.getRouteAirline}
+          selectTypeRouteAirline={this.selectTypeRouteAirline}
+          state={this.state}
+          pressEnterToGetData={this.pressEnterToGetData}
+        />
+
+        {/* {this.state.map ? (
           <AirlineMapCard state={this.state} data={this.state.bubblemap} />
-        ) : null}
+        ) : null} */}
 
         <Dimmer active={this.state.load}>
           <Loader size="big">Preparing Data</Loader>
@@ -616,11 +674,6 @@ class AirlineDashboardLayout extends Component {
         {this.state.load ? null : (
           <Dimmer active={this.state.routeload}>
             <Loader size="big">Get Route!</Loader>
-          </Dimmer>
-        )}
-        {this.state.load === true || this.state.routeload === true ? null : (
-          <Dimmer active={this.state.mapload}>
-            <Loader size="big">Get Map!</Loader>
           </Dimmer>
         )}
       </div>

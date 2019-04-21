@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Grid,
   Dropdown,
-  Loader
+  Loader,
+  Input
 } from '../../../../node_modules/semantic-ui-react'
 import dynamic from 'next/dynamic'
 import '../Layout/style.css'
@@ -26,7 +27,7 @@ const airline = [
 const defaultY = [
   { key: 1, text: 'No. of Route ', value: 'Route' },
   { key: 2, text: 'Seat', value: 'Seat' },
-  { key: 3, text: 'Pax', value: 'Pax' },
+  { key: 3, text: 'Passenger', value: 'Passenger' },
   // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
   // { key: 5, text: 'RPK', value: 'RPK' },
   { key: 6, text: 'Frequency', value: 'Frequency' }
@@ -47,23 +48,43 @@ const AirlineGraphCard = props => {
   return (
     <React.Fragment>
       <Grid>
-        {/* <Grid.Row textAlign="center">
-          <Grid.Column width={6} />
+        <Grid.Row>
+          <Grid.Column
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <label className="header">Airline</label>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row
+          centered
+          textAlign="center"
+          columns={4}
+          verticalAlign="middle"
+        >
+          <Grid.Column width={1}>
+            <label className="A-label-text">Airline</label>
+          </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
-            <Dropdown
+            <Input
               type="airline"
               defaultValue="THA"
-              options={airline}
               name="airline"
               placeholder="Airline"
-              selection
               fluid
               onChange={props.handleDropdown}
+              onKeyPress={props.pressEnterToGetData}
             />
+          </Grid.Column>
+          <Grid.Column width={1}>
+            <label className="A-label-text">Results</label>
           </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
-              defaultValue="Pax"
+              defaultValue="Passenger"
               options={defaultY}
               name="defaultY"
               placeholder="Yaxis"
@@ -72,11 +93,11 @@ const AirlineGraphCard = props => {
               onChange={props.handleDropdown}
             />
           </Grid.Column>
-        </Grid.Row> */}
+        </Grid.Row>
         <Grid.Row
           style={{
             paddingTop: '0px',
-            paddingLeft: '410px',
+            paddingLeft: '385px',
             paddingBottom: '0px'
           }}
         >
@@ -97,6 +118,8 @@ const AirlineGraphCard = props => {
               <DefaultBar
                 type="airline"
                 airline={props.state.airline}
+                state={props.state}
+                selectTypeRouteAirline={props.selectTypeRouteAirline}
                 getRouteAirline={props.getRouteAirline}
                 handleYear={props.handleYear}
                 data={props.state.defaultGraph}
@@ -118,15 +141,15 @@ const AirlineGraphCard = props => {
             <Grid.Row textAlign="center">
               <Grid.Column>
                 <label className="header-label">
-                  {props.state.year} Total routes of {props.state.airline}{' '}
-                  Airline
+                  {props.state.year} Total {props.state.defaultY} of{' '}
+                  {props.state.airline} Airline
                 </label>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row style={{ paddingBottom: '0px' }}>
               <Grid.Column width={3} />
               <Grid.Column style={{ paddingLeft: '50px' }}>
-                <label className="header-label">Routes</label>
+                <label className="header-label">{props.state.defaultY}</label>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={3}>

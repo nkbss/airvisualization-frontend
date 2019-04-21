@@ -40,11 +40,14 @@ class TopMenu extends Component {
             <Link activeClassName="active" href="/trafficDemand/airport">
               <Menu.Item name="Airport" />
             </Link>
-            <Link activeClassName="active" href="/trafficDemand/route">
-              <Menu.Item name="Route" />
+            <Link activeClassName="active" href="/trafficDemand/segment">
+              <Menu.Item name="Segment" />
             </Link>
             <Link activeClassName="active" href="/trafficDemand/od">
               <Menu.Item name="OD" />
+            </Link>
+            <Link activeClassName="active" href="/trafficDemand/map">
+              <Menu.Item name="Map" />
             </Link>
           </Menu.Menu>
         </Menu>
