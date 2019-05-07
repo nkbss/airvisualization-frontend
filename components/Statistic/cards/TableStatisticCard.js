@@ -8,10 +8,10 @@ const TableStatisticCard = props => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={2} style={{ backgroundColor: 'white' }} />
-            <Table.HeaderCell width={2}>Passenger</Table.HeaderCell>
-            <Table.HeaderCell width={2}>Seat</Table.HeaderCell>
-            <Table.HeaderCell width={2}>Route</Table.HeaderCell>
-            <Table.HeaderCell width={2}>Frequency</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Passengers</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Seats</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Routes</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Frequencies</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 

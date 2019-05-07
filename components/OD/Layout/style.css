@@ -1,10 +1,11 @@
 .OD-section {
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .OD-label-text {
   font-size: 17px;
   font-weight: bold;
+  color: #6b6b76;
 }
 
 .OD-label-header {
@@ -15,6 +16,12 @@
 
 .header-label {
   font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.od-header {
+  font-size: 32px;
   font-weight: bold;
   color: #6b6b76;
 }

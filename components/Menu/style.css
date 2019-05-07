@@ -2,3 +2,20 @@
   display: flex;
   justify-content: center;
 }
+#link:hover {
+  color: teal;
+}
+
+#link-defualt:hover {
+  color: black;
+}
+
+.topmenu-label {
+  font-size: 20px;
+  color: teal;
+  font-weight: bold;
+}
+
+.topmenu-label:hover {
+  color: black;
+}

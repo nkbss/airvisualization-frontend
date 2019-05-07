@@ -10,6 +10,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <title>Visualization</title>
           <link
             rel="stylesheet"
             href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"
@@ -24,7 +25,10 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/react-vis/dist/style.css"
           />
-
+          <link
+            href="https://fonts.googleapis.com/css?family=Montserrat|Roboto"
+            rel="stylesheet"
+          />
           {/* <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"

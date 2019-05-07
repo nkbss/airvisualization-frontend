@@ -6,7 +6,7 @@ class MapLayout extends Component {
   state = {
     airline: 'THA',
     year: '2013',
-    defaultY: 'Passenger',
+    defaultY: 'Passengers',
     bubblemap: [],
     mapstatus: false,
     mapload: false,
@@ -47,9 +47,9 @@ class MapLayout extends Component {
   }
 
   selectBubbleMap = (type, year, airline) => {
-    if (type === 'Passenger') {
+    if (type === 'Passengers') {
       this.getPaxBubbleMap(year, airline)
-    } else if (type === 'Seat') {
+    } else if (type === 'Seats') {
       this.getSeatBubbleMap(year, airline)
     } else {
       this.getFrequencyBubbleMap(year, airline)
@@ -153,6 +153,7 @@ class MapLayout extends Component {
   }
 
   setBubbleMap = data => {
+    this.state.bubblemap = []
     let fill = ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8']
 
     for (let i = 0; i < data.length; i++) {

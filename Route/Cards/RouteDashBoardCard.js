@@ -11,9 +11,9 @@ const airport = [
 ]
 
 const defaultY = [
-  { key: 1, text: 'Seat', value: 'Seat' },
-  { key: 2, text: 'Passenger', value: 'Passenger' },
-  { key: 3, text: 'Frequency', value: 'Frequency' }
+  { key: 1, text: 'Seats', value: 'Seats' },
+  { key: 2, text: 'Passengers', value: 'Passengers' },
+  { key: 3, text: 'Frequencies', value: 'Frequencies' }
 ]
 
 const RouteDashBoardCard = props => {
@@ -50,12 +50,12 @@ const RouteDashBoardCard = props => {
               onKeyPress={props.pressEnterToGetData}
             />
           </Grid.Column>
-          <Grid.Column width={1}>
-            <label className="S-label-text">Results</label>
+          <Grid.Column width={1} textAlign="center">
+            <label className="S-label-text">View</label>
           </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
-              defaultValue="Passenger"
+              defaultValue="Passengers"
               options={defaultY}
               name="defaultY"
               placeholder="Yaxis"
@@ -78,7 +78,10 @@ const RouteDashBoardCard = props => {
                 <label className="header-label">{props.state.defaultY}</label>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row centered style={{ paddingTop: '0px' }}>
+            <Grid.Row
+              centered
+              style={{ paddingTop: '0px', paddingBottom: '0px' }}
+            >
               <Grid.Column
                 style={{
                   display: 'flex',
@@ -86,6 +89,16 @@ const RouteDashBoardCard = props => {
                 }}
               >
                 <StackBar data={props.state.data} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row style={{ paddingTop: '0px', paddingLeft: '73px' }}>
+              <Grid.Column
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <label className="header-label">Year</label>
               </Grid.Column>
             </Grid.Row>
           </React.Fragment>

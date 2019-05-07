@@ -17,11 +17,11 @@ const airport = [
 
 const defaultY = [
   // { key: 1, text: 'No. of Route ', value: 'Route' },
-  { key: 2, text: 'Seat', value: 'Seat' },
-  { key: 3, text: 'Passenger', value: 'Passenger' },
+  { key: 2, text: 'Seats', value: 'Seats' },
+  { key: 3, text: 'Passengers', value: 'Passengers' },
   // { key: 4, text: 'Load Factor ', value: 'Load Factor' },
   // { key: 5, text: 'RPK', value: 'RPK' },
-  { key: 6, text: 'Frequency', value: 'Frequency' }
+  { key: 6, text: 'Frequencies', value: 'Frequencies' }
 ]
 
 const DefaultBar = dynamic(() => import('../../../Graph/defaultBar'), {
@@ -63,12 +63,12 @@ const DashboardCard = props => {
               onKeyPress={props.pressEnterToGetData}
             />
           </Grid.Column>
-          <Grid.Column width={1}>
-            <label className="A-label-text">Results</label>
+          <Grid.Column width={1} textAlign="center">
+            <label className="A-label-text">View</label>
           </Grid.Column>
           <Grid.Column width={2} verticalAlign="middle">
             <Dropdown
-              defaultValue="Passenger"
+              defaultValue="Passengers"
               options={defaultY}
               name="defaultY"
               placeholder="Yaxis"
@@ -91,34 +91,48 @@ const DashboardCard = props => {
             </Grid.Column>
           ) : null}
         </Grid.Row>
-        <Grid.Row textAlign="center" style={{ paddingBottom: '0px' }}>
-          <Grid.Column
-            style={{
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            {props.state.showdefault ? (
-              <DefaultBar
-                type="airport"
-                getAirlineAirport={props.getAirlineAirport}
-                airport={props.state.airport}
-                handleYear={props.handleYear}
-                data={props.state.defaultGraph}
-                state={props.state}
-                selectTypeAirlineAirport={props.selectTypeAirlineAirport}
-                xTitle="Year"
-                yTitle={props.defaultY}
-              />
-            ) : null}
-          </Grid.Column>
-        </Grid.Row>
+
+        {props.state.showdefault ? (
+          <React.Fragment>
+            <Grid.Row textAlign="center" style={{ paddingBottom: '0px' }}>
+              <Grid.Column
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <DefaultBar
+                  type="airport"
+                  getAirlineAirport={props.getAirlineAirport}
+                  airport={props.state.airport}
+                  handleYear={props.handleYear}
+                  data={props.state.defaultGraph}
+                  state={props.state}
+                  selectTypeAirlineAirport={props.selectTypeAirlineAirport}
+                  xTitle="Year"
+                  yTitle={props.defaultY}
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row style={{ paddingTop: '0px', paddingLeft: '73px' }}>
+              <Grid.Column
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <label className="header-label">Year</label>
+              </Grid.Column>
+            </Grid.Row>
+          </React.Fragment>
+        ) : null}
+
         {props.state.airlinestatus ? (
           <React.Fragment>
             <Grid.Row textAlign="center">
               <Grid.Column>
                 <label className="header-label">
-                  {props.state.year} operating airlines between BKK-
+                  {props.state.year} Operating Airlines between BKK-
                   {props.state.airport}
                 </label>
               </Grid.Column>

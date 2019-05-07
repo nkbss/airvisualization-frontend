@@ -12,18 +12,19 @@ class ODDahsBoardLayout extends Component {
     showdefault: false,
     defaultGraph: [
       { x: 'Direct Flight', y: 0, opacity: 1, index: 0 },
-      { x: '1 Connecting point', y: 0, opacity: 1, index: 1 },
-      { x: '2 Connecting points', y: 0, opacity: 1, index: 2 },
-      { x: '3 Connecting points', y: 0, opacity: 1, index: 3 },
-      { x: '4 Connecting points', y: 0, opacity: 1, index: 4 },
-      { x: '5 Connecting points', y: 0, opacity: 1, index: 5 }
+      { x: '1 Connecting Points', y: 0, opacity: 1, index: 1 },
+      { x: '2 Connecting Points', y: 0, opacity: 1, index: 2 },
+      { x: '3 Connecting Points', y: 0, opacity: 1, index: 3 },
+      { x: '4 Connecting Points', y: 0, opacity: 1, index: 4 },
+      { x: '5 Connecting Points', y: 0, opacity: 1, index: 5 }
     ],
     datastop: [],
     stopstatus: false,
     statusstop: null,
     stopindex: null,
     getpax: false,
-    getroutepax: false
+    getroutepax: false,
+    other: 0
   }
 
   // componentDidMount = () => {
@@ -180,27 +181,20 @@ class ODDahsBoardLayout extends Component {
             x: data[i].airport,
             y: data[i].Results
           })
-        } else if (i === 21) {
-          this.state.datastop.push({
-            x: 'Others',
-            y: 0
-          })
-        } else if (i > 21) {
+        } else {
           sum = sum + data[i].Results
         }
       }
-
-      if (this.state.datastop.length > 20) {
-        this.state.datastop[20].y = sum
-      }
+      this.state.other = sum
     }
-
     this.forceUpdate()
   }
 
   render() {
     // console.log(this.state)
     console.log(this.state.datastop)
+    console.log(this.state.other)
+
     return (
       <React.Fragment>
         <div className="OD-section">
@@ -214,7 +208,7 @@ class ODDahsBoardLayout extends Component {
             pressEnterToGetData={this.pressEnterToGetData}
           />
           <Dimmer active={this.state.getpax}>
-            <Loader size="big">Get passengers!</Loader>
+            <Loader size="big">Get Passengers!</Loader>
           </Dimmer>
           {this.state.getpax ? null : (
             <Dimmer active={this.state.getroutepax}>

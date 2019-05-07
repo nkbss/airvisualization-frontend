@@ -38,7 +38,7 @@ class ODAirportBar extends Component {
         />
         <YAxis />
         <VerticalBarSeries
-          //   color={this.props.type === 'airport' ? '#15a1cc' : '#28c1b2'}
+          color="#fccc2f"
           barWidth={this.props.data.length <= 4 ? 0.3 : 0.9}
           data={this.props.data}
           onNearestX={(value, { index }) =>

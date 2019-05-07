@@ -37,7 +37,7 @@ const StatisticCard = props => {
               justifyContent: 'center'
             }}
           >
-            <label className="header">Statistics</label>
+            <label className="stat-header">Statistics</label>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={6}>
@@ -175,6 +175,7 @@ const StatisticCard = props => {
             {props.state.flightB ? (
               <Input
                 fluid
+                placeholder="Flight"
                 size="large"
                 name="flight"
                 onChange={props.handleInput}
@@ -188,6 +189,7 @@ const StatisticCard = props => {
             {props.state.aircraftB ? (
               <Input
                 fluid
+                placeholder="Aircraft"
                 size="large"
                 name="aircraft"
                 onChange={props.handleInput}

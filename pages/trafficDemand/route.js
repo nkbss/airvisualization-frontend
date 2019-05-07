@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TopMenu } from '../../components/Menu'
 import { ODDahsBoardLayout } from '../../components/OD/Layout'
 
-class od extends Component {
+class route extends Component {
   render() {
     return (
       <React.Fragment>
@@ -13,4 +13,4 @@ class od extends Component {
   }
 }
 
-export default od
+export default route

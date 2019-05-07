@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { DashboardCard } from '../cards'
 import './style.css'
-import { Dimmer, Loader } from '../../../../node_modules/semantic-ui-react'
+import {
+  Dimmer,
+  Loader,
+  Modal,
+  Button
+} from '../../../../node_modules/semantic-ui-react'
 class DashboardLayout extends Component {
   state = {
     y2017: null,
     airport: 'HKT',
-    defaultY: 'Passenger',
+    defaultY: 'Passengers',
     data: null,
     showdefault: false,
     defaultGraph: [
@@ -23,7 +28,8 @@ class DashboardLayout extends Component {
     airlineload: false,
     otherstatus: false,
     other: 0,
-    graphindex: null
+    graphindex: null,
+    notfound: false
   }
 
   componentDidMount = () => {
@@ -57,20 +63,20 @@ class DashboardLayout extends Component {
   filterDefaultGraph = (airport, status, year) => {
     this.state.showdefault = true
     this.state.load = true
-    if (status === 'Passenger') {
+    if (status === 'Passengers') {
       this.getPax(airport)
       if (this.state.graphindex != null) {
         this.getPaxAirlineAirport(year, airport)
       }
     }
-    if (status === 'Frequency') {
+    if (status === 'Frequencies') {
       this.getFrequency(airport)
       if (this.state.graphindex != null) {
         this.getAirlineAirport(year, airport)
       }
     }
 
-    if (status === 'Seat') {
+    if (status === 'Seats') {
       this.getSeat(airport)
       if (this.state.graphindex != null) {
         this.getSeatAirlineAirport(year, airport)
@@ -105,6 +111,7 @@ class DashboardLayout extends Component {
         if (data) {
           this.loadFinished(data)
         }
+        this.checkData(data.data)
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -131,6 +138,7 @@ class DashboardLayout extends Component {
         if (data) {
           this.loadFinished(data)
         }
+        this.checkData(data.data)
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -157,6 +165,7 @@ class DashboardLayout extends Component {
         if (data) {
           this.loadFinished(data)
         }
+        this.checkData(data.data)
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
@@ -183,16 +192,16 @@ class DashboardLayout extends Component {
         if (data) {
           this.loadFinished(data)
         }
-
+        this.checkData(data.data)
         this.setDefaultGraphData(data.data)
         this.forceUpdate()
       })
   }
 
   selectTypeAirlineAirport = (type, year, airport) => {
-    if (type === 'Passenger') {
+    if (type === 'Passengers') {
       this.getPaxAirlineAirport(year, airport)
-    } else if (type === 'Seat') {
+    } else if (type === 'Seats') {
       this.getSeatAirlineAirport(year, airport)
     } else {
       this.getAirlineAirport(year, airport)
@@ -218,6 +227,7 @@ class DashboardLayout extends Component {
         console.log(data)
 
         if (data) {
+          this.checkData(data.data)
           this.setAirlineGraph(data.data)
           this.setState({ airlinestatus: true, airlineload: false })
         }
@@ -243,6 +253,7 @@ class DashboardLayout extends Component {
         console.log(data)
 
         if (data) {
+          this.checkData(data.data)
           this.setAirlineGraph(data.data)
           this.setState({ airlinestatus: true, airlineload: false })
         }
@@ -268,6 +279,7 @@ class DashboardLayout extends Component {
         console.log(data)
 
         if (data) {
+          this.checkData(data.data)
           this.setAirlineGraph(data.data)
           this.setState({ airlinestatus: true, airlineload: false })
         }
@@ -362,6 +374,19 @@ class DashboardLayout extends Component {
       }
     }
   }
+
+  checkData = data => {
+    console.log(data)
+    if (data.length === 0) {
+      this.setState({ notfound: true })
+      this.forceUpdate()
+    }
+  }
+
+  closeModal = () => {
+    location.reload()
+  }
+
   render() {
     console.log(this.state.airlineData)
     return (
@@ -375,6 +400,19 @@ class DashboardLayout extends Component {
             selectTypeAirlineAirport={this.selectTypeAirlineAirport}
             pressEnterToGetData={this.pressEnterToGetData}
           />
+          <Modal
+            size="mini"
+            dimmer="blurring"
+            open={this.state.notfound}
+            onClose={this.closeModal}
+          >
+            <Modal.Header>Data not found !</Modal.Header>
+            <Modal.Actions>
+              <Button onClick={this.closeModal} negative>
+                Close
+              </Button>
+            </Modal.Actions>
+          </Modal>
           <Dimmer active={this.state.load}>
             <Loader size="big">Preparing Data</Loader>
           </Dimmer>

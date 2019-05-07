@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { RouteDashBoardCard } from '../Cards'
 import './style.css'
-import { Dimmer, Loader } from '../../node_modules/semantic-ui-react'
+import {
+  Dimmer,
+  Loader,
+  Modal,
+  Button
+} from '../../node_modules/semantic-ui-react'
 class RouteDashBoardLayout extends Component {
   state = {
     airport: 'HKG',
-    defaultY: 'Passenger',
+    defaultY: 'Passengers',
     type: null,
     status: false,
+    notfound: false,
     data: [
       [
         { x: '2013', y: 0, airline: '' },
@@ -119,14 +125,14 @@ class RouteDashBoardLayout extends Component {
   filterDefaultGraph = (airport, status) => {
     this.state.showdefault = true
     this.state.load = true
-    if (status === 'Passenger') {
+    if (status === 'Passengers') {
       this.getPax(airport)
     }
-    if (status === 'Frequency') {
+    if (status === 'Frequencies') {
       this.getFrequency(airport)
     }
 
-    if (status === 'Seat') {
+    if (status === 'Seats') {
       this.getSeat(airport)
     }
     this.forceUpdate()
@@ -160,6 +166,7 @@ class RouteDashBoardLayout extends Component {
       .then(data => {
         console.log(data)
         if (data) {
+          this.checkData(data.data)
           this.setDefaultGraphData(data.data)
           this.state.status = true
         }
@@ -186,6 +193,7 @@ class RouteDashBoardLayout extends Component {
       .then(data => {
         console.log(data)
         if (data) {
+          this.checkData(data.data)
           this.setDefaultGraphData(data.data)
           this.state.status = true
         }
@@ -212,6 +220,7 @@ class RouteDashBoardLayout extends Component {
       .then(data => {
         console.log(data)
         if (data) {
+          this.checkData(data.data)
           this.setDefaultGraphData(data.data)
           this.state.status = true
         }
@@ -299,6 +308,28 @@ class RouteDashBoardLayout extends Component {
     this.forceUpdate()
   }
 
+  checkData = data => {
+    let status = true
+    console.log(data.length)
+    // if (data.length === 0) {
+    //   this.setState({ notfound: true })
+    //   this.forceUpdate()
+    // }
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].length === 0) {
+        status = status && true
+      } else {
+        status = status && false
+      }
+    }
+    this.setState({ notfound: status })
+    this.forceUpdate()
+  }
+
+  closeModal = () => {
+    location.reload()
+  }
+
   render() {
     console.log(this.state.data)
 
@@ -309,6 +340,19 @@ class RouteDashBoardLayout extends Component {
           handleDropdown={this.handleDropdown}
           state={this.state}
         />
+        <Modal
+          size="mini"
+          dimmer="blurring"
+          open={this.state.notfound}
+          onClose={this.closeModal}
+        >
+          <Modal.Header>Data not found !</Modal.Header>
+          <Modal.Actions>
+            <Button onClick={this.closeModal} negative>
+              Close
+            </Button>
+          </Modal.Actions>
+        </Modal>
         <Dimmer active={!this.state.status}>
           <Loader size="big">Preparing Data!</Loader>
         </Dimmer>

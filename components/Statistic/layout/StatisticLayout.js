@@ -354,8 +354,13 @@ class StatisticLayout extends Component {
           <Loader size="big">Get Data!</Loader>
         </Dimmer>
 
-        <Modal size="mini" open={this.state.notfound} onClose={this.closeModal}>
-          <Modal.Header>Not found !</Modal.Header>
+        <Modal
+          size="mini"
+          dimmer="blurring"
+          open={this.state.notfound}
+          onClose={this.closeModal}
+        >
+          <Modal.Header>Data not found !</Modal.Header>
           <Modal.Actions>
             <Button onClick={this.closeModal} negative>
               Close

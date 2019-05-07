@@ -38,7 +38,8 @@ class RouteAirlineBar extends Component {
         />
         <YAxis />
         <VerticalBarSeries
-          color={this.props.type === 'airport' ? '#15a1cc' : '#28c1b2'}
+          // color={this.props.type === 'airport' ? '#15a1cc' : '#28c1b2'}
+          color={this.props.color}
           data={this.props.data}
           onNearestX={(value, { index }) =>
             this.setState({

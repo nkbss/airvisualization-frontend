@@ -7,42 +7,49 @@ class FirstPage extends Component {
   goTrafficDemand = type => {
     console.log(type)
     localStorage.setItem('STATE', type)
-    Router.push('/trafficDemand/airline')
+    Router.push('/trafficDemand/statistic')
   }
 
   render() {
     return (
       <React.Fragment>
-        <Grid>
-          <Grid.Row style={{ paddingTop: '50px' }}>
-            <Grid.Column textAlign="center">
-              <label className="label-header">
-                Air-Travel Visualization System
-              </label>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row
-            columns={2}
-            verticalAlign="middle"
-            style={{ height: '85vh' }}
-          >
-            <Grid.Column
-              width={8}
-              textAlign="right"
-              verticalAlign="middle"
-              style={{ borderRight: '2px solid black' }}
-            >
-              <a className="a-label" onClick={() => this.goTrafficDemand('5')}>
-                <label className="label-text">Domestic</label>
-              </a>
-            </Grid.Column>
-            <Grid.Column width={8} textAlign="left">
-              <a className="a-label" onClick={() => this.goTrafficDemand('1')}>
-                <label className="label-text">International</label>
-              </a>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <div className="firstpage-section">
+          <Grid id="page-section">
+            <Grid.Row style={{ paddingTop: '50px' }}>
+              <Grid.Column textAlign="center">
+                <label className="label-header">
+                  Air-Travel Visualization System
+                </label>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={2} verticalAlign="middle" id="select-flight">
+              <Grid.Column
+                width={7}
+                textAlign="right"
+                verticalAlign="middle"
+                // style={{ borderRight: '2px solid black' }}
+              >
+                <a
+                  className="a-label"
+                  onClick={() => this.goTrafficDemand('5')}
+                >
+                  <label className="label-text">Domestic</label>
+                </a>
+              </Grid.Column>
+              <Grid.Column id="col-divider" width={1}>
+                <div className="divider" />
+              </Grid.Column>
+              <Grid.Column width={7} textAlign="left">
+                <a
+                  className="a-label"
+                  onClick={() => this.goTrafficDemand('1')}
+                >
+                  <label className="label-text">International</label>
+                </a>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </div>
       </React.Fragment>
     )
   }

@@ -7,9 +7,9 @@ const BubbleMap = dynamic(() => import('../../Datamaps/DataMaps'), {
 })
 var commaNumber = require('comma-number')
 const defaultY = [
-  { key: 1, text: 'Seat', value: 'Seat' },
-  { key: 2, text: 'Passenger', value: 'Passenger' },
-  { key: 3, text: 'Frequency', value: 'Frequency' }
+  { key: 1, text: 'Seats', value: 'Seats' },
+  { key: 2, text: 'Passengers', value: 'Passengers' },
+  { key: 3, text: 'Frequencies', value: 'Frequencies' }
 ]
 
 const year = [
@@ -36,28 +36,10 @@ class MapCard extends Component {
                 justifyContent: 'center'
               }}
             >
-              <label className="header">World Map</label>
+              <label className="map-header">World Map</label>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row centered columns={6} verticalAlign="middle">
-            <Grid.Column
-              width={1}
-              textAlign="center"
-              style={{ padding: '0 0 0 0' }}
-            >
-              <label className="M-label-text">Year</label>
-            </Grid.Column>
-            <Grid.Column width={2} style={{ padding: '0 0 0 0' }}>
-              <Dropdown
-                name="year"
-                defaultValue="2013"
-                placeholder="Year"
-                options={year}
-                selection
-                fluid
-                onChange={this.props.handleDropdown}
-              />
-            </Grid.Column>
             <Grid.Column
               width={1}
               textAlign="center"
@@ -79,19 +61,33 @@ class MapCard extends Component {
                 onKeyPress={event => this.props.pressEnterToGetData(event)}
               />
             </Grid.Column>
+            <Grid.Column width={1} textAlign="center">
+              <label className="M-label-text">View</label>
+            </Grid.Column>
+            <Grid.Column width={2} style={{ padding: '0 0 0 0' }}>
+              <Dropdown
+                defaultValue="Passengers"
+                options={defaultY}
+                name="defaultY"
+                placeholder="Yaxis"
+                selection
+                fluid
+                onChange={this.props.handleDropdown}
+              />
+            </Grid.Column>
             <Grid.Column
               width={1}
               textAlign="center"
               style={{ padding: '0 0 0 0' }}
             >
-              <label className="M-label-text">Results</label>
+              <label className="M-label-text">Year</label>
             </Grid.Column>
             <Grid.Column width={2} style={{ padding: '0 0 0 0' }}>
               <Dropdown
-                defaultValue="Passenger"
-                options={defaultY}
-                name="defaultY"
-                placeholder="Yaxis"
+                name="year"
+                defaultValue="2013"
+                placeholder="Year"
+                options={year}
                 selection
                 fluid
                 onChange={this.props.handleDropdown}
@@ -132,8 +128,8 @@ class MapCard extends Component {
                              <lable>Results : ${commaNumber(
                                data.result
                              )}</lable><br> 
-                             <lable>Country : ${data.country}</lable><br> 
                              <lable>City : ${data.city}</lable><br> 
+                             <lable>Country : ${data.country}</lable><br> 
                              `
                     }}
                   />

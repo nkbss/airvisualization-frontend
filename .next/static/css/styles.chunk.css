@@ -1,17 +1,43 @@
-.statistic-section {
-  padding-top: 40px;
+#topmenu {
+  display: flex;
+  justify-content: center;
+}
+#link:hover {
+  color: teal;
 }
 
-#tableresponseform-card {
-  box-shadow: none;
-  background: #f7f7f8;
-  margin-bottom: 0px;
+#link-defualt:hover {
+  color: black;
 }
 
-#tableresponseform-divider {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border-radius: 1rem;
+.topmenu-label {
+  font-size: 20px;
+  color: teal;
+  font-weight: bold;
+}
+
+.topmenu-label:hover {
+  color: black;
+}
+
+.text-label {
+  /* padding-left: 75px; */
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.header-label {
+  /* padding-left: 50px; */
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.A-label-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6b6b76;
 }
 
 .header {
@@ -20,9 +46,28 @@
   color: #6b6b76;
 }
 
-#topmenu {
-  display: flex;
-  justify-content: center;
+.section-dashboard {
+  padding-top: 40px;
+}
+
+.mode-header {
+  font-size: 40px;
+  font-weight: bold;
+  color: #6b6b76;
+}
+
+.mode-header-active {
+  font-size: 40px;
+  font-weight: bold;
+  color: teal;
+}
+
+.mode-header-active:hover {
+  color: teal;
+}
+
+.mode-header:hover {
+  color: teal;
 }
 
 

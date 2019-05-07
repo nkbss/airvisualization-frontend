@@ -23,6 +23,16 @@ const ODDashBoardCard = props => {
   return (
     <React.Fragment>
       <Grid>
+        <Grid.Row>
+          <Grid.Column
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <label className="od-header">Route</label>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row centered columns={6} verticalAlign="middle">
           <Grid.Column
             width={2}
@@ -61,7 +71,7 @@ const ODDashBoardCard = props => {
             />
           </Grid.Column>
           <Grid.Column
-            width={2}
+            width={1}
             textAlign="center"
             style={{ padding: '0 0 0 0' }}
           >
@@ -78,11 +88,11 @@ const ODDashBoardCard = props => {
             />
           </Grid.Column>
         </Grid.Row>
-        {props.state.showdefault ? (
+        {/* {props.state.showdefault ? (
           <Grid.Row centered columns={1} verticalAlign="middle">
             <Grid.Column textAlign="center">
               <label className="OD-label-header">
-                {props.state.year} Total passengers{' '}
+                {props.state.year} Total Passengers{' '}
                 {props.state.totalstop === 0
                   ? 'direct flight'
                   : props.state.totalstop}{' '}
@@ -92,10 +102,10 @@ const ODDashBoardCard = props => {
               </label>
             </Grid.Column>
           </Grid.Row>
-        ) : null}
+        ) : null} */}
         <Grid.Row
           style={{
-            paddingTop: '0px',
+            paddingTop: '20px',
             paddingLeft: '385px',
             paddingBottom: '0px'
           }}
@@ -132,19 +142,18 @@ const ODDashBoardCard = props => {
             <Grid.Row textAlign="center">
               <Grid.Column>
                 <label className="OD-label-header">
-                  {props.state.year} Total number of passengers for each airport
-                  that choose {props.state.statusstop} between{' '}
-                  {props.state.orig}-{props.state.dest}
+                  {props.state.year} Total Passengers for{' '}
+                  {props.state.statusstop}
                 </label>
               </Grid.Column>
             </Grid.Row>
 
-            {props.state.datastop.length > 21 ? (
+            {props.state.other > 0 ? (
               <React.Fragment>
                 <Grid.Row
                   style={{
                     paddingTop: '0px',
-                    paddingLeft: '435px',
+                    paddingLeft: '392px',
                     paddingBottom: '0px'
                   }}
                 >
@@ -153,32 +162,31 @@ const ODDashBoardCard = props => {
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  <Grid.Column width={4} />
-                  <Grid.Column width={9}>
+                  <Grid.Column width={3} />
+                  <Grid.Column width={9} style={{ paddingLeft: '66px' }}>
                     <ODAirportBar data={props.state.datastop} />
                   </Grid.Column>
 
                   <Grid.Column
                     width={2}
                     textAlign="left"
-                    style={{ paddingLeft: '0px' }}
+                    style={{ paddingLeft: '46px' }}
                   >
                     <label>Others</label>
                     <br />
-                    <label>{commaNumber(props.state.datastop[20].y)}</label>
-                    {/* <label>2,000</label> */}
+                    <label>{commaNumber(props.state.other)}</label>
                   </Grid.Column>
-                  <Grid.Row centered columns={1} style={{ paddingTop: '0px' }}>
-                    <Grid.Column
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        paddingLeft: '195px'
-                      }}
-                    >
-                      <label className="header-label">Airport</label>
-                    </Grid.Column>
-                  </Grid.Row>
+                </Grid.Row>
+                <Grid.Row centered columns={1} style={{ paddingTop: '0px' }}>
+                  <Grid.Column
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      paddingLeft: '130px'
+                    }}
+                  >
+                    <label className="header-label">Airport</label>
+                  </Grid.Column>
                 </Grid.Row>
               </React.Fragment>
             ) : (
